@@ -1,0 +1,39 @@
+nav{
+    display: flex;
+    align-items: center;
+    padding: 0 120px;
+    color: var(--primary-color);   
+    justify-content: space-between;
+}
+
+h1{
+    font-size: 2rem;
+}
+
+.highlight{
+    color: var(--secondary-color);
+}
+
+li{
+    list-style: none;
+    display: inline;
+    margin: 0 56px;
+}
+
+a{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+}
+
+.cta-button{
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    font-weight: 550;
+    font-family: var(--font-main);
+}
+

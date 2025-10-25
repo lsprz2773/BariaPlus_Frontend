@@ -1,0 +1,81 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 120px;
+    margin-top: 90px;
+    gap: 40px;
+    position: relative;
+}
+
+.cards-features{
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 80px;
+    justify-content: center;
+    max-width: 1300px;
+    gap: 48px;
+}
+
+.card{
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+    width: 270px;
+}
+
+h1{
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    font-weight: var(--title-weight);
+    font-family: var(--font-main);
+    text-transform:  uppercase;
+    margin-bottom: 2rem;
+}
+
+span{
+    color: var(--secondary-color);
+}
+
+.features-cta-button{
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 8px;
+
+    font-weight: 600;
+    font-family: var(--font-main);
+    box-shadow: 0 0px 9px 1px rgba(0, 0, 0, 0.2);
+}
+
+.deco{
+position: absolute;
+width: 160px;
+bottom: 5%;
+z-index: 0; /* Atrás de todo */
+}
+
+.wrapper .deco {
+    position: absolute; 
+    bottom: -190px; /* 150px FUERA del fondo del hero-wrapper, para que se vea entre secciones */
+    right: -11px;  
+    max-width: 250px; 
+    width: 20vw; /* El ancho de la imagen decorativa será el 20% del ancho de la vista (viewport) */
+    height: auto;
+    z-index: 0; 
+}
+
+@media (max-width: 768px) {
+    .wrapper .deco {
+        bottom: -50px; /* Menos desplazamiento para móvil */
+        right: -30px; 
+        max-width: 150px; /* Tamaño máximo más pequeño */
+        width: 30vw; /* Puede ocupar más porcentaje de la vista, pero su max-width lo limita */
+    }
+}

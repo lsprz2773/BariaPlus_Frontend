@@ -1,0 +1,78 @@
+h1{
+    color: var(--primary-color);
+    font-size: 3.8rem;
+    font-weight: var(--title-weight);
+    font-family: var(--font-main);
+    text-transform:  uppercase;
+    margin-bottom: 1rem;
+}
+
+.hero-text{
+    max-width: 600px;
+    margin-bottom: 13rem;
+}
+
+.hero-subtitle{
+    font-family: var(--font-main);
+    font-size: 1.5rem;
+    font-weight: var(--subtiles-weigth);
+    margin-bottom: 3rem;
+    padding-right: 100px;
+
+}    
+
+.highlight{
+    color: var(--secondary-color);
+}
+
+.hero-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0px 80px;
+    position: relative;
+    z-index: 0; 
+    margin-top: 80px;
+}
+
+img{
+    width: 600px;
+}
+
+.hero-cta-button{
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-family: var(--font-main);
+    box-shadow: 0 0px 9px 1px rgba(0, 0, 0, 0.2);
+}
+
+.deco{
+position: absolute;
+width: 160px;
+bottom: 5%;
+z-index: 0; /* Atrás de todo */
+}
+
+.hero-wrapper .deco {
+    position: absolute; 
+    bottom: -190px; /* 150px FUERA del fondo del hero-wrapper, para que se vea entre secciones */
+    left: -5px;  
+    max-width: 250px; 
+    width: 20vw; /* El ancho de la imagen decorativa será el 20% del ancho de la vista (viewport) */
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .hero-wrapper .deco {
+        bottom: -50px; /* Menos desplazamiento para móvil */
+        left: -30px; 
+        max-width: 150px; /* Tamaño máximo más pequeño */
+        width: 30vw; /* Puede ocupar más porcentaje de la vista, pero su max-width lo limita */
+    }
+}

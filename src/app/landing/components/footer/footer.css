@@ -1,0 +1,48 @@
+footer{
+    margin-top: 50px;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 50px;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+
+}
+
+.info{
+    font-size: 1rem;
+}
+
+.title{
+    font-size: 1.4rem;
+}
+
+.title{
+    color: var(--primary-color);
+}
+
+.highlight{
+    color: var(--secondary-color);
+}
+
+
+a:hover{
+    text-decoration: underline;
+    color: var(--primary-color);
+}
