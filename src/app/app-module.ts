@@ -3,15 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { Navbar } from './shared/components/navbar/navbar';
-import { LoginModal } from './shared/components/login-modal/login-modal';
-import { CommonModule } from '@angular/common';
 import { Modal } from './shared/modal';
 import { SharedModule } from './shared/shared-module';
-
+import { CardPatient } from './pages/dashboard/components/card-patient/card-patient';
 @NgModule({
   declarations: [
-    App
+    App,
+    CardPatient
   ],
   imports: [
     BrowserModule,

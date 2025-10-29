@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Modal as ModalService } from '../../modal';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-modal',
@@ -14,7 +15,9 @@ export class LoginModal implements OnInit, OnDestroy {
 
   // Guardar referencia para poder cancerlar la suscripción
   private modalSubscription!: Subscription;
-  constructor(private modalService: ModalService) { 
+  constructor(
+    private modalService: ModalService,
+    private router: Router) { 
     
   }
 
@@ -47,6 +50,11 @@ export class LoginModal implements OnInit, OnDestroy {
     if (this.modalSubscription) {
       this.modalSubscription.unsubscribe();
     }
+  }
+
+  onContinuar():void{
+    this.closeModal();
+    this.router.navigate(['/dashboard']);
   }
 
 }
