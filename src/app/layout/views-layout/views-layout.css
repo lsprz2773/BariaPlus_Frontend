@@ -1,0 +1,24 @@
+.container {
+  display: flex; 
+  min-height: 100vh;
+  flex-direction: row;
+}
+
+.sidebar{
+  display: flex;
+  padding: 40px 0 40px 0px;
+  position: fixed; 
+  min-height: 500px;
+}
+
+app-sidebar{
+  width: 100px;
+  margin-left: 40px;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 180px;  
+  padding:  40px 0 40px 0px;;
+  max-height: 100vh;
+}

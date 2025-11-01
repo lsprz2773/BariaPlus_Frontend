@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchBar } from './search-bar';
+import { ViewsLayout } from './views-layout';
 
-describe('SearchBar', () => {
-  let component: SearchBar;
-  let fixture: ComponentFixture<SearchBar>;
+describe('ViewsLayout', () => {
+  let component: ViewsLayout;
+  let fixture: ComponentFixture<ViewsLayout>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SearchBar]
+      declarations: [ViewsLayout]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SearchBar);
+    fixture = TestBed.createComponent(ViewsLayout);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

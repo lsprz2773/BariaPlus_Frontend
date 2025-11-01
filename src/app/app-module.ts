@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { Modal } from './shared/modal';
 import { SharedModule } from './shared/shared-module';
-import { CardPatient } from './pages/dashboard/components/card-patient/card-patient';
+import { ViewsLayout } from './layout/views-layout/views-layout';
+import { Dashboard } from './pages/dashboard/dashboard';
 @NgModule({
   declarations: [
     App,
-    CardPatient
-  ],
+    ViewsLayout,
+    Dashboard
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

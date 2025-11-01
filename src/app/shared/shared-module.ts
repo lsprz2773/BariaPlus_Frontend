@@ -4,15 +4,13 @@ import { Navbar } from './components/navbar/navbar';
 import { LoginModal } from './components/login-modal/login-modal';
 import { Sidebar } from './components/sidebar/sidebar';
 import { RouterModule } from '@angular/router';
-import { SearchBar } from './components/search-bar/search-bar';
 
 
 @NgModule({
   declarations: [
     Navbar,
     LoginModal,
-    Sidebar,
-    SearchBar
+    Sidebar
   ],
   imports: [
     CommonModule,
