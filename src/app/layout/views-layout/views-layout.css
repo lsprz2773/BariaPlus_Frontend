@@ -9,11 +9,18 @@
   padding: 40px 0 40px 0px;
   position: fixed; 
   min-height: 500px;
+  z-index: 100;
+  transition: all 0.3s ease;
 }
 
 app-sidebar{
   width: 100px;
   margin-left: 40px;
+  transition: width 0.3 ease;
+}
+
+.container.sidebar-expanded app-sidebar{
+  width: 200px;
 }
 
 .main-content {
@@ -21,4 +28,9 @@ app-sidebar{
   margin-left: 180px;  
   padding:  40px 0 40px 0px;;
   max-height: 100vh;
+  transition: margin-left 0.3 ease;
+}
+
+.container.container.sidebar-expanded .main-content{
+  margin-left: 280px;
 }

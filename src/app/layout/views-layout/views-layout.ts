@@ -8,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class ViewsLayout {
 
+  isExpanded = false;
+
 }

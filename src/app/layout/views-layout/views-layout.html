@@ -1,5 +1,7 @@
-<div class="container">
-    <aside class="sidebar">
+<div class="container" [class.sidebar-expanded]="isExpanded">
+    <aside class="sidebar"
+    (mouseenter)="isExpanded = true"
+    (mouseleave)="isExpanded = false">
         <app-sidebar></app-sidebar>
     </aside>
 
