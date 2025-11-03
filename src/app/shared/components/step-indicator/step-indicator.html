@@ -1,1 +1,14 @@
-<p>step-indicator works!</p>
+<div class="progress-stepper">
+  <ng-container *ngFor="let step of [].constructor(totalSteps); let i = index">
+    <div 
+      class="step" 
+      [class.active]="i + 1 <= currentStep"
+      [class.current]="i + 1 === currentStep">
+    </div>
+    <div 
+      class="step-line" 
+      *ngIf="i < totalSteps - 1"
+      [class.active]="i + 1 < currentStep">
+    </div>
+  </ng-container>
+</div>
