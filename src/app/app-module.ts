@@ -7,11 +7,20 @@ import { Modal } from './shared/modal';
 import { SharedModule } from './shared/shared-module';
 import { ViewsLayout } from './layout/views-layout/views-layout';
 import { Dashboard } from './pages/dashboard/dashboard';
+import { PatientCard } from './pages/dashboard/components/patient-card/patient-card';
+import { PatientRegister } from './pages/patient-register/patient-register';
+import { Filter } from './pages/dashboard/components/filter/filter';
+import { SearchBar } from './pages/dashboard/components/search-bar/search-bar';
+
 @NgModule({
   declarations: [
     App,
     ViewsLayout,
-    Dashboard
+    Dashboard,
+    PatientCard,
+    PatientRegister,
+    Filter,
+    SearchBar
     ],
   imports: [
     BrowserModule,

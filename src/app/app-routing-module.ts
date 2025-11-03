@@ -14,7 +14,7 @@ const routes: Routes = [
     component: ViewsLayout,
     children: [{
       path: 'dashboard', 
-      component: Dashboard
+      component: Dashboard,
     }]
   }
 ];

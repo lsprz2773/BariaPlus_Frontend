@@ -1,0 +1,11 @@
+.dashboard{
+    display: flex;
+    flex-direction: column;
+}
+
+.search-content{
+    display: flex;
+    flex-direction: row;
+    gap: 320px;
+}
+
