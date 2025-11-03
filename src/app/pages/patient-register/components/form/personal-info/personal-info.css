@@ -30,7 +30,7 @@
 }
 
 .form-input {
-  width: 90%;
+  width: 100%;
   padding: 12px 14px;
   font-size: 14px;
   border: 1px solid #e0e0e0;
@@ -42,7 +42,7 @@
 
 
 .form-select{
-  width: 87%;
+  width: 110%;
   padding: 12px 14px;
   font-size: 14px;
   border: 1px solid #e0e0e0;
