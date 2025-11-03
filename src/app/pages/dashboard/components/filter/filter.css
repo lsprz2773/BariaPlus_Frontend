@@ -48,7 +48,7 @@
     transition: background-color 0.2s ease;
 }
 
-.dropdown:hover .dropdown_content {
+.dropdown_content.show {
     display: block;
 }
 

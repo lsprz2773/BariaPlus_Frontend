@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-filter',
@@ -8,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class Filter {
 
+   menuOpen = false;
+
+  toggleMenu(event: Event) {
+    event.stopPropagation(); // Evita que el click se propague
+    this.menuOpen = !this.menuOpen;
+  }
+
+  // Cierra el menú cuando haces click fuera
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event) {
+    this.menuOpen = false;
+  }
 }

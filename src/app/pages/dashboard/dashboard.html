@@ -9,8 +9,8 @@
     </div>
 
     <section class="cards-container">
-        <app-patient-card></app-patient-card>
+        <app-patient-card *ngFor="let patient of filteredPatients" [patient]="patient">
+        </app-patient-card>
     </section>
 
 </main>
-
