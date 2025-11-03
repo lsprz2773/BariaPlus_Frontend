@@ -14,6 +14,10 @@ import { SearchBar } from './pages/dashboard/components/search-bar/search-bar';
 import { PersonalInfo } from './pages/patient-register/components/form/personal-info/personal-info';
 import { Allergies } from './pages/patient-register/components/form/allergies/allergies';
 import { Form } from './pages/patient-register/components/form/form';
+import { UserProfile } from './pages/user-profile/user-profile';
+import { Reviews } from './pages/reviews/reviews';
+import { ProfileInfo } from './pages/user-profile/components/profile-info/profile-info';
+import { ProfesionalInfo } from './pages/user-profile/components/profesional-info/profesional-info';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { Form } from './pages/patient-register/components/form/form';
     SearchBar,
     PersonalInfo,
     Allergies,
-    Form
+    Form,
+    UserProfile,
+    Reviews,
+    ProfileInfo,
+    ProfesionalInfo
     ],
   imports: [
     BrowserModule,
