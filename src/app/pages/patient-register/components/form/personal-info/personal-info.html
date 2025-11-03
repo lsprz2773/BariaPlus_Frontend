@@ -1,0 +1,55 @@
+<article class="personal-info">
+    <div class="title">
+        <h2>Información Personal</h2>
+    </div>
+
+    <form class="form">
+        <div class="input-group">
+            <input 
+                id="name" 
+                type="text" 
+                placeholder="Nombre" 
+                class="form-input"
+                required />
+        </div>
+
+        <div class="input-group">
+            <input 
+                id="lastname" 
+                type="text" 
+                placeholder="Apellidos" 
+                class="form-input"
+                required />
+        </div>
+
+        <div class="wrap">
+            <div class="input-group">
+                <label for="birthdate" class="form-label">Fecha de nacimiento</label>
+                <input 
+                    id="birthdate" 
+                    type="date" 
+                    class="form-input"
+                    required />
+            </div>
+
+            <div class="input-group">
+                <label for="gender" class="form-label">Sexo
+                </label>
+                <select id="gender" class="form-select" required>
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <input 
+                id="emergencyNumber" 
+                type="tel" 
+                placeholder="Número de emergencia" 
+                class="form-input"
+                required />
+        </div>
+    </form>
+</article>
