@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingPage } from './landing/landing-page/landing-page';
 import { ViewsLayout } from './layout/views-layout/views-layout';
 import { Dashboard } from './pages/dashboard/dashboard';
+import { PatientRegister } from './pages/patient-register/patient-register';
 
 const routes: Routes = [
   {
@@ -12,10 +13,16 @@ const routes: Routes = [
   {
     path: '',
     component: ViewsLayout,
-    children: [{
-      path: 'dashboard', 
-      component: Dashboard,
-    }]
+    children: [
+      {
+        path: 'dashboard',
+        component: Dashboard,
+      },
+      {
+        path: 'patient-register',
+        component: PatientRegister
+      }
+    ]
   }
 ];
 
