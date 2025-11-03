@@ -5,7 +5,12 @@
 
 .search-content{
     display: flex;
-    flex-direction: row;
-    gap: 320px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+@media screen {
+    
 }
 
