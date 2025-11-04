@@ -5,6 +5,7 @@ import { LoginModal } from './components/login-modal/login-modal';
 import { Sidebar } from './components/sidebar/sidebar';
 import { RouterModule } from '@angular/router';
 import { StepIndicator } from './components/step-indicator/step-indicator';
+import { ReusableForm } from './components/reusable-form/reusable-form';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { StepIndicator } from './components/step-indicator/step-indicator';
     Navbar,
     LoginModal,
     Sidebar,
-    StepIndicator
+    StepIndicator,
+    ReusableForm
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { StepIndicator } from './components/step-indicator/step-indicator';
     Navbar,
     LoginModal,
     Sidebar,
-    StepIndicator
+    StepIndicator,
+    ReusableForm
   ]
 })
 export class SharedModule { }

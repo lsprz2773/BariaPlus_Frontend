@@ -4,6 +4,8 @@ import { LandingPage } from './landing/landing-page/landing-page';
 import { ViewsLayout } from './layout/views-layout/views-layout';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { PatientRegister } from './pages/patient-register/patient-register';
+import { UserProfile } from './pages/user-profile/user-profile';
+import { Reviews } from './pages/reviews/reviews';
 
 const routes: Routes = [
   {
@@ -21,6 +23,14 @@ const routes: Routes = [
       {
         path: 'patient-register',
         component: PatientRegister
+      },
+      {
+        path: 'user-profile',
+        component: UserProfile
+      },
+      {
+        path: 'reviews',
+        component: Reviews
       }
     ]
   }

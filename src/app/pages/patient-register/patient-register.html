@@ -3,18 +3,18 @@
         <h2 class="title">Registro Paciente</h2>
     </header>
 
-    <div class="step-indicator">
-        <app-step-indicator></app-step-indicator>
-    </div>
-
     <article class="form">
-        <app-form></app-form>
+        <div class="step-indicator">
+            <app-step-indicator></app-step-indicator>
+        </div>
+        <div class="form">
+            <app-reusable-form [title]="'Información personal'" [formItems]="personalInfoItems"></app-reusable-form>
+        </div>
     </article>
 
     <div class="next-btn">
         <button class="next">
             Siguiente
-            <i class="fa fa-arrow-right arrow" aria-hidden="true"></i>
         </button>
     </div>
 
