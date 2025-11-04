@@ -1,13 +1,12 @@
 .personal-info {
   background-color: transparent;
   padding: 0;
-  max-width: 700px;
+  width: 100%;
 }
 
 .title h2 {
   font-size: 32px;
   font-weight: 600;
-  color: #333;
   margin: 0 0 20px 0;
 }
 
@@ -54,13 +53,13 @@
 
 .form-input:focus,
 .form-select:focus {
-  border-color: var(--primary-color, #5DABA8);
+  border-color: var(--primary-color);
   background-color: #fff;
   outline: none;
 }
 
 .form-input::placeholder {
-  color: #bbb;
+  color: #7e7e7e;
 }
 
 .form-select {
@@ -81,7 +80,6 @@
   flex: 1;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .wrap {
     flex-direction: column;

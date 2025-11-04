@@ -1,0 +1,32 @@
+<article class="personal-info">
+    <div class="title">
+        <h2>{{ title }}</h2>
+    </div>
+
+    <form class="form">
+        @for (item of formItems; track item.name) {
+
+        <div class="input-group">
+            <label [for]="item.name" class="form-label">{{ item.label }}</label>
+
+            @if (item.type === 'text' || item.type === 'tel' || item.type === 'date') {
+
+            <input [id]="item.name" [type]="item.type" [placeholder]="item.placeholder" [name]="item.name"
+                [required]="item.required"  class="form-input" />
+
+            } @else if (item.type === 'select') {
+
+            <select [id]="item.name" [name]="item.name" [required]="item.required" class="form-select">
+
+                <option value="" disabled selected>Seleccionar</option>
+
+                @for (option of item.options; track option) {
+
+                <option [value]="option">{{ option }}</option>
+                }
+            </select>
+            }
+        </div>
+        }
+    </form>
+</article>

@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     max-width: 700px;
-    min-height: 550px;
     height: 100%;
     justify-content: space-between;
     margin-top: -12px;
@@ -14,10 +13,6 @@
 
 .title-container {
     margin-bottom: 20px;
-}
-
-i{
-    color: #fff;
 }
 
 .title {
@@ -36,10 +31,8 @@ i{
 }
 
 .next-btn {
-
     display: flex;
     justify-content: flex-end;
-    padding-left: 0;
     align-items: flex-end;
 }
 
@@ -59,8 +52,7 @@ i{
 }
 
 .next:hover {
-    background-color: #4a9593;
-    transform: translateY(-1px);
+    background-color: var(--primary-color);
     box-shadow: 0 4px 8px rgba(93, 171, 168, 0.3);
 }
 

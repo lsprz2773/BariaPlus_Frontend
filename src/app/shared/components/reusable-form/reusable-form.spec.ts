@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PersonalInfo } from './personal-info';
+import { ReusableForm } from './reusable-form';
 
-describe('PersonalInfo', () => {
-  let component: PersonalInfo;
-  let fixture: ComponentFixture<PersonalInfo>;
+describe('ReusableForm', () => {
+  let component: ReusableForm;
+  let fixture: ComponentFixture<ReusableForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PersonalInfo]
+      declarations: [ReusableForm]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PersonalInfo);
+    fixture = TestBed.createComponent(ReusableForm);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

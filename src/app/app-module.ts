@@ -11,9 +11,6 @@ import { PatientCard } from './pages/dashboard/components/patient-card/patient-c
 import { PatientRegister } from './pages/patient-register/patient-register';
 import { Filter } from './pages/dashboard/components/filter/filter';
 import { SearchBar } from './pages/dashboard/components/search-bar/search-bar';
-import { PersonalInfo } from './pages/patient-register/components/form/personal-info/personal-info';
-import { Allergies } from './pages/patient-register/components/form/allergies/allergies';
-import { Form } from './pages/patient-register/components/form/form';
 import { UserProfile } from './pages/user-profile/user-profile';
 import { Reviews } from './pages/reviews/reviews';
 import { ProfileInfo } from './pages/user-profile/components/profile-info/profile-info';
@@ -27,9 +24,6 @@ import { ProfileInfo } from './pages/user-profile/components/profile-info/profil
     PatientRegister,
     Filter,
     SearchBar,
-    PersonalInfo,
-    Allergies,
-    Form,
     UserProfile,
     Reviews,
     ProfileInfo
