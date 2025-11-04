@@ -1,45 +1,16 @@
-<div class="personal-info">
-    <header class="subtitle">
-        Informacion personal
+<section class="personal-info">
+    <header class="subtitle-content">
+        <h2 class="subtitle">{{title}}</h2>
     </header>
 
     <div class="content">
-
-        <div class="name-w">
+        @for (item of data; track item.label){
+        <div class="info">
             <span class="highlight">
-                <p>Nombre(s)</p>
+                {{ item.label }}
             </span>
-            <span>
-                <p>Luis Ángel</p>
-            </span>
+            <p>{{item.value}}</p>
         </div>
-
-        <div class="lastname-w">
-            <span class="highlight">
-                <p>Apellido(s)</p>
-            </span>
-            <span>
-                <p>Perez Aguilera</p>
-            </span>
-        </div>
-
-        <div class="gender-w">
-            <span class="highlight">
-                <p>Género</p>
-            </span>
-            <span>
-                <p>Masculino</p>
-            </span>
-        </div>
-
-        <div class="email-w">
-            <span class="highlight">
-                <p>Correo eléctronico</p>
-            </span>
-            <span>
-                <p>przlp@gmail.com</p>
-            </span>
-        </div>
-
+        }
     </div>
-</div>
+</section>

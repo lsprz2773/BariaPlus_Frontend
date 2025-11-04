@@ -1,7 +1,6 @@
 .user-profile{
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
 }
 
 .title{
@@ -11,4 +10,10 @@
 .title-container{
     margin-top: -50px;
     margin-bottom: -24px;
+}
+
+.profile-content{
+    display: flex;
+    flex-direction: column;
+    gap:16px;
 }
