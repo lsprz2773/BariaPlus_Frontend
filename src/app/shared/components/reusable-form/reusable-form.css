@@ -28,20 +28,7 @@
   margin-bottom: 6px;
 }
 
-.form-input {
-  width: 100%;
-  padding: 12px 14px;
-  font-size: 14px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background-color: #fafafa;
-  transition: all 0.2s ease;
-  font-family: inherit;
-}
-
-
-.form-select{
-  width: 110%;
+.form-input, .form-select{
   padding: 12px 14px;
   font-size: 14px;
   border: 1px solid #e0e0e0;
@@ -69,15 +56,6 @@
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 40px;
-}
-
-.wrap {
-  display: flex;
-  gap: 72px;
-}
-
-.wrap .input-group {
-  flex: 1;
 }
 
 @media (max-width: 768px) {

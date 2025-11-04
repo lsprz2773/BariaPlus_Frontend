@@ -7,14 +7,16 @@
         @for (item of formItems; track item.name) {
 
         <div class="input-group">
-            <label [for]="item.name" class="form-label">{{ item.label }}</label>
-
             @if (item.type === 'text' || item.type === 'tel' || item.type === 'date') {
 
-            <input [id]="item.name" [type]="item.type" [placeholder]="item.placeholder" [name]="item.name"
-                [required]="item.required"  class="form-input" />
+            <label [for]="item.name" class="form-label">{{ item.label }}</label>
+
+            <input [id]="item.name" [type]="item.type" [placeholder]="item.placeholder" [name]="item.name "
+                [required]="item.required" class="form-input" />
 
             } @else if (item.type === 'select') {
+
+            <label [for]=" item.name" class="form-label">{{item.label}}</label>
 
             <select [id]="item.name" [name]="item.name" [required]="item.required" class="form-select">
 
