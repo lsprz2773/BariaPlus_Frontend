@@ -14,6 +14,8 @@ import { SearchBar } from './pages/dashboard/components/search-bar/search-bar';
 import { UserProfile } from './pages/user-profile/user-profile';
 import { Reviews } from './pages/reviews/reviews';
 import { ProfileInfo } from './pages/user-profile/components/profile-info/profile-info';
+import { Register } from './pages/auth/register/register';
+import { Form } from './pages/auth/register/form/form';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ProfileInfo } from './pages/user-profile/components/profile-info/profil
     SearchBar,
     UserProfile,
     Reviews,
-    ProfileInfo
+    ProfileInfo,
+    Register,
+    Form
     ],
   imports: [
     BrowserModule,

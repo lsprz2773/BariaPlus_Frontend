@@ -6,6 +6,7 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { PatientRegister } from './pages/patient-register/patient-register';
 import { UserProfile } from './pages/user-profile/user-profile';
 import { Reviews } from './pages/reviews/reviews';
+import {Register} from './pages/auth/register/register';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'reviews',
         component: Reviews
+      },
+      {
+        path: 'user-register',
+        component: Register
       }
     ]
   }
