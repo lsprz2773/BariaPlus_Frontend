@@ -1,6 +1,6 @@
 export interface FormItem {
   type: 'text' | 'date' | 'select' | 'tel';
-  label: string;
+  label?: string;
   placeholder: string;
   name: string;
   required?: boolean;

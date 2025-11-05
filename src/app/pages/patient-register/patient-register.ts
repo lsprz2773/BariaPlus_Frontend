@@ -13,41 +13,82 @@ export class PatientRegister {
   personalInfoItems: FormItem[] = [
     { 
       type: 'text', 
-      label: 'Nombre', 
       placeholder: 'Nombre', 
       name: 'name', 
       required: true 
     },
     { 
       type: 'text', 
-      label: 'Apellidos', 
       placeholder: 'Apellidos', 
       name: 'lastname', 
       required: true 
     },
     { 
       type: 'date', 
-      label: 'Fecha de nacimiento', 
-      placeholder: '', 
+      placeholder: 'Fecha de nacimiento', 
       name: 'birthdate', 
       required: true 
     },
     { 
       type: 'select', 
-      label: 'Genero', 
-      placeholder: '', 
+      placeholder: 'Sexo', 
       name: 'gender', 
       options: ['Masculino', 'Femenino'], 
       required: true 
     },
     { 
       type: 'tel', 
-      label: 'Número de emergencia', 
-      placeholder: 'Número de emergencia', 
+       placeholder: 'Número de emergencia', 
       name: 'emergencyNumber', 
       required: true 
     }
   ]
 
-  //aca el resto de pasos
+  allergies: FormItem[] = [
+    { 
+      type: 'text', 
+      placeholder: 'Nombre de la alergia', 
+      name: 'allergie', 
+      required: true 
+    },
+    { 
+      type: 'text', 
+      placeholder: 'Describa los sintomas de la alergia', 
+      name: 'description', 
+      required: true 
+    }
+  ]
+
+    illness: FormItem[] = [
+    { 
+      type: 'text', 
+      placeholder: 'Nombre de la enfermedad', 
+      name: 'illness', 
+      required: true 
+    },
+    { 
+      type: 'select', 
+      placeholder: 'Estado actual', 
+      name: 'actual_state', 
+      required: true 
+    }
+  ]
+
+    records: FormItem[] = [
+    { 
+      type: 'select', 
+      placeholder: 'Tipo de antecedent', 
+      name: 'allergie', 
+      options: ['Heredorfamiliares', 'Patológicos', 'No patológicos', 'Ginecobstétricos', 'Tratamientos de obesidad', 'Psicológico/Social'],
+      required: true 
+    },
+    { 
+      type: 'text', 
+      label: 'Descripción', 
+      placeholder: 'Describa los sintomas de la alergia', 
+      name: 'description', 
+      required: true 
+    }
+  ]
+  
 }
