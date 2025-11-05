@@ -14,6 +14,10 @@ const routes: Routes = [
     component: LandingPage
   },
   {
+    path: 'user-register',
+    component: Register
+  },
+  {
     path: '',
     component: ViewsLayout,
     children: [
@@ -32,10 +36,6 @@ const routes: Routes = [
       {
         path: 'reviews',
         component: Reviews
-      },
-      {
-        path: 'user-register',
-        component: Register
       }
     ]
   }

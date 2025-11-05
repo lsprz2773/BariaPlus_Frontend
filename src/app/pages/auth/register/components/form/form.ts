@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FormItem} from '../../../../../core/interfaces/form-item';
 
 @Component({
   selector: 'app-form',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './form.css'
 })
 export class Form {
-
+  step: number = 2;
 }

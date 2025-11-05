@@ -6,6 +6,7 @@ import { Sidebar } from './components/sidebar/sidebar';
 import { RouterModule } from '@angular/router';
 import { StepIndicator } from './components/step-indicator/step-indicator';
 import { ReusableForm } from './components/reusable-form/reusable-form';
+import { Button } from './components/button/button';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ReusableForm } from './components/reusable-form/reusable-form';
     LoginModal,
     Sidebar,
     StepIndicator,
-    ReusableForm
+    ReusableForm,
+    Button
   ],
   imports: [
     CommonModule,

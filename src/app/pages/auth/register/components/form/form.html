@@ -1,0 +1,12 @@
+<section>
+  <header>
+    <app-step-indicator></app-step-indicator>
+    <h1>Crear cuenta</h1>
+  </header>
+  @if (step === 1){
+    <app-part-one></app-part-one>
+  } @else {
+    <app-part-two></app-part-two>
+  }
+</section>
+
