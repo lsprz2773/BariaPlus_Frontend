@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './register-form-buttons.css'
 })
 export class RegisterFormButtons {
-  step: number = 1;
+  step: number = 2;
 }

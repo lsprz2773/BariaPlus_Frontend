@@ -1,6 +1,6 @@
 @if (step === 1){
-  <button>Cancelar</button>
-  <button>Continuar <i class="fa-solid fa-arrow-right"></i></button>
+  <app-button [type]="'button'" [name]="'cancel'" [context]="'default'" [text]="'Cancelar'"></app-button>
+  <app-button [type]="'submit'" [name]="'continue'" [context]="'continue'" [text]="'Continuar'"></app-button>
 } @else {
-  <button>Registrarse</button>
+  <app-button [type]="'submit'" [name]="'register'" [context]="'primary longButton'" [text]="'Registrarse'"></app-button>
 }

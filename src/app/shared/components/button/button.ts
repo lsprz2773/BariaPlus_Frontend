@@ -1,5 +1,4 @@
-import {Component, Input} from '@angular/core';
-import {ButtonConfig} from '../../../core/interfaces/button-config';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -8,12 +7,15 @@ import {ButtonConfig} from '../../../core/interfaces/button-config';
   styleUrl: './button.css'
 })
 export class Button {
-  @Input() buttonInfo: ButtonConfig;
+  @Input() type: 'submit' | 'reset' | 'button' = 'button';
+  @Input() name: string = '';
+  @Input() text: string = 'Button';
+  @Input() context: 'continue' | 'default' | 'submit' | 'previous' | 'primary longButton' = 'default';
+  @Input() disabled: boolean = false;
 
-  btnConfig: ButtonConfig = {
-    type:'submit',
-    name: 'submitRegisterForm',
-    text: 'Continuar',
-    context: 'continue'
-  };
+  @Output() btnClick = new EventEmitter<void>();
+
+  onClick() {
+    this.btnClick.emit();
+  }
 }

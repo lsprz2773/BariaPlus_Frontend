@@ -27,7 +27,8 @@ import { Button } from './components/button/button';
     LoginModal,
     Sidebar,
     StepIndicator,
-    ReusableForm
+    ReusableForm,
+    Button
   ]
 })
 export class SharedModule { }
@@ -37,4 +38,3 @@ export class SharedModule { }
 
 
 
-         
