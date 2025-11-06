@@ -1,13 +1,13 @@
 <article class="personal-info">
     <div class="title">
-        <h2>{{ title }}</h2>
+      <h2>{{ title }}</h2>
     </div>
 
     <form class="form">
         @for (item of formItems; track item.name) {
 
         <div class="input-group">
-            @if (item.type === 'text' || item.type === 'tel' || item.type === 'date') {
+            @if (item.type === 'text' || item.type === 'tel' || item.type === 'date' || item.type === 'password' || item.type === 'email') {
 
             <label [for]="item.name" class="form-label">{{ item.label }}</label>
 
