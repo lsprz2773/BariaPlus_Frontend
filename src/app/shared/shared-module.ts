@@ -6,7 +6,7 @@ import { Sidebar } from './components/sidebar/sidebar';
 import { RouterModule } from '@angular/router';
 import { StepIndicator } from './components/step-indicator/step-indicator';
 import { ReusableForm } from './components/reusable-form/reusable-form';
-import { Buttons } from './components/buttons/buttons';
+import { Button } from './components/button/button';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { Buttons } from './components/buttons/buttons';
     Sidebar,
     StepIndicator,
     ReusableForm,
-    Buttons
+    Button
   ],
   imports: [
     CommonModule,
@@ -28,13 +28,7 @@ import { Buttons } from './components/buttons/buttons';
     Sidebar,
     StepIndicator,
     ReusableForm,
-    Buttons
+    Button
   ]
 })
 export class SharedModule { }
-
-
-
-
-
-

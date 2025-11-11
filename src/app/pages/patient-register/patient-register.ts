@@ -102,9 +102,6 @@ export class PatientRegister {
     record:{}
   }
 
-  // gracias claude por,todavia en mantenimiento XD 
-
-   // Avanzar al siguiente paso
   nextStep() {
     if (this.currentStep < this.totalSteps) {
       this.currentStep++;
