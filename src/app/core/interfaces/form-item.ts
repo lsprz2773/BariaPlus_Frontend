@@ -1,5 +1,5 @@
 export interface FormItem {
-  type: 'text' | 'date' | 'select' | 'tel';
+  type: 'text' | 'date' | 'select' | 'tel' | 'password' | 'email';
   label?: string;
   placeholder: string;
   name: string;

@@ -14,6 +14,12 @@ import { SearchBar } from './pages/dashboard/components/search-bar/search-bar';
 import { UserProfile } from './pages/user-profile/user-profile';
 import { Reviews } from './pages/reviews/reviews';
 import { ProfileInfo } from './pages/user-profile/components/profile-info/profile-info';
+import { Register } from './pages/auth/register/register';
+import { Form } from './pages/auth/register/components/form/form';
+import { PartOne } from './pages/auth/register/components/part-one/part-one';
+import { PartTwo } from './pages/auth/register/components/part-two/part-two';
+import { RegisterFormFooter } from './pages/auth/register/components/register-form-footer/register-form-footer';
+import { RegisterFormButtons } from './pages/auth/register/components/register-form-buttons/register-form-buttons';
 
 @NgModule({
   declarations: [
@@ -26,7 +32,14 @@ import { ProfileInfo } from './pages/user-profile/components/profile-info/profil
     SearchBar,
     UserProfile,
     Reviews,
-    ProfileInfo
+    ProfileInfo,
+    Register,
+    Form,
+    PartOne,
+    PartTwo,
+    RegisterFormFooter,
+    RegisterFormButtons,
+
     ],
   imports: [
     BrowserModule,
