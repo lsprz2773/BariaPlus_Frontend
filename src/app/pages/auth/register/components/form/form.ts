@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {FormItem} from '../../../../../core/interfaces/form-item';
 
 @Component({
   selector: 'app-form',

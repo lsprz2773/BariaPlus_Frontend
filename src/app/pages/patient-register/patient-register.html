@@ -3,18 +3,55 @@
         <h2 class="title">Registro Paciente</h2>
     </header>
 
-    <article class="form">
+      <article class="form">
         <div class="step-indicator">
-            <app-step-indicator></app-step-indicator>
+            <app-step-indicator 
+                [currentStep]="currentStep" 
+                [totalSteps]="totalSteps">
+            </app-step-indicator>
         </div>
-        <div class="form">
-            <app-reusable-form [title]="'Información personal'" [formItems]="personalInfoItems"></app-reusable-form>
+
+        <div class="form-content">
+            @if (currentStep === 1) {
+                <app-reusable-form 
+                    [title]="'Información Personal'" 
+                    [formItems]="personalInfo">
+                </app-reusable-form>
+            } @else if (currentStep === 2) {
+                <app-reusable-form 
+                    [title]="'Alergias'" 
+                    [formItems]="allergies">
+                </app-reusable-form>
+            } @else if (currentStep === 3) {
+                <app-reusable-form 
+                    [title]="'Enfermedades Actuales'" 
+                    [formItems]="illness">
+                </app-reusable-form>
+            } @else if (currentStep === 4) {
+                <app-reusable-form 
+                    [title]="'Antecedentes médicos'" 
+                    [formItems]="records">
+                </app-reusable-form>
+            }
         </div>
     </article>
 
-    <div class="next-btn">
-        <button class="next">
-            Siguiente
+    <div class="buttons-container">
+        @if (!isFirstStep()) {
+            <button class="back" (click)="previousStep()">
+                <i class="fa fa-arrow-left"></i>
+                Anterior
+            </button>
+        }
+        
+        <button class="next" (click)="nextStep()">
+            @if (isLastStep()) {
+                Finalizar
+                <i class="fa fa-check"></i>
+            } @else {
+                Siguiente
+                <i class="fa fa-arrow-right"></i>
+            }
         </button>
     </div>
 

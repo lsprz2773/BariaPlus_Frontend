@@ -32,9 +32,3 @@ import { Button } from './components/button/button';
   ]
 })
 export class SharedModule { }
-
-
-
-
-
-
