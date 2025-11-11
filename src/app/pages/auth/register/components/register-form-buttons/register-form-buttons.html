@@ -1,6 +1,10 @@
 @if (step === 1){
-  <app-button [type]="'button'" [name]="'cancel'" [context]="'default'" [text]="'Cancelar'"></app-button>
-  <app-button [type]="'submit'" [name]="'continue'" [context]="'continue'" [text]="'Continuar'"></app-button>
+  <div class="step-one">
+    <app-button [type]="'button'" [name]="'cancel'" [context]="'default'" [text]="'Cancelar'" (click)="onCancel()" ></app-button>
+    <app-button [type]="'submit'" [name]="'continue'" [context]="'continue'" [text]="'Continuar'" (click)="onContinue()"></app-button>
+  </div>
 } @else {
-  <app-button [type]="'submit'" [name]="'register'" [context]="'primary longButton'" [text]="'Registrarse'"></app-button>
+  <div class="step-two">
+    <app-button [type]="'submit'" [name]="'register'" [context]="'primary longButton'" [text]="'Registrarse'" (click)="onRegister()"></app-button>
+  </div>
 }

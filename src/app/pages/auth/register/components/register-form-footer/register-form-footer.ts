@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-register-form-footer',
@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './register-form-footer.css'
 })
 export class RegisterFormFooter {
+  @Input() step: number = 1;
+  @Output() prevStep = new EventEmitter<void>();
 
+  onPreviousStep(){
+    this.prevStep.emit()
+  }
 }

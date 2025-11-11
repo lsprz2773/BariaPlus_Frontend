@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormItem} from '../../../../../core/interfaces/form-item';
 
 @Component({
@@ -8,6 +8,18 @@ import {FormItem} from '../../../../../core/interfaces/form-item';
   styleUrl: './part-two.css'
 })
 export class PartTwo {
+    @Input() step: number = 2;
+    @Output() register = new EventEmitter<void>();
+    @Output() prevStep = new EventEmitter<void>();
+
+    onRegister(){
+      this.register.emit()
+    }
+
+    onPrevStep(){
+      this.prevStep.emit();
+    }
+
   registerPartTwo: FormItem[] = [
     {
       type: 'select',
