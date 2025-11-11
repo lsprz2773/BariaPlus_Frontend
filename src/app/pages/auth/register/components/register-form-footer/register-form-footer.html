@@ -1,1 +1,10 @@
-<p>register-form-footer works!</p>
+@if (step === 1) {
+  <h3>¿Ya tienes una cuenta?</h3>
+  <h4><a href="#">Inicia sesión</a></h4>
+} @else {
+  <section class="icon">
+    <div class="icon-wrap" (click)="onPreviousStep()">
+      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+  </section>
+}

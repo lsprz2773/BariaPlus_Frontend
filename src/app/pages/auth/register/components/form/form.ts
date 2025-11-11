@@ -7,5 +7,20 @@ import { Component } from '@angular/core';
   styleUrl: './form.css'
 })
 export class Form {
-  step: number = 2;
+  currentStep: number = 1;
+  totalSteps: number = 2;
+
+  nextStep(){
+    this.currentStep++;
+    console.log(this.currentStep);
+  }
+
+  previousStep(){
+    this.currentStep--;
+    console.log(this.currentStep);
+  }
+
+  register(){
+    console.log('register')
+  }
 }

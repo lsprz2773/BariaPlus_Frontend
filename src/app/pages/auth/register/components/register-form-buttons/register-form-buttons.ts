@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-form-buttons',
@@ -7,5 +8,24 @@ import { Component } from '@angular/core';
   styleUrl: './register-form-buttons.css'
 })
 export class RegisterFormButtons {
-  step: number = 2;
+  @Input() step: number = 1;
+  @Output() nextStep = new EventEmitter<void>();
+  @Output() register = new EventEmitter<void>();
+  @Output() prevStep = new EventEmitter<void>();
+
+
+  constructor(private router: Router) {
+  }
+
+  onContinue(){
+    this.nextStep.emit()
+  }
+
+  onCancel(){
+    this.router.navigate(['']);
+  }
+
+  onRegister(){
+    this.register.emit()
+  }
 }

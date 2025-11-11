@@ -1,12 +1,12 @@
 <section>
   <header>
-    <app-step-indicator></app-step-indicator>
+    <app-step-indicator [currentStep]="currentStep" [totalSteps]="totalSteps"></app-step-indicator>
     <h1>Crear cuenta</h1>
   </header>
-  @if (step === 1){
-    <app-part-one></app-part-one>
+  @if (currentStep === 1){
+    <app-part-one [step]="currentStep" (nextStep)="nextStep()"></app-part-one>
   } @else {
-    <app-part-two></app-part-two>
+    <app-part-two [step]="currentStep" (prevStep)="previousStep()" (register)="register()"></app-part-two>
   }
 </section>
 
