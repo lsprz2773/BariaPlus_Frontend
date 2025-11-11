@@ -20,6 +20,14 @@ import { PartOne } from './pages/auth/register/components/part-one/part-one';
 import { PartTwo } from './pages/auth/register/components/part-two/part-two';
 import { RegisterFormFooter } from './pages/auth/register/components/register-form-footer/register-form-footer';
 import { RegisterFormButtons } from './pages/auth/register/components/register-form-buttons/register-form-buttons';
+import { Patient } from './pages/patient/patient';
+import { MainInfo } from './pages/patient/components/main-info/main-info';
+import { Stats } from './pages/patient/components/stats/stats';
+import { Card } from './pages/patient/components/stats/card/card';
+import { SideInfo } from './pages/patient/components/side-info/side-info';
+import { Appointments } from './pages/patient/components/appointments/appointments';
+import { Appointment } from './pages/patient/components/appointments/appointment/appointment';
+import { TopBar } from './pages/patient/components/appointments/top-bar/top-bar';
 
 @NgModule({
   declarations: [
@@ -39,6 +47,14 @@ import { RegisterFormButtons } from './pages/auth/register/components/register-f
     PartTwo,
     RegisterFormFooter,
     RegisterFormButtons,
+    Patient,
+    MainInfo,
+    Stats,
+    Card,
+    SideInfo,
+    Appointments,
+    Appointment,
+    TopBar,
 
     ],
   imports: [
