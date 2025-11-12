@@ -87,3 +87,14 @@
     gap: 16px;
   }
 }
+
+:host(.input-form-register) .form-input,
+:host(.input-form-register) .form-select {
+  padding: 8px 12px;
+  font-size: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}

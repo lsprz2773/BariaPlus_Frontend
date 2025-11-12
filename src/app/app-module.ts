@@ -1,4 +1,4 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
@@ -21,13 +21,16 @@ import { PartTwo } from './pages/auth/register/components/part-two/part-two';
 import { RegisterFormFooter } from './pages/auth/register/components/register-form-footer/register-form-footer';
 import { RegisterFormButtons } from './pages/auth/register/components/register-form-buttons/register-form-buttons';
 import { Patient } from './pages/patient/patient';
-import { MainInfo } from './pages/patient/components/main-info/main-info';
 import { Stats } from './pages/patient/components/stats/stats';
 import { Card } from './pages/patient/components/stats/card/card';
-import { SideInfo } from './pages/patient/components/side-info/side-info';
 import { Appointments } from './pages/patient/components/appointments/appointments';
 import { Appointment } from './pages/patient/components/appointments/appointment/appointment';
 import { TopBar } from './pages/patient/components/appointments/top-bar/top-bar';
+import { Info } from './pages/patient/components/info/info';
+import {MainInfo} from './pages/patient/components/info/main-info/main-info';
+import {SideInfo} from './pages/patient/components/info/side-info/side-info';
+import { BottomInfo } from './pages/patient/components/info/main-info/bottom-info/bottom-info';
+import {TopInfo} from './pages/patient/components/info/main-info/top-info/top-info';
 
 @NgModule({
   declarations: [
@@ -55,6 +58,9 @@ import { TopBar } from './pages/patient/components/appointments/top-bar/top-bar'
     Appointments,
     Appointment,
     TopBar,
+    Info,
+    TopInfo,
+    BottomInfo,
 
     ],
   imports: [

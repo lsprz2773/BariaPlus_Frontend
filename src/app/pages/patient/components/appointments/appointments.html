@@ -1,1 +1,6 @@
-<p>appointments works!</p>
+<app-top-bar></app-top-bar>
+<section class="appointments-list">
+  @for (appointments of appointments; track appointments.id){
+    <app-appointment [appointment]="appointments.date"></app-appointment>
+  }
+</section>
