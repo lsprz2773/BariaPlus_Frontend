@@ -1,6 +1,10 @@
 <app-top-bar></app-top-bar>
 <section class="appointments-list">
-  @for (appointments of appointments; track appointments.id){
-    <app-appointment [appointment]="appointments.date"></app-appointment>
+  @if (appointments.length === 0){
+    <h5>Aun no hay consultas registradas</h5>
+  } @else if (appointments && appointments.length > 0){
+    @for (appointment of appointments; track appointment.id){
+      <app-appointment [appointment]="appointment.date"></app-appointment>
+    }
   }
 </section>
