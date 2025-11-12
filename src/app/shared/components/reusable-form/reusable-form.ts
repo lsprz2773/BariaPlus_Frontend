@@ -10,8 +10,9 @@ import { CommonModule } from '@angular/common';
 })
 export class ReusableForm {
 
-  @Input() title: string = '';        
+  @Input() title: string = '';
   @Input() formItems: FormItem[] = [];
+  @Input() classHelper?: string = '';
 
   formData: { [key:string]: any } = {};
 
@@ -23,7 +24,7 @@ export class ReusableForm {
 
   onInputChange(name:string, value: any){
     this.formData[name] = value;
-    console.log('Form data', this.formData) 
+    console.log('Form data', this.formData)
   }
 
 }
