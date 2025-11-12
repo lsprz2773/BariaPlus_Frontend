@@ -31,6 +31,7 @@ import {MainInfo} from './pages/patient/components/info/main-info/main-info';
 import {SideInfo} from './pages/patient/components/info/side-info/side-info';
 import { BottomInfo } from './pages/patient/components/info/main-info/bottom-info/bottom-info';
 import {TopInfo} from './pages/patient/components/info/main-info/top-info/top-info';
+import { Login } from './pages/auth/login/login';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {TopInfo} from './pages/patient/components/info/main-info/top-info/top-in
     Info,
     TopInfo,
     BottomInfo,
+    Login,
 
     ],
   imports: [
