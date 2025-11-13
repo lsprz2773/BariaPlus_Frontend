@@ -1,3 +1,4 @@
+
 export interface Patient {
     id?: number;
     firstName: string;
@@ -7,10 +8,10 @@ export interface Patient {
     genderId: number;
     statusId: number;
     allergies?: Allergy[];
-    diseases?: Disease[]; 
+    diseases?: Disease[];
     medicalHistories?: MedicalHistory[];
 }
 
-import { Allergy } from './allergy';
-import { Disease } from './diseases';
-import { MedicalHistory } from './medical-history';
+import { Allergy } from '../allergy';
+import { Disease } from '../diseases';
+import { MedicalHistory } from '../medical-history';
