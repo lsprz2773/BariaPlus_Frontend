@@ -14,3 +14,5 @@ export interface Patient {
 import { Allergy } from './allergy';
 import { Disease } from './diseases';
 import { MedicalHistory } from './medical-history';
+
+//en vez de import mejor aca todo de una

@@ -13,7 +13,36 @@ export class PatientCard {
   patients: Patient[] = []
   isLoading: boolean = true;
 
-  constructor(private patientService: PatientService){
+  constructor(private patientService: PatientService) {
+  }
+
+  @Input() patient!: Patient
+
+  menuOpen = false;
+
+  toggleMenu(event: Event) {
+    event.stopPropagation(); // Evita que el click se propague
+    this.menuOpen = !this.menuOpen;
+  }
+
+  // Cierra el menú cuando haces click fuera
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event) {
+    this.menuOpen = false;
+  }
+
+    onEdit(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log('Editar');
+    this.menuOpen = false;
+  }
+
+  onDelete(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log('Eliminar');
+    this.menuOpen = false;
   }
 
   loadPatients(): void {
@@ -33,8 +62,10 @@ export class PatientCard {
   }
 
   getAvatar(genderId: number): string {
-    return genderId === 1 
+    return genderId === 1
       ? 'assets/otros/women-avatar.png'
-      : 'assets/otros/men-avatar.png' 
+      : 'assets/otros/men-avatar.png'
   }
+
+
 }

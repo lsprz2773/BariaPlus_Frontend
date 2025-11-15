@@ -4,21 +4,21 @@
             <i class="fa fa-ellipsis-vertical"></i>
         </button>
         <div class="dropdown-menu" [class.show]="menuOpen">
-            <a href="#" class="menu-item" (click)="onEdit($event)">
+            <a href="ruta-a-editar" class="menu-item" (click)="onEdit($event)">
                 <span>Editar paciente</span>
             </a>
-            <a href="#" class="menu-item delete" (click)="onDelete($event)">
+            <button class="menu-item delete" (click)="onDelete($event)">
                 <span>Marcar como inactivo</span>
-            </a>
+            </button>
         </div>
     </header>
 
     <figure class="patient-avatar">
-        <img src="{{patient.avatar}}" alt="Avatar de Jorge Antonio Axayacatl Gómez Escamilla">
+        <img src="{{getAvatar(patient.genderId)}}" alt="Avatar de Jorge Antonio Axayacatl Gómez Escamilla">
     </figure>
 
     <div class="patient-info">
-        <h3 class="name">{{patient.nombre}}</h3>
-        <p class="lastname">{{patient.apellidos}}</p>
+        <h3 class="name">{{patient.firstName}}</h3>
+        <p class="lastname">{{patient.lastName}}</p>
     </div>
 </article>
