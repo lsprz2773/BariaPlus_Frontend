@@ -1,6 +1,5 @@
+@if(isModalOpen){
 <main (click)="onBackdropClick()" class="modal">
-
-    @if(isModalOpen){
     <div class="modal-content" (click)="onModalClick($event)">
 
         <div class="right">
@@ -41,6 +40,5 @@
         </button>
 
     </div>
-    }
-
 </main>
+}

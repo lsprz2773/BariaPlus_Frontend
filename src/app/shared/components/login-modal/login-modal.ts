@@ -88,7 +88,6 @@ export class LoginModal implements OnInit, OnDestroy {
     // Llamar al servicio de autenticación
     this.authService.login(loginRequest).subscribe({
       next: (response) => {
-        console.log('✅ Login exitoso:', response);
         
         if (response.success) {
           // Cerrar modal y redirigir al dashboard
