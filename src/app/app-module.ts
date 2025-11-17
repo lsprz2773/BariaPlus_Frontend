@@ -32,6 +32,9 @@ import {SideInfo} from './pages/patient/components/info/side-info/side-info';
 import { BottomInfo } from './pages/patient/components/info/main-info/bottom-info/bottom-info';
 import {TopInfo} from './pages/patient/components/info/main-info/top-info/top-info';
 import { Login } from './pages/auth/login/login';
+import { TokenTest } from './pages/auth/token-test/token-test';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -63,15 +66,17 @@ import { Login } from './pages/auth/login/login';
     TopInfo,
     BottomInfo,
     Login,
-
+    TokenTest
     ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [
-    Modal
+    Modal,
+    provideHttpClient(withInterceptors([]))
   ],
   bootstrap: [App]
 })

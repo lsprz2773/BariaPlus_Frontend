@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Patient } from '../interfaces/patient';
+import { Patient, PatientResponse } from '../interfaces/patient';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
@@ -9,21 +9,45 @@ import { environment } from '../../../environments/environment.development';
 })
 export class PatientService {
   //gracias mijangos por
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    if (environment.enableDebugMode) {
+      console.log('🔧 PatientService inicializado');
+    console.log('📍 API URL:', this.apiUrl);
+    }
+  }
 
-  createPatient(patient: Patient): Observable<Patient> {
+  private apiUrl = environment.API_URL;
+
+  createPatient(patient: Patient): Observable<PatientResponse> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${environment.tokenKey}`
     });
-    return this.http.post<Patient>(`${environment.API_URL}/patient`, patient, { headers });
+
+    if (environment.enableDebugMode) {
+      console.log('Creando paciente con datos:', patient);
+    }
+
+    return this.http.post<PatientResponse>(`${this.apiUrl}/patient`, patient, { headers });
   }
 
-  getPatients(): Observable<Patient[]> {
-    return this.http.get<Patient[]>(`${environment.API_URL}/patient`);
+  getPatients(): Observable<PatientResponse> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem(environment.tokenKey)}`
+    });
+
+    return this.http.get<PatientResponse>(
+      `${this.apiUrl}/patients`,
+      { headers }
+    );
   }
 
-  getPatientById(id: number): Observable<Patient> {
-    return this.http.get<Patient>(`${environment.API_URL}/patient/${id}`);
+  getPatientById(id: number): Observable<PatientResponse> {
+
+    if (environment.enableDebugMode) {
+      console.log('Obteniendo paciente con ID:', id);
+    }
+    return this.http.get<PatientResponse>(`${this.apiUrl}/patient/${id}`);
   };
 
   // updatePatient(id: number, patient: Patient): Observable<Patient> {
@@ -36,10 +60,14 @@ export class PatientService {
   //recordar a toño que haga un metodo patch y put para el status del paciente
 
   deletePatient(id: number): Observable<any> {
-    return this.http.patch(`${environment.API_URL}/patient/${id}`, { statusId: 2 });
+    if (environment.enableDebugMode) {
+      console.log('Eliminando paciente con ID:', id);
+    }
+    return this.http.patch(`${this.apiUrl}/patient/${id}`, { statusId: 2 });
   }
 
-  
+
+
 
 }
 

@@ -9,6 +9,7 @@ import { Reviews } from './pages/reviews/reviews';
 import {Register} from './pages/auth/register/register';
 import {Patient} from './pages/patient/patient';
 import {Login} from './pages/auth/login/login';
+import { TokenTest } from './pages/auth/token-test/token-test';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: Login
+  },
+  {
+    path: 'token-test',
+    component: TokenTest
   },
   {
     path: '',

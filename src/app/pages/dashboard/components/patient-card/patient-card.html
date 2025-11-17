@@ -1,4 +1,4 @@
-<article class="patient-card">
+<article class="patient-card" (click)="viewPatientDetails()">
     <header class="menu" (click)="toggleMenu($event)">
         <button class="menu-trigger" aria-label="Opciones">
             <i class="fa fa-ellipsis-vertical"></i>
@@ -14,7 +14,7 @@
     </header>
 
     <figure class="patient-avatar">
-        <img src="{{getAvatar(patient.genderId)}}" alt="Avatar de Jorge Antonio Axayacatl Gómez Escamilla">
+        <img src="{{getAvatar(patient.genderId)}}" alt="Avatar paciente">
     </figure>
 
     <div class="patient-info">

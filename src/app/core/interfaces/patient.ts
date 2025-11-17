@@ -11,8 +11,30 @@ export interface Patient {
     medicalHistories?: MedicalHistory[];
 }
 
-import { Allergy } from './allergy';
-import { Disease } from './diseases';
-import { MedicalHistory } from './medical-history';
+export interface MedicalHistory {
+    id?: number;
+    name: string;
+    detectionDate: Date | null;
+    historyTypesId: number;
+}
 
-//en vez de import mejor aca todo de una
+export interface Disease {
+    id?: number;
+    name: string;
+    actualStateId: number;
+}
+
+export interface Allergy {
+    id?: number;
+    name: string;
+    allergicReaction: string;
+}
+
+export interface PatientResponse {
+    success: boolean,
+    message: string,
+    patient: Patient;
+    patients?: Patient[];
+}
+
+

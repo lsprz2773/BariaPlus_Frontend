@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../../core/interfaces/patient';
+import { PatientService } from '../../core/services/patient-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,29 +13,51 @@ export class Dashboard implements OnInit {
   patients: Patient[] = [];
   filteredPatients: Patient[] = [];
   searchTerm: string = '';
+  isLoading: boolean = false;
+  errorMessage: string = '';
 
-  //simiulacion
-  loadPatients(){
-    this.patients = [
-      //proximamente api Bv
-      {
-        id: 1,
-        nombre: 'Jorge Antonio Axayacatl',
-        apellidos: 'Gómez Escamilla',
-        avatar: 'assets/otros/men-avatar.png'
-      },
-      {
-        id: 2,
-        nombre: 'Alicia Jacqueline',
-        apellidos: 'Ocaña Ozuna',
-        avatar: 'assets/otros/women-avatar.png'
-      }
-    ];
-
-    this.filteredPatients = [...this.patients]; // los 3 puntos es de lo q pide la interfaz menos el id idk
-  }
+  constructor(private patientService: PatientService) {}
 
   ngOnInit(): void {
-      this.loadPatients();
+    this.loadPatients();
+  }
+
+  loadPatients(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    this.patientService.getPatients().subscribe({
+      next: (response) => {
+        if (response.success) {
+          // Ajusta según tu respuesta de API - puede ser response.patients o response.data
+          this.patients = response.patients || []; 
+          this.filteredPatients = [...this.patients];
+          console.log('Pacientes cargados:', this.patients);
+        }
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar pacientes:', error);
+        this.errorMessage = 'No se pudieron cargar los pacientes. Intenta de nuevo.';
+        this.isLoading = false;
+      }
+    });
+  }
+
+  onSearch(term: string): void {
+    this.searchTerm = term.toLowerCase();
+    this.filteredPatients = this.patients.filter(patient =>
+      patient.firstName.toLowerCase().includes(this.searchTerm) ||
+      patient.lastName.toLowerCase().includes(this.searchTerm)
+    );
+  }
+
+  onFilter(filterCriteria: any): void {
+    console.log('Filtrar con:', filterCriteria);
+    
+  }
+
+  refreshPatients(): void {
+    this.loadPatients();
   }
 }

@@ -3,7 +3,7 @@
         <h2 class="title">Registro Paciente</h2>
     </header>
 
-      <article class="form">
+    <article class="form">
         <div class="step-indicator">
             <app-step-indicator 
                 [currentStep]="currentStep" 
@@ -15,22 +15,26 @@
             @if (currentStep === 1) {
                 <app-reusable-form 
                     [title]="'Información Personal'" 
-                    [formItems]="personalInfo">
+                    [formItems]="personalInfo"
+                    [formGroup]="patientForm">
                 </app-reusable-form>
             } @else if (currentStep === 2) {
                 <app-reusable-form 
                     [title]="'Alergias'" 
-                    [formItems]="allergies">
+                    [formItems]="allergiesItems"
+                    [formGroup]="allergiesForm">
                 </app-reusable-form>
             } @else if (currentStep === 3) {
                 <app-reusable-form 
                     [title]="'Enfermedades Actuales'" 
-                    [formItems]="diseases">
+                    [formItems]="diseasesItems"
+                    [formGroup]="diseasesForm">
                 </app-reusable-form>
             } @else if (currentStep === 4) {
                 <app-reusable-form 
                     [title]="'Antecedentes médicos'" 
-                    [formItems]="medicalHistories">
+                    [formItems]="medicalHistoriesItems"
+                    [formGroup]="medicalHistoriesForm">
                 </app-reusable-form>
             }
         </div>
@@ -38,15 +42,15 @@
 
     <div class="buttons-container">
         @if (!isFirstStep()) {
-            <button class="back" (click)="previousStep()">
+            <button type="button" class="back" (click)="previousStep()">
                 <i class="fa fa-arrow-left"></i>
                 Anterior
             </button>
         }
         
-        <button class="next" (click)="nextStep()">
+        <button type="button" class="next" (click)="isLastStep() ? submitAllData() : nextStep()" [disabled]="isSubmitted">
             @if (isLastStep()) {
-                Finalizar
+                {{ isSubmitted ? 'Enviando...' : 'Finalizar' }}
                 <i class="fa fa-check"></i>
             } @else {
                 Siguiente
@@ -54,5 +58,4 @@
             }
         </button>
     </div>
-
 </section>
