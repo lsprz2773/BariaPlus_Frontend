@@ -75,7 +75,8 @@
               "buildTarget": "lp-baria-plus:build:production"
             },
             "development": {
-              "buildTarget": "lp-baria-plus:build:development"
+              "buildTarget": "lp-baria-plus:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

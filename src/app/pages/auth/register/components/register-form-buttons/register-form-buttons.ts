@@ -27,5 +27,6 @@ export class RegisterFormButtons {
 
   onRegister(){
     this.register.emit()
+    console.log('BOTONES onRegister ejecutado');
   }
 }

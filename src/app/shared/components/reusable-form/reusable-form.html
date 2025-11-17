@@ -12,13 +12,13 @@
             <label [for]="item.name" class="form-label">{{ item.label }}</label>
 
             <input [id]="item.name" [type]="item.type" [placeholder]="item.placeholder" [name]="item.name "
-                [required]="item.required" class="form-input {{classHelper}}}"/>
+                [required]="item.required" class="form-input {{classHelper}}}" (input)="onInputChange(item.name, $any($event.target).value)"/>
 
             } @else if (item.type === 'select') {
 
             <label [for]=" item.name" class="form-label">{{item.label}}</label>
 
-            <select [id]="item.name" [name]="item.name" [required]="item.required" class="form-select {{classHelper}}">
+            <select [id]="item.name" [name]="item.name" [required]="item.required" class="form-select {{classHelper}}" (change)="onInputChange(item.name, $any($event.target).value)">
 
                 <option value="" disabled selected>Seleccionar</option>
 

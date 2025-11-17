@@ -17,11 +17,13 @@ export class Auth {
 
   login(request: LoginRequest) :Observable<LoginResponse>{
     const url = environment.AUTH_API_URL + '/login';
-    return this.http.post<LoginResponse>(url, request);
+    //REGRESAR A ESTO DESPUES DE ARREGLAR CORSreturn this.http.post<LoginResponse>(url, request);
+    return this.http.post<LoginResponse>('/api/auth/login', request).pipe()
   }
 
   register(request: RegisterRequest): Observable<RegisterResponse>{
     const url = environment.AUTH_API_URL + '/register';
-    return this.http.post<RegisterResponse>(url, request);
+    //REGRESAR A ESTO DESPUES DE ARREGLAR CORS return this.http.post<RegisterResponse>(url, request);
+    return this.http.post<RegisterResponse>('/api/auth/register', request).pipe()
   }
 }

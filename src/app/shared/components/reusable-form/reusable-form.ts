@@ -27,4 +27,5 @@ export class ReusableForm {
     console.log('Form data', this.formData)
   }
 
+  protected readonly event = event;
 }
