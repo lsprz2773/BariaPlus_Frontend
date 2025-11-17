@@ -61,9 +61,11 @@ export class PatientCard {
   }
 
   getAvatar(genderId: number): string {
-    return genderId === 1
-      ? 'assets/otros/women-avatar.png'
-      : 'assets/otros/men-avatar.png'
+    if(genderId === 1) {
+      return 'assets/otros/men-avatar.png';
+    } else {
+      return 'assets/otros/women-avatar.png';
+    }
   }
 
   getPatientAge(): number {

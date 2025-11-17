@@ -44,3 +44,7 @@ Thumbs.db
 
 # enviroments
 /enviroments
+#MODIFICACIONES
+#QUITAR EL PROXY DE ESTE ARCHIVO angular.json
+#ELIMINAR DESPUES ESTE ARCHIVO proxy.conf.json
+QUITARESTO.txt

@@ -1,5 +1,6 @@
-<main *ngIf=isModalOpen (click)="onBackdropClick()" class="modal">
+<main (click)="onBackdropClick()" class="modal">
 
+    @if(isModalOpen){
     <div class="modal-content" (click)="onModalClick($event)">
 
         <div class="right">
@@ -35,10 +36,11 @@
 
         </section>
 
-            <button class="close-button">
-                <img src="assets/iconos/arrowback-icon.png" alt="Close Icon" (click)="closeModal()">
-            </button>
+        <button class="close-button">
+            <img src="assets/iconos/arrowback-icon.png" alt="Close Icon" (click)="closeModal()">
+        </button>
 
     </div>
+    }
 
 </main>

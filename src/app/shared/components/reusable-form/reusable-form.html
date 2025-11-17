@@ -16,7 +16,8 @@
                 [type]="item.type" 
                 [placeholder]="item.placeholder" 
                 [formControlName]="item.name"
-                class="form-input {{classHelper}}"
+                class="form-input {{classHelper}}" 
+                (input)="onInputChange(item.name, $any($event.target).value)"
             />
 
             } @else if (item.type === 'select') {
@@ -25,7 +26,7 @@
             <select 
                 [id]="item.name" 
                 [formControlName]="item.name" 
-                class="form-select {{classHelper}}"
+                class="form-select {{classHelper}}" (change)="onInputChange(item.name, $any($event.target).value)"
             >
                 <option value="" disabled>Seleccionar</option>
                 @for (option of item.options; track option) {

@@ -193,7 +193,7 @@ export class PatientRegister implements OnInit {
       firstName: formValue.firstName,
       lastName: formValue.lastName,
       dateOfBirth: formValue.dateOfBirth,
-      emergencyNumber: formValue.emergencyNumber,
+      emergencyNumber: String(formValue.emergencyNumber), // Asegurar que sea string
       genderId: genderMap[formValue.genderId] || 1,
       statusId: 1,
       allergies: formValue.allergies.map((allergy: any) => ({
@@ -211,7 +211,8 @@ export class PatientRegister implements OnInit {
       }))
     };
 
-    console.log('Datos a enviar:', patientData);
+    console.log('📤 DATOS A ENVIAR A LA API:');
+    console.log(JSON.stringify(patientData, null, 2));
 
     this.patientService.createPatient(patientData).subscribe({
       next: (response) => {
@@ -219,7 +220,6 @@ export class PatientRegister implements OnInit {
         if (response.success) {
           alert(`${response.message}\nPaciente: ${response.patient.firstName} ${response.patient.lastName}`);
           this.patientForm.reset();
-          this.router.navigate(['/dashboard']);
         }
         this.isSubmitted = false;
       },

@@ -1,88 +1,68 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { environment } from '../../../environments/environment'
-import { Doctor } from '../interfaces/doctor';
-import { LoginRequest, LoginResponse } from '../interfaces/auth';
+import {CookieService} from 'ngx-cookie-service';
+import {CookiesStorage} from './cookies-storage';
+import {HttpClient} from '@angular/common/http';
+import {LoginRequest} from '../interfaces/api/login-request';
+import {Observable, tap} from 'rxjs';
+import {LoginResponse} from '../interfaces/api/login-response';
+import {environment} from '../../../environments/environment.development';
+import {RegisterResponse} from '../interfaces/api/register-response';
+import {RegisterRequest} from '../interfaces/api/register-request';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Auth {
+  private readonly TOKEN_KEY = 'access_token';
+  private readonly DOCTOR_KEY = 'doctor_data';
 
-  private apiUrl = environment.API_URL;
-  private tokenKey = environment.tokenKey;
-  private doctorKey = environment.doctorKey; // clave para almacenar el doctor en localStorage
+  constructor(
+    private http: HttpClient,
+    private cookiesStorage: CookiesStorage
+  ) {}
 
-  private currentDoctorSubject = new BehaviorSubject<Doctor | null>(this.getDoctorFromStorage());
-  private currentDoctor$ = this.currentDoctorSubject.asObservable();
-
-  constructor(private _http: HttpClient) {  }
-  
-  login(credentials: LoginRequest): Observable<LoginResponse> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
-    const url = `${this.apiUrl}/auth/login`;
-
-    if (environment.enableDebugMode) {
-      console.log('Intentando iniciar sesión con URL:', url);
-    }
-
-    return this._http.post<LoginResponse>(url, credentials, { headers }).pipe(
+  login(request: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>('/api/auth/login', request).pipe(
       tap(response => {
-        if (response.success && response.token){
-          this.saveToken(response.token);
-          this.saveDoctor(response.doctor);
-          this.currentDoctorSubject.next(response.doctor);
+        if (response.success && response.token) {
+          // Guardar token en cookies (expira en 7 días)
+          const expirationDate = new Date();
+          expirationDate.setDate(expirationDate.getDate() + 7);
+          
+          this.cookiesStorage.setKey(this.TOKEN_KEY, response.token, expirationDate);
+          this.cookiesStorage.setKey(this.DOCTOR_KEY, JSON.stringify(response.doctor), expirationDate);
+          
+          console.log('✅ Token guardado:', response.token);
+          console.log('✅ Doctor guardado:', response.doctor);
         }
       })
     );
   }
 
-  // guardar tokens
-
-  private saveToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
-  }
-
-  private saveDoctor(doctor: Doctor): void {
-    localStorage.setItem(this.doctorKey, JSON.stringify(doctor));
+  register(request: RegisterRequest): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>('/api/auth/register', request).pipe(
+      tap(response => {
+        console.log('✅ Registro exitoso:', response);
+      })
+    );
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
-  }
-
-  private getDoctorFromStorage(): Doctor | null {
-    const doctorJson = localStorage.getItem(this.doctorKey);
-    return doctorJson ? JSON.parse(doctorJson) : null; // Devuelve null si no hay doctor almacenado
-  }
-
-  getCurrentDoctor(): Doctor | null {
-    return this.currentDoctorSubject.value;
+    const token = this.cookiesStorage.getValueKey(this.TOKEN_KEY);
+    return token || null;
   }
 
   isAuthenticated(): boolean {
-    return this.getToken() !== null;
+    return !!this.getToken();
   }
 
   logout(): void {
-    localStorage.removeItem(this.tokenKey);
-    localStorage.removeItem(this.doctorKey);
-    this.currentDoctorSubject.next(null);
-
-    if (environment.enableDebugMode) {
-      console.log('Usuario desconectado, token y doctor eliminados del almacenamiento local.');
-    }
+    this.cookiesStorage.deleteKeyValue(this.TOKEN_KEY);
+    this.cookiesStorage.deleteKeyValue(this.DOCTOR_KEY);
   }
 
-  setTokenManually(token: string, doctor: Doctor): void {
-    this.saveToken(token);
-    this.saveDoctor(doctor);
-    this.currentDoctorSubject.next(doctor);
-
-    console.log('Token y doctor establecidos manualmente.'+ token + doctor);
+  getDoctor(): any {
+    const doctorData = this.cookiesStorage.getValueKey(this.DOCTOR_KEY);
+    return doctorData ? JSON.parse(doctorData) : null;
   }
 }

@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {FormItem} from '../../../../../core/interfaces/form-item';
+import {ReusableForm} from '../../../../../shared/components/reusable-form/reusable-form';
 
 @Component({
   selector: 'app-part-two',
@@ -7,13 +8,16 @@ import {FormItem} from '../../../../../core/interfaces/form-item';
   templateUrl: './part-two.html',
   styleUrl: './part-two.css'
 })
-export class PartTwo {
+export class PartTwo implements AfterViewInit {
     @Input() step: number = 2;
-    @Output() register = new EventEmitter<void>();
+    @Output() register = new EventEmitter<any>();
     @Output() prevStep = new EventEmitter<void>();
+    @ViewChild(ReusableForm) reusableForm!: ReusableForm;
 
     onRegister(){
-      this.register.emit()
+      const stepTwoData = this.reusableForm.formData;
+      this.register.emit(stepTwoData)
+      console.log('PART TWO onRegister ejecutado');
     }
 
     onPrevStep(){
@@ -27,36 +31,39 @@ export class PartTwo {
       placeholder: 'Seleccione su genero',
       name: 'gender',
       required: true,
-      options: ['Femenino', 'Masculino', 'Otro']
+      options: ['Femenino', 'Masculino']
     },
     {
       type: 'text',
       label: 'Cedula profesional *',
       placeholder: 'Ingrese el numero de su cedula profesional',
-      name: 'licenseNumber',
+      name: 'professionalLicense',
       required: true,
     },
     {
       type: 'text',
       label: 'Institucion de porvenciencia *',
       placeholder: 'Ingrese su institucion de porvenciencia *',
-      name: 'sourceInstitution',
+      name: 'graduationInstitution',
       required: true,
     },
     {
       type: 'date',
       label: 'Fecha de inicio laboral  *',
       placeholder: 'Ingrese la fecha de inicio laboral',
-      name: 'employmentStartDate',
+      name: 'employmentStart',
       required: true,
     },
     {
       type: 'text',
       label: 'Lugar de trabajo actual *',
       placeholder: 'Ingrese su lugar de trabajo actual',
-      name: 'currentWorkPlace',
+      name: 'currentWorkplace',
       required: true,
     }
   ]
 
+  ngAfterViewInit() {
+    console.log('PartTwo ViewChild reusableForm:', this.reusableForm);
+  }
 }

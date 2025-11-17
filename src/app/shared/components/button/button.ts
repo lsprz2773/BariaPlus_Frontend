@@ -13,9 +13,9 @@ export class Button {
   @Input() context: 'continue' | 'default' | 'submit' | 'previous' | 'primary longButton' = 'default';
   @Input() disabled: boolean = false;
 
-  @Output() click = new EventEmitter<void>();
+  @Output() pressed = new EventEmitter<void>();
 
   onClick() {
-    this.click.emit();
+    this.pressed.emit();
   }
 }

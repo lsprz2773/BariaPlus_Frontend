@@ -15,13 +15,28 @@ export class ReusableForm {
   @Input() formItems: FormItem[] = [];
   @Input() classHelper: string = '';
 
+  formData: { [key: string]: any } = {};
+
+  constructor() {
+    this.formItems.forEach(item => {
+      this.formData[item.name] = null;
+    });
+  }
+
   //helper para control de lista
 
-  getControl(name: string){
-    return this.formGroup.get(name) ||null;
+  getControl(name: string) {
+    return this.formGroup.get(name) || null;
   }
 
-    trackByName(_: number, item: FormItem) {
+  trackByName(_: number, item: FormItem) {
     return item.name;
   }
+
+  onInputChange(name: string, value: any) {
+    this.formData[name] = value;
+    console.log('Form data', this.formData)
+  }
+
+  protected readonly event = event;
 }
