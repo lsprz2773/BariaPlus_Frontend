@@ -32,6 +32,11 @@ import {SideInfo} from './pages/patient/components/info/side-info/side-info';
 import { BottomInfo } from './pages/patient/components/info/main-info/bottom-info/bottom-info';
 import {TopInfo} from './pages/patient/components/info/main-info/top-info/top-info';
 import { Login } from './pages/auth/login/login';
+import {CookieService} from 'ngx-cookie-service';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
+import {authInterceptor} from './core/interceptors/auth-interceptor';
+import {authTokenInterceptor} from './core/interceptors/auth-token-interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -63,15 +68,22 @@ import { Login } from './pages/auth/login/login';
     TopInfo,
     BottomInfo,
     Login,
-
     ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [
-    Modal
+    Modal,
+    CookieService,
+    provideHttpClient(
+      withInterceptors([
+        authInterceptor,
+        authTokenInterceptor
+      ])
+    )
   ],
   bootstrap: [App]
 })

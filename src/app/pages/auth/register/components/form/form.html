@@ -4,9 +4,9 @@
     <h1>Crear cuenta</h1>
   </header>
   @if (currentStep === 1){
-    <app-part-one [step]="currentStep" (nextStep)="nextStep()"></app-part-one>
+    <app-part-one [step]="currentStep" (nextStep)="onPartOneNext($event)"></app-part-one>
   } @else {
-    <app-part-two [step]="currentStep" (prevStep)="previousStep()" (register)="register()"></app-part-two>
+    <app-part-two [step]="currentStep" (prevStep)="previousStep()" (register)="onPartTwoRegister($event)"></app-part-two>
   }
 </section>
 

@@ -5,12 +5,16 @@
 
     <article class="profile-content">
         <div class="personal-info">
-            <app-profile-info [title] = "'Información personal'" [data] = "personalInfo"></app-profile-info>
+            <app-profile-info [title]="'Información personal'" [data]="personalInfo"></app-profile-info>
         </div>
 
         <div class="profesional-info">
-            <app-profile-info [title] = "'Información profesional'" [data] = "profesionalInfo"></app-profile-info>
+            <app-profile-info [title]="'Información profesional'" [data]="profesionalInfo"></app-profile-info>
         </div>
 
+        <div class="btn-edit">
+            <button class="btn">Editar</button>
+        </div>
     </article>
+
 </section>

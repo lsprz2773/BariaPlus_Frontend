@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, Output, ViewChild, viewChild} from '@angular/core';
 import {FormItem} from '../../../../../core/interfaces/form-item';
+import {ReusableForm} from '../../../../../shared/components/reusable-form/reusable-form';
 
 @Component({
   selector: 'app-part-one',
@@ -7,21 +8,22 @@ import {FormItem} from '../../../../../core/interfaces/form-item';
   templateUrl: './part-one.html',
   styleUrl: './part-one.css'
 })
-export class PartOne {
+export class PartOne implements AfterViewInit {
   @Input() step: number = 1;
-  @Output() nextStep = new EventEmitter<void>();
+  @Output() nextStep = new EventEmitter<any>();
+  @ViewChild(ReusableForm) reusableForm!: ReusableForm;
 
   onNextStep(){
-    this.nextStep.emit();
+    const partOneData = this.reusableForm.formData;
+    this.nextStep.emit(partOneData);
   }
-
 
   registerPartOne: FormItem[] = [
     {
       type: 'text',
       label: 'Nombre (s) *',
       placeholder: 'Ingrese su nombre',
-      name: 'name',
+      name: 'firstName',
       required: true,
     },
     {
@@ -53,4 +55,8 @@ export class PartOne {
       required: true,
     }
   ]
+
+  ngAfterViewInit() {
+    console.log('PartOne ViewChild reusableForm:', this.reusableForm);
+  }
 }

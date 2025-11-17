@@ -1,159 +1,233 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { FormItem } from '../../core/interfaces/form-item';
+import { PatientService } from '../../core/services/patient-service';
+import { Router } from '@angular/router';
+import { Patient } from '../../core/interfaces/patient';
 
 @Component({
   selector: 'app-patient-register',
   standalone: false,
   templateUrl: './patient-register.html',
-  styleUrl: './patient-register.css'
+  styleUrl: './patient-register.css',
 })
-export class PatientRegister {
+export class PatientRegister implements OnInit {
 
-  currentStep:number = 1;
+  currentStep: number = 1;
   totalSteps: number = 4;
+  isSubmitted: boolean = false;
 
-  //informacionpersonal
-  personalInfo: FormItem[] = [
-    { 
-      type: 'text', 
-      placeholder: 'Nombre', 
-      name: 'name', 
-      required: true 
-    },
-    { 
-      type: 'text', 
-      placeholder: 'Apellidos', 
-      name: 'lastname', 
-      required: true 
-    },
-    { 
-      type: 'date', 
-      placeholder: 'Fecha de nacimiento', 
-      name: 'birthdate', 
-      required: true 
-    },
-    { 
-      type: 'select', 
-      placeholder: 'Sexo', 
-      name: 'gender', 
-      options: ['Masculino', 'Femenino'], 
-      required: true 
-    },
-    { 
-      type: 'tel', 
-       placeholder: 'Número de emergencia', 
-      name: 'emergencyNumber', 
-      required: true 
-    }
-  ]
+  // FormGroup principal (PADRE)
+  patientForm!: FormGroup;
 
-  allergies: FormItem[] = [
-    { 
-      type: 'text', 
-      placeholder: 'Nombre de la alergia', 
-      name: 'allergie', 
-      required: true 
-    },
-    { 
-      type: 'text', 
-      placeholder: 'Describa los sintomas de la alergia', 
-      name: 'description', 
-      required: true 
-    }
-  ]
+  constructor(
+    private fb: FormBuilder,
+    private patientService: PatientService,
+    private router: Router
+  ) { }
 
-    illness: FormItem[] = [
-    { 
-      type: 'text', 
-      placeholder: 'Nombre de la enfermedad', 
-      name: 'illness', 
-      required: true 
-    },
-    { 
-      type: 'select', 
-      label: "Estado actual",
-      placeholder: 'Estado actual', 
-      name: 'actual_state', //preguntar xd 
-      required: true 
-    }
-  ]
-
-    records: FormItem[] = [
-    { 
-      type: 'select', 
-      placeholder: 'Tipo de antecedent', 
-      name: 'allergie', 
-      options: ['Heredorfamiliares', 'Patológicos', 'No patológicos', 'Ginecobstétricos', 'Tratamientos de obesidad', 'Psicológico/Social'],
-      required: true 
-    },
-    { 
-      type: 'text', 
-      label: 'Descripción', 
-      placeholder: 'Describa los sintomas de la alergia', 
-      name: 'description', 
-      required: true 
-    }
-  ]
-
-  formData = {
-    personal: {},
-    allergie: {},
-    ill: {},
-    record:{}
+  ngOnInit(): void {
+    this.initForm();
   }
 
-  nextStep() {
+  // Inicializar TODOS los controles en un solo FormGroup
+  initForm(): void {
+    this.patientForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      genderId: ['', Validators.required],
+      emergencyNumber: ['', Validators.required],
+
+      allergies: this.fb.array([this.createAllergyGroup()]),
+      diseases: this.fb.array([this.createDiseaseGroup()]),
+      medicalHistories: this.fb.array([this.createMedicalHistoryGroup()])
+    });
+  }
+
+  //agregar con el botoncito uno por uno waaa noo
+  createAllergyGroup(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      allergicReaction: ['', Validators.required]
+    });
+  }
+  addAllergy(): void {
+    this.allergies.push(this.createAllergyGroup())
+  }
+  removeAllergy(index: number): void {
+    if (this.allergies.length > 1) {
+      this.allergies.removeAt(index);
+    } else {
+      alert('Debe haber al menos una alergia registrada');
+    }
+  }
+
+  createDiseaseGroup(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      actualStateId: ['', Validators.required]
+    })
+  }
+  addDisease(): void {
+    this.diseases.push(this.createDiseaseGroup())
+  }
+  removeDisease(index: number): void {
+    if (this.diseases.length > 1) {
+      this.diseases.removeAt(index);
+    } else {
+      alert('Debe haber al menos una enfermedad registrada');
+    }
+  }
+  createMedicalHistoryGroup(): FormGroup {
+    return this.fb.group({
+      historyTypeId: ['', Validators.required],
+      name: ['', Validators.required],
+      detectionDate: ['', Validators.required]
+    });
+  }
+  addMedicalHistory(): void {
+    this.medicalHistories.push(this.createMedicalHistoryGroup());
+  }
+  removeMedicalHistory(index: number): void {
+    if (this.medicalHistories.length > 1) {
+      this.medicalHistories.removeAt(index);
+    } else {
+      alert('Debe haber al menos un antecedente registrado');
+    }
+  }
+
+  // getters para acceder a los sub-grupos en forma de arreglo
+  get allergies(): FormArray {
+    return this.patientForm.get('allergies') as FormArray;
+  }
+
+  get diseases(): FormArray {
+    return this.patientForm.get('diseases') as FormArray;
+  }
+
+  get medicalHistories(): FormArray {
+    return this.patientForm.get('medicalHistories') as FormArray;
+  }
+
+  // define qué campos mostrar en cada paso
+  personalInfo: FormItem[] = [
+    { type: 'text', placeholder: 'Nombre', name: 'firstName', required: true },
+    { type: 'text', placeholder: 'Apellidos', name: 'lastName', required: true },
+    { type: 'date', placeholder: 'Fecha de nacimiento', name: 'dateOfBirth', required: true },
+    { type: 'select', placeholder: 'Sexo', name: 'genderId', options: ['Masculino', 'Femenino'], required: true },
+    { type: 'tel', placeholder: 'Número de emergencia', name: 'emergencyNumber', required: true }
+  ];
+
+  allergiesItems: FormItem[] = [
+    { type: 'text', placeholder: 'Nombre de la alergia', name: 'name', required: true },
+    { type: 'text', placeholder: 'Describa los síntomas', name: 'allergicReaction', required: true }
+  ];
+
+  diseasesItems: FormItem[] = [
+    { type: 'text', placeholder: 'Nombre de la enfermedad', name: 'name', required: true },
+    { type: 'select', label: "Estado actual", placeholder: 'Estado actual', name: 'actualStateId', options: ['Controlada', 'En tratamiento', 'Aguda'], required: true }
+  ];
+
+  medicalHistoriesItems: FormItem[] = [
+    { type: 'select', label: 'Tipo de antecedente', placeholder: 'Tipo de antecedente', name: 'historyTypeId', options: ['Heredorfamiliares', 'Patológicos', 'No patológicos', 'Ginecobstétricos', 'Tratamientos de obesidad', 'Psicológico/Social'], required: true },
+    { type: 'text', placeholder: 'Nombre del antecedente', name: 'name', required: true },
+    { type: 'date', label: 'Fecha de detección',placeholder: 'Fecha de detección', name: 'detectionDate', required: true }
+  ];
+
+  // Navegación
+  nextStep(): void {
     if (this.currentStep < this.totalSteps) {
       this.currentStep++;
-      console.log('Paso actual:', this.currentStep);
     }
   }
 
-  // Retroceder al paso anterior
-  previousStep() {
+  previousStep(): void {
     if (this.currentStep > 1) {
       this.currentStep--;
     }
   }
 
-  // Verificar si es el último paso
   isLastStep(): boolean {
     return this.currentStep === this.totalSteps;
   }
 
-  // Verificar si es el primer paso
   isFirstStep(): boolean {
     return this.currentStep === 1;
   }
 
-  // Guardar datos del formulario actual
-  onFormSubmit(stepData: any) {
-    switch(this.currentStep) {
-      case 1:
-        this.formData.personal = stepData;
-        break;
-      case 2:
-        this.formData.allergie = stepData;
-        break;
-      case 3:
-        this.formData.ill = stepData;
-        break;
-      case 4:
-        this.formData.record = stepData;
-        break;
+  // Enviar datos (el padre lee del FormGroup)
+  submitAllData(): void {
+    if (this.patientForm.invalid) {
+      alert('⚠️ Por favor completa todos los campos requeridos');
+      this.patientForm.markAllAsTouched();
+      return;
     }
-    
-    if (this.isLastStep()) {
-      this.submitAllData();
-    } else {
-      this.nextStep();
-    }
+
+    this.isSubmitted = true;
+
+    const formValue = this.patientForm.value;
+
+    // mapeos
+    const genderMap: { [key: string]: number } = {
+      'Masculino': 1,
+      'Femenino': 2
+    };
+
+    const stateMap: { [key: string]: number } = {
+      'Controlada': 1,
+      'En tratamiento': 2,
+      'Aguda': 3
+    };
+
+    const historyTypeMap: { [key: string]: number } = {
+      'Heredorfamiliares': 1,
+      'Patológicos': 2,
+      'No patológicos': 3,
+      'Ginecobstétricos': 4,
+      'Tratamientos de obesidad': 5,
+      'Psicológico/Social': 6
+    };
+
+    const patientData: Patient = {
+      firstName: formValue.firstName,
+      lastName: formValue.lastName,
+      dateOfBirth: formValue.dateOfBirth,
+      emergencyNumber: String(formValue.emergencyNumber), // Asegurar que sea string
+      genderId: genderMap[formValue.genderId] || 1,
+      statusId: 1,
+      allergies: formValue.allergies.map((allergy: any) => ({
+        name: allergy.name,
+        allergicReaction: allergy.allergicReaction
+      })),
+      diseases: formValue.diseases.map((disease: any) => ({
+        name: disease.name,
+        actualStateId: stateMap[disease.actualStateId] || 1
+      })),
+      medicalHistories: formValue.medicalHistories.map((history: any) => ({
+        name: history.name,
+        detectionDate: history.detectionDate || null,
+        historyTypesId: historyTypeMap[history.historyTypeId] || 1
+      }))
+    };
+
+    console.log('📤 DATOS A ENVIAR A LA API:');
+    console.log(JSON.stringify(patientData, null, 2));
+
+    this.patientService.createPatient(patientData).subscribe({
+      next: (response) => {
+        console.log('Respuesta del servidor:', response);
+        if (response.success) {
+          alert(`${response.message}\nPaciente: ${response.patient.firstName} ${response.patient.lastName}`);
+          this.patientForm.reset();
+        }
+        this.isSubmitted = false;
+      },
+      error: (error) => {
+        console.error('Error:', error);
+        this.isSubmitted = false;
+        alert(`Error al crear paciente: ${error.message || 'Error desconocido'}`);
+      }
+    });
   }
-  
-  // Enviar todos los datos
-  submitAllData() {
-    console.log('Todos los datos del paciente:', this.formData);
-    // Aquí llamarías a tu servicio para guardar en el backend
-  }
-  
 }

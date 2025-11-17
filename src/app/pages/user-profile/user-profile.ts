@@ -11,6 +11,7 @@ export class UserProfile {
 
   personalInfo: InfoItem[] = [];
   profesionalInfo: InfoItem[] = [];
+  
 
   ngOnInit(){
     this.personalInfo = [
