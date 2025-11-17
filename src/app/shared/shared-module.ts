@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { StepIndicator } from './components/step-indicator/step-indicator';
 import { ReusableForm } from './components/reusable-form/reusable-form';
 import { Button } from './components/button/button';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { Button } from './components/button/button';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
     Navbar,

@@ -9,7 +9,7 @@
         <div class="input-group">
             @if (item.type === 'text' || item.type === 'tel' || item.type === 'date' || item.type === 'password' || item.type === 'email') {
 
-            <label [for]="item.name" class="form-label">{{ item.label || item.placeholder }}</label>
+            <label [for]="item.name" class="form-label">{{ item.label }}</label>
 
             <input 
                 [id]="item.name" 
@@ -21,21 +21,18 @@
 
             } @else if (item.type === 'select') {
 
-            <label [for]="item.name" class="form-label">{{ item.label || item.placeholder }}</label>
-
+            <label [for]="item.name" class="form-label">{{ item.label }}</label>
             <select 
                 [id]="item.name" 
                 [formControlName]="item.name" 
                 class="form-select {{classHelper}}"
             >
                 <option value="" disabled>Seleccionar</option>
-
                 @for (option of item.options; track option) {
                 <option [value]="option">{{ option }}</option>
                 }
             </select>
             }
-
             @if (formGroup.get(item.name)?.invalid && formGroup.get(item.name)?.touched) {
             <div class="error-message">
                 Campo requerido

@@ -16,12 +16,9 @@ export class PatientRegister implements OnInit {
   currentStep: number = 1;
   totalSteps: number = 4;
   isSubmitted: boolean = false;
-  
-  // ✅ FormGroup principal (PADRE)
+
+  // FormGroup principal (PADRE)
   patientForm!: FormGroup;
-  allergiesForm!: FormGroup;
-  diseasesForm!: FormGroup;
-  medicalHistoriesForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -33,51 +30,87 @@ export class PatientRegister implements OnInit {
     this.initForm();
   }
 
-  // ✅ Inicializar TODOS los controles en un solo FormGroup
+  // Inicializar TODOS los controles en un solo FormGroup
   initForm(): void {
     this.patientForm = this.fb.group({
-      // Paso 1: Información Personal (controles individuales)
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       genderId: ['', Validators.required],
       emergencyNumber: ['', Validators.required],
-      
-      // Paso 2: Alergias (sub-grupo para simplificar)
-      allergy: this.fb.group({
-        name: ['', Validators.required],
-        allergicReaction: ['', Validators.required]
-      }),
-      
-      // Paso 3: Enfermedades (sub-grupo)
-      disease: this.fb.group({
-        name: ['', Validators.required],
-        actualStateId: ['', Validators.required]
-      }),
-        
-      // Paso 4: Antecedentes (sub-grupo)
-      medicalHistory: this.fb.group({
-        historyTypeId: ['', Validators.required],
-        name: ['', Validators.required],
-        detectionDate: ['', Validators.required]
-      })
+
+      allergies: this.fb.array([this.createAllergyGroup()]),
+      diseases: this.fb.array([this.createDiseaseGroup()]),
+      medicalHistories: this.fb.array([this.createMedicalHistoryGroup()])
     });
   }
 
-  // ✅ Getters para acceder a los sub-grupos
-  get allergyGroup(): FormGroup {
-    return this.patientForm.get('allergy') as FormGroup;
+  //agregar con el botoncito uno por uno waaa noo
+  createAllergyGroup(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      allergicReaction: ['', Validators.required]
+    });
+  }
+  addAllergy(): void {
+    this.allergies.push(this.createAllergyGroup())
+  }
+  removeAllergy(index: number): void {
+    if (this.allergies.length > 1) {
+      this.allergies.removeAt(index);
+    } else {
+      alert('Debe haber al menos una alergia registrada');
+    }
   }
 
-  get diseaseGroup(): FormGroup {
-    return this.patientForm.get('disease') as FormGroup;
+  createDiseaseGroup(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      actualStateId: ['', Validators.required]
+    })
+  }
+  addDisease(): void {
+    this.diseases.push(this.createDiseaseGroup())
+  }
+  removeDisease(index: number): void {
+    if (this.diseases.length > 1) {
+      this.diseases.removeAt(index);
+    } else {
+      alert('Debe haber al menos una enfermedad registrada');
+    }
+  }
+  createMedicalHistoryGroup(): FormGroup {
+    return this.fb.group({
+      historyTypeId: ['', Validators.required],
+      name: ['', Validators.required],
+      detectionDate: ['', Validators.required]
+    });
+  }
+  addMedicalHistory(): void {
+    this.medicalHistories.push(this.createMedicalHistoryGroup());
+  }
+  removeMedicalHistory(index: number): void {
+    if (this.medicalHistories.length > 1) {
+      this.medicalHistories.removeAt(index);
+    } else {
+      alert('Debe haber al menos un antecedente registrado');
+    }
   }
 
-  get medicalHistoryGroup(): FormGroup {
-    return this.patientForm.get('medicalHistory') as FormGroup;
+  // getters para acceder a los sub-grupos en forma de arreglo
+  get allergies(): FormArray {
+    return this.patientForm.get('allergies') as FormArray;
   }
 
-  // ✅ Configuración de FormItems (define qué campos mostrar en cada paso)
+  get diseases(): FormArray {
+    return this.patientForm.get('diseases') as FormArray;
+  }
+
+  get medicalHistories(): FormArray {
+    return this.patientForm.get('medicalHistories') as FormArray;
+  }
+
+  // define qué campos mostrar en cada paso
   personalInfo: FormItem[] = [
     { type: 'text', placeholder: 'Nombre', name: 'firstName', required: true },
     { type: 'text', placeholder: 'Apellidos', name: 'lastName', required: true },
@@ -97,9 +130,9 @@ export class PatientRegister implements OnInit {
   ];
 
   medicalHistoriesItems: FormItem[] = [
-    { type: 'select', placeholder: 'Tipo de antecedente', name: 'historyTypeId', options: ['Heredorfamiliares', 'Patológicos', 'No patológicos', 'Ginecobstétricos', 'Tratamientos de obesidad', 'Psicológico/Social'], required: true },
+    { type: 'select', label: 'Tipo de antecedente', placeholder: 'Tipo de antecedente', name: 'historyTypeId', options: ['Heredorfamiliares', 'Patológicos', 'No patológicos', 'Ginecobstétricos', 'Tratamientos de obesidad', 'Psicológico/Social'], required: true },
     { type: 'text', placeholder: 'Nombre del antecedente', name: 'name', required: true },
-    { type: 'date', placeholder: 'Fecha de detección', name: 'detectionDate', required: true }
+    { type: 'date', label: 'Fecha de detección',placeholder: 'Fecha de detección', name: 'detectionDate', required: true }
   ];
 
   // Navegación
@@ -123,7 +156,7 @@ export class PatientRegister implements OnInit {
     return this.currentStep === 1;
   }
 
-  // ✅ Enviar datos (el padre lee del FormGroup)
+  // Enviar datos (el padre lee del FormGroup)
   submitAllData(): void {
     if (this.patientForm.invalid) {
       alert('⚠️ Por favor completa todos los campos requeridos');
@@ -135,7 +168,7 @@ export class PatientRegister implements OnInit {
 
     const formValue = this.patientForm.value;
 
-    // Mapeos
+    // mapeos
     const genderMap: { [key: string]: number } = {
       'Masculino': 1,
       'Femenino': 2
@@ -156,7 +189,6 @@ export class PatientRegister implements OnInit {
       'Psicológico/Social': 6
     };
 
-    // ✅ Construir objeto Patient con los datos del FormGroup
     const patientData: Patient = {
       firstName: formValue.firstName,
       lastName: formValue.lastName,
@@ -164,37 +196,37 @@ export class PatientRegister implements OnInit {
       emergencyNumber: formValue.emergencyNumber,
       genderId: genderMap[formValue.genderId] || 1,
       statusId: 1,
-      allergies: [{
-        name: formValue.allergy.name,
-        allergicReaction: formValue.allergy.allergicReaction
-      }],
-      diseases: [{
-        name: formValue.disease.name,
-        actualStateId: stateMap[formValue.disease.actualStateId] || 1
-      }],
-      medicalHistories: [{
-        name: formValue.medicalHistory.name,
-        detectionDate: formValue.medicalHistory.detectionDate || null,
-        historyTypesId: historyTypeMap[formValue.medicalHistory.historyTypeId] || 1
-      }]
+      allergies: formValue.allergies.map((allergy: any) => ({
+        name: allergy.name,
+        allergicReaction: allergy.allergicReaction
+      })),
+      diseases: formValue.diseases.map((disease: any) => ({
+        name: disease.name,
+        actualStateId: stateMap[disease.actualStateId] || 1
+      })),
+      medicalHistories: formValue.medicalHistories.map((history: any) => ({
+        name: history.name,
+        detectionDate: history.detectionDate || null,
+        historyTypesId: historyTypeMap[history.historyTypeId] || 1
+      }))
     };
 
-    console.log('📤 Datos a enviar:', patientData);
+    console.log('Datos a enviar:', patientData);
 
     this.patientService.createPatient(patientData).subscribe({
       next: (response) => {
-        console.log('✅ Respuesta del servidor:', response);
+        console.log('Respuesta del servidor:', response);
         if (response.success) {
-          alert(`✅ ${response.message}\nPaciente: ${response.patient.firstName} ${response.patient.lastName}`);
+          alert(`${response.message}\nPaciente: ${response.patient.firstName} ${response.patient.lastName}`);
           this.patientForm.reset();
           this.router.navigate(['/dashboard']);
         }
         this.isSubmitted = false;
       },
       error: (error) => {
-        console.error('❌ Error:', error);
+        console.error('Error:', error);
         this.isSubmitted = false;
-        alert(`❌ Error al crear paciente: ${error.message || 'Error desconocido'}`);
+        alert(`Error al crear paciente: ${error.message || 'Error desconocido'}`);
       }
     });
   }

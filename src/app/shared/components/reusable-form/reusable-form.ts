@@ -9,18 +9,19 @@ import { FormItem } from '../../../core/interfaces/form-item';
   styleUrls: ['./reusable-form.css']
 })
 export class ReusableForm {
-  
-  // ✅ Recibe el FormGroup desde el padre
+
   @Input() formGroup!: FormGroup;
-  
-  // ✅ Recibe la configuración de qué campos mostrar
   @Input() title: string = '';
   @Input() formItems: FormItem[] = [];
   @Input() classHelper: string = '';
-  @Input() 
 
-  // ✅ TrackBy para optimizar renderizado
-  trackByName(_: number, item: FormItem) {
+  //helper para control de lista
+
+  getControl(name: string){
+    return this.formGroup.get(name) ||null;
+  }
+
+    trackByName(_: number, item: FormItem) {
     return item.name;
   }
 }
