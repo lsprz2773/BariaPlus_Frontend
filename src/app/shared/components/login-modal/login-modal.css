@@ -179,3 +179,9 @@ button {
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 86, 179, 0.3);
 }
+
+:host(.login-view){
+  .close-button{
+    display: none;
+  }
+}

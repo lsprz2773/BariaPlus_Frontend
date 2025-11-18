@@ -14,8 +14,7 @@ export class RegisterFormButtons {
   @Output() prevStep = new EventEmitter<void>();
 
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) { }
 
   onContinue(){
     this.nextStep.emit()
