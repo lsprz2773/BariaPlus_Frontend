@@ -1,8 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {Auth} from '../../../../../core/services/auth';
 import {RegisterRequest} from '../../../../../core/interfaces/api/register-request';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {FormItem} from '../../../../../core/interfaces/form-item';
+
+export const passwordMatchValidator: ValidatorFn = (control: AbstractControl) => {
+  const form = control as FormGroup;
+  const password = form.get('password')?.value;
+  const checkPassword = form.get('checkPassword')?.value;
+
+  if (!password || !checkPassword){
+    return null;
+  }
+
+  return password === checkPassword? null : {passwordMismatch: true};
+}
 
 @Component({
   selector: 'app-form',
@@ -38,7 +50,10 @@ export class Form implements OnInit {
       graduationInstitution: ['', [Validators.required]],
       employmentStart: ['', [Validators.required]],
       currentWorkplace: ['', [Validators.required]]
-    })
+    },
+      {
+        validators: [passwordMatchValidator]
+      })
   }
 
   registerPartOne:FormItem[] = [
@@ -125,9 +140,11 @@ export class Form implements OnInit {
     console.log('PASO 1 userForm valid:', this.userForm.valid);
     const controls = ['firstName', 'lastName', 'email', 'password', 'checkPassword'];
     const stepOneGroupValid = controls.every(c => this.userForm.get(c)?.valid);
-
-    if (!stepOneGroupValid) {
+    const passwordsOk = !this.userForm.errors?.['passwordMismatch'];
+    console.log('Paso 1 controls valid:', stepOneGroupValid, 'passwordsOk:', passwordsOk);
+    if (!stepOneGroupValid || !passwordsOk) {
       controls.forEach(c => this.userForm.get(c)?.markAsTouched());
+      this.userForm.markAsTouched()
       return;
     }
     this.nextStep();

@@ -11,21 +11,21 @@
 
             <label [for]="item.name" class="form-label">{{ item.label }}</label>
 
-            <input 
-                [id]="item.name" 
-                [type]="item.type" 
-                [placeholder]="item.placeholder" 
+            <input
+                [id]="item.name"
+                [type]="item.type"
+                [placeholder]="item.placeholder"
                 [formControlName]="item.name"
-                class="form-input {{classHelper}}" 
+                class="form-input {{classHelper}}"
                 (input)="onInputChange(item.name, $any($event.target).value)"
             />
 
             } @else if (item.type === 'select') {
 
             <label [for]="item.name" class="form-label">{{ item.label }}</label>
-            <select 
-                [id]="item.name" 
-                [formControlName]="item.name" 
+            <select
+                [id]="item.name"
+                [formControlName]="item.name"
                 class="form-select {{classHelper}}" (change)="onInputChange(item.name, $any($event.target).value)"
             >
                 <option value="" disabled>Seleccionar</option>
@@ -39,6 +39,14 @@
                 Campo requerido
             </div>
             }
+          @if (item.name === 'checkPassword'
+          && formGroup.get('checkPassword')?.valid
+          && formGroup.errors?.['passwordMismatch']
+          && formGroup.get('checkPassword')?.touched) {
+            <div class="error-message">
+              Las contraseñas no coinciden
+            </div>
+          }
         </div>
         }
     </form>
