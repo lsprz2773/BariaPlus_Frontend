@@ -83,14 +83,12 @@ export class LoginModal implements OnInit, OnDestroy {
       password: this.loginForm.value.password
     };
 
-    console.log('📤 Enviando login:', loginRequest);
+    console.log('Enviando login:', loginRequest);
 
-    // Llamar al servicio de autenticación
     this.authService.login(loginRequest).subscribe({
       next: (response) => {
         
         if (response.success) {
-          // Cerrar modal y redirigir al dashboard
           this.closeModal();
           this.loginForm.reset();
           this.router.navigate(['/dashboard']);
