@@ -3,6 +3,7 @@ import {Auth} from '../../../../../core/services/auth';
 import {RegisterRequest} from '../../../../../core/interfaces/api/register-request';
 import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {FormItem} from '../../../../../core/interfaces/form-item';
+import {Router} from '@angular/router';
 
 export const passwordMatchValidator: ValidatorFn = (control: AbstractControl) => {
   const form = control as FormGroup;
@@ -24,7 +25,7 @@ export const passwordMatchValidator: ValidatorFn = (control: AbstractControl) =>
 })
 export class Form implements OnInit {
 
-  constructor(private authService: Auth, private fb: FormBuilder) {}
+  constructor(private authService: Auth, private fb: FormBuilder, private router: Router) {}
 
   currentStep: number = 1;
   totalSteps: number = 2;
@@ -201,6 +202,7 @@ export class Form implements OnInit {
     this.authService.register(payload).subscribe({
       next: (res) => {
         console.log('Registro hecho',res);
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         console.log('Error al registrar',err);
