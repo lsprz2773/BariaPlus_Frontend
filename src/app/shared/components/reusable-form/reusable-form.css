@@ -89,7 +89,7 @@
 }
 
 :host(.input-form-register) .form-input,
-:host(.input-form-register) .form-select {
+:host(.input-form-register) .form-select{
   padding: 8px 12px;
   font-size: 10px;
   border: 1px solid #e0e0e0;
@@ -97,4 +97,22 @@
   background-color: #fafafa;
   transition: all 0.2s ease;
   font-family: inherit;
+}
+
+:host(.input-form-register) .error-message {
+  font-size: 10px;
+  display: flex;
+  justify-content: flex-end;
+  color: red;
+  padding: 0;
+  margin: 0;
+}
+
+.form:has(.error-message){
+  gap: 3px;
+}
+
+:host(.input-form-register) .form-input.ng-invalid.ng-touched,
+:host(.input-form-register) .form-select.ng-invalid.ng-touched {
+  border-color: red;
 }

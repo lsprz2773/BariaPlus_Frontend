@@ -16,8 +16,6 @@ import { Reviews } from './pages/reviews/reviews';
 import { ProfileInfo } from './pages/user-profile/components/profile-info/profile-info';
 import { Register } from './pages/auth/register/register';
 import { Form } from './pages/auth/register/components/form/form';
-import { PartOne } from './pages/auth/register/components/part-one/part-one';
-import { PartTwo } from './pages/auth/register/components/part-two/part-two';
 import { RegisterFormFooter } from './pages/auth/register/components/register-form-footer/register-form-footer';
 import { RegisterFormButtons } from './pages/auth/register/components/register-form-buttons/register-form-buttons';
 import { Patient } from './pages/patient/patient';
@@ -52,8 +50,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProfileInfo,
     Register,
     Form,
-    PartOne,
-    PartTwo,
     RegisterFormFooter,
     RegisterFormButtons,
     Patient,

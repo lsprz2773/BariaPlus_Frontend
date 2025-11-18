@@ -9,6 +9,7 @@ import { Reviews } from './pages/reviews/reviews';
 import {Register} from './pages/auth/register/register';
 import {Patient} from './pages/patient/patient';
 import {Login} from './pages/auth/login/login';
+import {authGuard} from './core/guards/auth-guard';
 
 const routes: Routes = [
   {
