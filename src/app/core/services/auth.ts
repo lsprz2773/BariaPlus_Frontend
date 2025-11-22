@@ -31,9 +31,6 @@ export class Auth {
           
           this.cookiesStorage.setKey(this.TOKEN_KEY, response.token, expirationDate);
           this.cookiesStorage.setKey(this.DOCTOR_KEY, JSON.stringify(response.doctor), expirationDate);
-          
-          console.log('✅ Token guardado:', response.token);
-          console.log('✅ Doctor guardado:', response.doctor);
         }
       })
     );
@@ -65,4 +62,5 @@ export class Auth {
     const doctorData = this.cookiesStorage.getValueKey(this.DOCTOR_KEY);
     return doctorData ? JSON.parse(doctorData) : null;
   }
+
 }

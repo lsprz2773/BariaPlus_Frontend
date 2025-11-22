@@ -31,7 +31,7 @@ export class PatientCard {
     this.menuOpen = false;
   }
 
-    onEdit(event: Event) {
+  onEdit(event: Event) {
     event.preventDefault();
     event.stopPropagation();
     console.log('Editar');
@@ -61,29 +61,28 @@ export class PatientCard {
   }
 
   getAvatar(genderId: number): string {
-    if(genderId === 1) {
+    if (genderId === 1) {
       return 'assets/otros/men-avatar.png';
     } else {
       return 'assets/otros/women-avatar.png';
     }
   }
 
-  getPatientAge(): number {
-    if (!this.patient.dateOfBirth) return 0;
-    const birthDate = new Date(this.patient.dateOfBirth);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    return age;
-  }
+  // getPatientAge(): number {
+  //   if (!this.patient.dateOfBirth) return 0;
+  //   const birthDate = new Date(this.patient.dateOfBirth);
+  //   const today = new Date();
+  //   let age = today.getFullYear() - birthDate.getFullYear();
+  //   const monthDiff = today.getMonth() - birthDate.getMonth();
+  //   if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+  //     age--;
+  //   }
+  //   return age;
+  // }
 
-  getGenderLabel(): string {
-    // Ajusta según tus IDs de género en la API
-    return this.patient.genderId === 1 ? 'Masculino' : 'Femenino';
-  }
+  // getGenderLabel(): string {
+  //   return this.patient.genderId === 1 ? 'Masculino' : 'Femenino';
+  // }
 
   viewPatientDetails(): void {
     this.router.navigate(['/patient', this.patient.id]);

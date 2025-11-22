@@ -132,7 +132,7 @@ export class PatientRegister implements OnInit {
   medicalHistoriesItems: FormItem[] = [
     { type: 'select', label: 'Tipo de antecedente', placeholder: 'Tipo de antecedente', name: 'historyTypeId', options: ['Heredorfamiliares', 'Patológicos', 'No patológicos', 'Ginecobstétricos', 'Tratamientos de obesidad', 'Psicológico/Social'], required: true },
     { type: 'text', placeholder: 'Nombre del antecedente', name: 'name', required: true },
-    { type: 'date', label: 'Fecha de detección',placeholder: 'Fecha de detección', name: 'detectionDate', required: true }
+    { type: 'date', label: 'Fecha de detección', placeholder: 'Fecha de detección', name: 'detectionDate', required: true }
   ];
 
   // Navegación
@@ -196,22 +196,25 @@ export class PatientRegister implements OnInit {
       emergencyNumber: String(formValue.emergencyNumber), // Asegurar que sea string
       genderId: genderMap[formValue.genderId] || 1,
       statusId: 1,
+
       allergies: formValue.allergies.map((allergy: any) => ({
-        name: allergy.name,
-        allergicReaction: allergy.allergicReaction
+        name: allergy.name || null,
+        allergicReaction: allergy.allergicReaction || null
       })),
+
       diseases: formValue.diseases.map((disease: any) => ({
-        name: disease.name,
+        name: disease.name || null,
         actualStateId: stateMap[disease.actualStateId] || 1
       })),
+
       medicalHistories: formValue.medicalHistories.map((history: any) => ({
-        name: history.name,
+        name: history.name || null,
         detectionDate: history.detectionDate || null,
         historyTypesId: historyTypeMap[history.historyTypeId] || 1
       }))
     };
 
-    console.log('📤 DATOS A ENVIAR A LA API:');
+    console.log('DATOS A ENVIAR A LA API:');
     console.log(JSON.stringify(patientData, null, 2));
 
     this.patientService.createPatient(patientData).subscribe({
@@ -220,6 +223,9 @@ export class PatientRegister implements OnInit {
         if (response.success) {
           alert(`${response.message}\nPaciente: ${response.patient.firstName} ${response.patient.lastName}`);
           this.patientForm.reset();
+          this.initForm(); // reiniciar el formulario con valores por defecto
+          this.currentStep = 1; // Volver al primer paso
+          this.router.navigate(['/dashboard']);
         }
         this.isSubmitted = false;
       },
