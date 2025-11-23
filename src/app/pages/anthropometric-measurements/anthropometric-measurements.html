@@ -1,0 +1,27 @@
+<section class="measurements">
+    <header class="title-container">
+        <h2 class="title">Medidas Antropometricas</h2>
+        <app-step-indicator [currentStep]="currentStep" [totalSteps]="totalSteps"></app-step-indicator>
+    </header>
+
+
+    <div class="buttons-container">
+        @if (!isFirstStep()) {
+        <button type="button" class="back" (click)="previousStep()">
+            <i class="fa fa-arrow-left"></i>
+            Anterior
+        </button>
+        }
+
+        <button type="button" class="next" (click)="isLastStep() ? submitAllData() : nextStep()"
+            [disabled]="isSubmitted">
+            @if (isLastStep()) {
+                {{ isSubmitted ? 'Enviando...' : 'Finalizar' }}
+                <i class="fa fa-check"></i>
+            } @else {
+                Siguiente
+                <i class="fa fa-arrow-right"></i>
+            }
+        </button>
+    </div>
+</section>

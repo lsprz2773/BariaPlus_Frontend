@@ -35,6 +35,7 @@ import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {authInterceptor} from './core/interceptors/auth-interceptor';
 import {authTokenInterceptor} from './core/interceptors/auth-token-interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AnthropometricMeasurements } from './pages/anthropometric-measurements/anthropometric-measurements';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TopInfo,
     BottomInfo,
     Login,
+    AnthropometricMeasurements
     ],
   imports: [
     BrowserModule,
