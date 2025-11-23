@@ -1,4 +1,4 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Patient } from '../../../../core/interfaces/patient';
 import { PatientService } from '../../../../core/services/patient-service';
 import { Router } from '@angular/router';
@@ -18,6 +18,8 @@ export class PatientCard {
   }
 
   @Input() patient!: Patient
+
+  @Output() patientDeleted = new EventEmitter<number>();
 
   menuOpen = false;
 
@@ -41,8 +43,25 @@ export class PatientCard {
   onDelete(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('Eliminar');
     this.menuOpen = false;
+
+    
+
+    if (this.patient.id !== undefined) {
+      this.patientService.deletePatient(this.patient.id).subscribe({
+        next: () => {
+          console.log('Paciente eliminado');
+          this.loadPatients();
+
+          this.patientDeleted.emit(this.patient.id);
+        },
+        error: (error) => {
+          console.error('Error al eliminar paciente', error);
+        }
+      });
+    } else {
+      console.error('El ID del paciente no está definido');
+    }
   }
 
   loadPatients(): void {
@@ -67,22 +86,6 @@ export class PatientCard {
       return 'assets/otros/women-avatar.png';
     }
   }
-
-  // getPatientAge(): number {
-  //   if (!this.patient.dateOfBirth) return 0;
-  //   const birthDate = new Date(this.patient.dateOfBirth);
-  //   const today = new Date();
-  //   let age = today.getFullYear() - birthDate.getFullYear();
-  //   const monthDiff = today.getMonth() - birthDate.getMonth();
-  //   if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-  //     age--;
-  //   }
-  //   return age;
-  // }
-
-  // getGenderLabel(): string {
-  //   return this.patient.genderId === 1 ? 'Masculino' : 'Femenino';
-  // }
 
   viewPatientDetails(): void {
     this.router.navigate(['/patient', this.patient.id]);

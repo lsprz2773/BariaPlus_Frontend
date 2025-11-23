@@ -40,7 +40,7 @@ export class PatientService {
     if (environment.enableDebugMode) {
       console.log('Eliminando paciente con ID:', id);
     }
-    return this.http.patch(`/api/patient/${id}`, { statusId: 2 });
+    return this.http.patch(`/api/patient/${id}/status`, { statusId: 2 });
   }
 
 }
