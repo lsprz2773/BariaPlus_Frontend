@@ -2,6 +2,7 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 import { Patient } from '../../../../core/interfaces/patient';
 import { PatientService } from '../../../../core/services/patient-service';
 import { Router } from '@angular/router';
+import { Modal } from '../../../../shared/modal';
 
 @Component({
   selector: 'app-patient-card',
@@ -11,17 +12,18 @@ import { Router } from '@angular/router';
 })
 export class PatientCard {
 
-  patients: Patient[] = []
-  isLoading: boolean = true;
-
-  constructor(private patientService: PatientService, private router: Router) {
-  }
-
-  @Input() patient!: Patient
-
+  @Input() patient!: Patient;
   @Output() patientDeleted = new EventEmitter<number>();
 
   menuOpen = false;
+  showConfirmModal = false;
+  patientToDeleteName = '';
+
+  constructor(
+    private patientService: PatientService, 
+    private router: Router,
+    private modalService: Modal
+  ) { }
 
   toggleMenu(event: Event) {
     event.stopPropagation(); // Evita que el click se propague
@@ -45,38 +47,30 @@ export class PatientCard {
     event.stopPropagation();
     this.menuOpen = false;
 
-    
-
-    if (this.patient.id !== undefined) {
-      this.patientService.deletePatient(this.patient.id).subscribe({
-        next: () => {
-          console.log('Paciente eliminado');
-          this.loadPatients();
-
-          this.patientDeleted.emit(this.patient.id);
-        },
-        error: (error) => {
-          console.error('Error al eliminar paciente', error);
-        }
-      });
-    } else {
-      console.error('El ID del paciente no está definido');
-    }
+    // ✅ Abre el modal de confirmación
+    this.patientToDeleteName = `${this.patient.firstName} ${this.patient.lastName}`;
+    this.modalService.openModal();
   }
 
-  loadPatients(): void {
-    this.isLoading = true;
-    this.patientService.getPatients().subscribe({
-      next: (data) => {
-        this.isLoading = false;
+  onConfirmDelete(): void {
+    if (!this.patient.id) {
+      return;
+    }
 
-        console.log('Pacientes cargados: ', this.patients);
+    this.patientService.deletePatient(this.patient.id).subscribe({
+      next: (response) => {
+        
+        // Emite el evento al padre
+        this.patientDeleted.emit(this.patient.id);
       },
       error: (error) => {
-        console.error('Error al cargar pacientes', error);
-        this.isLoading = false;
+        console.error('Error al eliminar paciente:', error);
+        alert('Error al eliminar el paciente. Por favor, intenta de nuevo.');
       }
-    })
+    });
+  }
+
+  onCancelDelete(): void{
   }
 
   getAvatar(genderId: number): string {
