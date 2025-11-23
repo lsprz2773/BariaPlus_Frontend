@@ -118,6 +118,10 @@
     line-height: 1.4;
 }
 
+button{
+    border: none;
+}
+
 @media screen and (max-width: 768px) {
     .patient-card {
         max-width: 100%;

@@ -1,7 +1,8 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Patient } from '../../../../core/interfaces/patient';
 import { PatientService } from '../../../../core/services/patient-service';
 import { Router } from '@angular/router';
+import { Modal } from '../../../../shared/modal';
 
 @Component({
   selector: 'app-patient-card',
@@ -11,15 +12,18 @@ import { Router } from '@angular/router';
 })
 export class PatientCard {
 
-  patients: Patient[] = []
-  isLoading: boolean = true;
-
-  constructor(private patientService: PatientService, private router: Router) {
-  }
-
-  @Input() patient!: Patient
+  @Input() patient!: Patient;
+  @Output() patientDeleted = new EventEmitter<number>();
 
   menuOpen = false;
+  showConfirmModal = false;
+  patientToDeleteName = '';
+
+  constructor(
+    private patientService: PatientService, 
+    private router: Router,
+    private modalService: Modal
+  ) { }
 
   toggleMenu(event: Event) {
     event.stopPropagation(); // Evita que el click se propague
@@ -41,23 +45,32 @@ export class PatientCard {
   onDelete(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('Eliminar');
     this.menuOpen = false;
+
+    // ✅ Abre el modal de confirmación
+    this.patientToDeleteName = `${this.patient.firstName} ${this.patient.lastName}`;
+    this.modalService.openModal();
   }
 
-  loadPatients(): void {
-    this.isLoading = true;
-    this.patientService.getPatients().subscribe({
-      next: (data) => {
-        this.isLoading = false;
+  onConfirmDelete(): void {
+    if (!this.patient.id) {
+      return;
+    }
 
-        console.log('Pacientes cargados: ', this.patients);
+    this.patientService.deletePatient(this.patient.id).subscribe({
+      next: (response) => {
+        
+        // Emite el evento al padre
+        this.patientDeleted.emit(this.patient.id);
       },
       error: (error) => {
-        console.error('Error al cargar pacientes', error);
-        this.isLoading = false;
+        console.error('Error al eliminar paciente:', error);
+        alert('Error al eliminar el paciente. Por favor, intenta de nuevo.');
       }
-    })
+    });
+  }
+
+  onCancelDelete(): void{
   }
 
   getAvatar(genderId: number): string {
@@ -67,22 +80,6 @@ export class PatientCard {
       return 'assets/otros/women-avatar.png';
     }
   }
-
-  // getPatientAge(): number {
-  //   if (!this.patient.dateOfBirth) return 0;
-  //   const birthDate = new Date(this.patient.dateOfBirth);
-  //   const today = new Date();
-  //   let age = today.getFullYear() - birthDate.getFullYear();
-  //   const monthDiff = today.getMonth() - birthDate.getMonth();
-  //   if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-  //     age--;
-  //   }
-  //   return age;
-  // }
-
-  // getGenderLabel(): string {
-  //   return this.patient.genderId === 1 ? 'Masculino' : 'Femenino';
-  // }
 
   viewPatientDetails(): void {
     this.router.navigate(['/patient', this.patient.id]);
