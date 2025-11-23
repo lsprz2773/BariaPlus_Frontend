@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { PatientResponse } from '../../../../../core/interfaces/patient';
 
 @Component({
   selector: 'app-main-info',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './main-info.css'
 })
 export class MainInfo {
-
+  @Input() patient!: PatientResponse;
 }

@@ -30,7 +30,7 @@ export class PatientRegister implements OnInit {
     this.initForm();
   }
 
-  // Inicializar TODOS los controles en un solo FormGroup
+  // inicializar TODOS los controles en un solo FormGroup
   initForm(): void {
     this.patientForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -193,7 +193,8 @@ export class PatientRegister implements OnInit {
       firstName: formValue.firstName,
       lastName: formValue.lastName,
       dateOfBirth: formValue.dateOfBirth,
-      emergencyNumber: String(formValue.emergencyNumber), // Asegurar que sea string
+      entryDate: new Date().toISOString().split('T')[0], // fecha de entrada en formato YYYY-MM-DD
+      emergencyNumber: String(formValue.emergencyNumber), // asegurar que sea string
       genderId: genderMap[formValue.genderId] || 1,
       statusId: 1,
 
@@ -213,9 +214,6 @@ export class PatientRegister implements OnInit {
         historyTypesId: historyTypeMap[history.historyTypeId] || 1
       }))
     };
-
-    console.log('DATOS A ENVIAR A LA API:');
-    console.log(JSON.stringify(patientData, null, 2));
 
     this.patientService.createPatient(patientData).subscribe({
       next: (response) => {

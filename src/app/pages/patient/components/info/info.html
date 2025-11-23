@@ -1,2 +1,16 @@
-<app-main-info></app-main-info>
-<app-side-info></app-side-info>
+@if(isLoading){
+<div class="loading">
+  <p>Cargando información del paciente...</p>
+</div>
+}
+
+@if(errorMessage && !isLoading){
+<div class="error-message">
+  {{ errorMessage }}
+</div>
+}
+
+@if(patientData && !isLoading && !errorMessage){
+<app-main-info [patient]="patientData"></app-main-info>
+<app-side-info [patient]="patientData"></app-side-info>
+}

@@ -45,7 +45,7 @@ const routes: Routes = [
         component: Reviews
       },
       {
-        path: 'patient',
+        path: 'patient/:id',
         component: Patient
       }
     ]
