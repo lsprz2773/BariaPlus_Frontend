@@ -8,11 +8,7 @@ import { environment } from '../../../environments/environment.development';
   providedIn: 'root'
 })
 export class PatientService {
-  // El interceptor agregará automáticamente el token, no lo hagas manualmente
   constructor(private http: HttpClient) {
-    if (environment.enableDebugMode) {
-      console.log('🔧 PatientService inicializado');
-    }
   }
 
   // /api para que funcione con el proxy

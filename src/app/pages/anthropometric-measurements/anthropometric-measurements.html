@@ -1,16 +1,83 @@
 <section class="measurements">
     <header class="title-container">
-        <h2 class="title">Medidas Antropometricas</h2>
+        <h2 class="title">Medidas Antropométricas</h2>
         <app-step-indicator [currentStep]="currentStep" [totalSteps]="totalSteps"></app-step-indicator>
     </header>
 
+    <form [formGroup]="measurementsForm" class="measurements-form">
+        
+        <!-- Paso 1: Talla, Peso, Gasto energético, Circunferencias -->
+        @if (currentStep === 1) {
+            <div class="form-step">
+                @for (field of step1Fields; track field.name) {
+                    <div class="form-group">
+                        @if (field.label) {
+                            <label>{{ field.label }}</label>
+                        }
+                        
+                        @if (field.type === 'select') {
+                            <select [formControlName]="field.name">
+                                <option value="">{{ field.placeholder }}</option>
+                                @for (option of field.options; track option) {
+                                    <option [value]="option">{{ option }}</option>
+                                }
+                            </select>
+                        } @else if (field.type === 'number') {
+                            <input 
+                                type="number" 
+                                [formControlName]="field.name"
+                                [placeholder]="field.placeholder"
+                                [step]="field.step || '0.1'"
+                                [min]="field.min || 0"
+                            />
+                        }
+                    </div>
+                }
+            </div>
+        }
+
+        <!-- Paso 2: Pliegues cutáneos -->
+        @if (currentStep === 2) {
+            <div class="form-step">
+                @for (field of step2Fields; track field.name) {
+                    <div class="form-group">
+                        <input 
+                            type="number" 
+                            [formControlName]="field.name"
+                            [placeholder]="field.placeholder"
+                            [step]="field.step || '0.1'"
+                            [min]="field.min || 0"
+                        />
+                    </div>
+                }
+            </div>
+        }
+
+        <!-- Paso 3: Bioimpedancia -->
+        @if (currentStep === 3) {
+            <div class="form-step">
+                @for (field of step3Fields; track field.name) {
+                    <div class="form-group">
+                        <input 
+                            type="number" 
+                            [formControlName]="field.name"
+                            [placeholder]="field.placeholder"
+                            [step]="field.step || '0.1'"  
+                            [min]="field.min || 0"
+                        />
+                    </div>
+                }
+            </div>
+        }
+
+    </form>
 
     <div class="buttons-container">
         @if (!isFirstStep()) {
-        <button type="button" class="back" (click)="previousStep()">
-            <i class="fa fa-arrow-left"></i>
-            Anterior
-        </button>
+            <button type="button" class="back" (click)="previousStep()">
+                <i class="fa fa-arrow-left"></i>
+                Anterior
+            </button>
         }
 
         <button type="button" class="next" (click)="isLastStep() ? submitAllData() : nextStep()"

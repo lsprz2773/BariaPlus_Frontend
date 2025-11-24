@@ -28,3 +28,21 @@ export interface ConsultationResponse {
   calculatedIndicators: CalculatedIndicator[];
   calculatedMetrics: CalculatedMetric[];
 }
+
+// HELPER INTERFACES (para uso en componentes)
+export interface MetricDisplay {
+  catalogId: number;
+  name: string;
+  value: string;
+  unit: string;
+  category: string;
+}
+
+export interface IndicatorDisplay {
+  typeIndicatorId: number;
+  name: string;
+  value: string;
+  rangeName: string;
+  color: string;
+  icon?: string;
+}
