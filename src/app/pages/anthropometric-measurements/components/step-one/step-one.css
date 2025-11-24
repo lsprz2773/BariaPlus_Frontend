@@ -1,0 +1,133 @@
+.step-one-layout {
+    display: grid;
+    grid-template-columns: 350px 1fr 350px;
+    gap: 40px;
+    max-width: 1400px;
+    margin-right: 60px;
+    margin-bottom: 30px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: -15px;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 4px;
+}
+
+.field-sublabel {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+}
+
+.left-column input,
+.left-column select {
+    padding: 12px 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fef9f3;
+    transition: all 0.3s ease;
+}
+
+.left-column input:focus,
+.left-column select:focus {
+    outline: none;
+    border-color: var(--hover-color);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(93, 187, 158, 0.1);
+}
+
+.left-column input::placeholder {
+    color: var(--text-color);
+}
+
+.center-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.center-column app-avatar-1 {
+    width: 100%;
+    max-width: 300px;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: -20px;
+}
+
+.column-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.circumference-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.circumference-field label {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.circumference-field input {
+    padding: 12px 6px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 13px;
+    background: #fef9f3;
+    transition: all 0.3s ease;
+}
+
+.circumference-field input:focus {
+    outline: none;
+    border-color: var(--hover-color);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(93, 187, 158, 0.1);
+}
+
+.circumference-field input::placeholder {
+    color: var(--text-color);
+    font-size: 13px;
+}
+
+.dual-input {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+input.error,
+select.error {
+    border-color: #e74c3c !important;
+    background: #fef5f5 !important;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 4px;
+}
