@@ -29,7 +29,7 @@ export class Dashboard implements OnInit {
     this.patientService.getPatients().subscribe({
       next: (response) => {
         if (response.success) {
-          // Ajusta según tu respuesta de API - puede ser response.patients o response.data
+          // Ajusta según respuesta de API - puede ser response.patients o response.data
           this.patients = response.patients || []; 
           this.filteredPatients = [...this.patients];
           console.log('Pacientes cargados:', this.patients);
@@ -46,6 +46,12 @@ export class Dashboard implements OnInit {
 
   onSearch(term: string): void {
     this.searchTerm = term.toLowerCase();
+
+    if(!this.searchTerm){
+      this.filteredPatients = [...this.patients];
+      return;
+    }
+
     this.filteredPatients = this.patients.filter(patient =>
       patient.firstName.toLowerCase().includes(this.searchTerm) ||
       patient.lastName.toLowerCase().includes(this.searchTerm)
@@ -55,6 +61,16 @@ export class Dashboard implements OnInit {
   onFilter(filterCriteria: any): void {
     console.log('Filtrar con:', filterCriteria);
     
+  }
+
+  onPatientDeleted(patientId: number): void {
+    this.patients = this.patients.filter(p => p.id !== patientId);
+    this.filteredPatients = this.filteredPatients.filter(p => p.id !== patientId);
+  }
+
+  //cachar solo el id del paciente y no meterme en más pedo con eliminar XD
+  trackByPatientId(index: number, patient: Patient): number {
+    return patient.id || index;
   }
 
   refreshPatients(): void {

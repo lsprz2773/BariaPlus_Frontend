@@ -3,6 +3,7 @@ export interface Patient {
     firstName: string;
     lastName: string;
     dateOfBirth: string;
+    entryDate: string;
     emergencyNumber: string; // Cambiado a string para coincidir con la API
     genderId: number;
     statusId: number;

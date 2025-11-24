@@ -29,18 +29,18 @@ export class PatientService {
     return this.http.get<PatientResponse>('/api/patient');
   }
 
-  // getPatientById(id: number): Observable<PatientResponse> {
-  //   if (environment.enableDebugMode) {
-  //     console.log('Obteniendo paciente con ID:', id);
-  //   }
-  //   return this.http.get<PatientResponse>(`/api/patient/${id}`);
-  // }
+  getPatientById(id: number): Observable<PatientResponse> {
+    if (environment.enableDebugMode) {
+      console.log('Obteniendo paciente con ID:', id);
+    }
+    return this.http.get<PatientResponse>(`/api/patient/${id}`);
+  }
 
   deletePatient(id: number): Observable<any> {
     if (environment.enableDebugMode) {
       console.log('Eliminando paciente con ID:', id);
     }
-    return this.http.patch(`/api/patient/${id}`, { statusId: 2 });
+    return this.http.patch(`/api/patient/${id}/status`, { statusId: 2 });
   }
 
 }

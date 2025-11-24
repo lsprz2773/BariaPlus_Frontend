@@ -22,3 +22,13 @@
         <p class="lastname">{{patient.lastName}}</p>
     </div>
 </article>
+
+<app-confirm-modal
+    [title]="'¿Eliminar paciente?'"
+    [message]="'¿Estás seguro de marcar como inactivo a ' + patientToDeleteName + '? Esta acción no se puede deshacer.'"
+    [confirmText]="'Sí, eliminar'"
+    [cancelText]="'Cancelar'"
+    [isDangerous]="true"
+    (confirmed)="onConfirmDelete()"
+    (cancelled)="onCancelDelete()">
+</app-confirm-modal>
