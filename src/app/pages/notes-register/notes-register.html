@@ -1,6 +1,8 @@
 <main>
   <h1>Registro de notas</h1>
-  <app-reusable-form [formItems]="noteForm" [formGroup]="notesForm" [title]="'Notas'"></app-reusable-form>
-  <app-button [type]="'submit'" [name]="'add-note'" [context]="'primary'" [text]="'Agregar'" (pressed)="addNote()"></app-button>
+  <div class="note-form">
+    <app-reusable-form [formItems]="noteForm" [formGroup]="notesForm" [title]="'Notas'" class="note-form"></app-reusable-form>
+    <app-button [type]="'submit'" [name]="'add-note'" [context]="'primary'" [text]="'Agregar'" (pressed)="addNote()"></app-button>
+  </div>
 </main>
 <app-notes-container></app-notes-container>

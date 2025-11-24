@@ -2,7 +2,15 @@
   <div class="title-container">
     <h2>Notas creadas</h2>
   </div>
-  <div class="notes-container"></div>
+  <div class="notes-container" [ngClass]="{'centered': !notes || notes.length === 0}">
+    @if (!notes || notes.length === 0){
+      <h4>Aun no  hay notas registradas</h4>
+    } @else {
+      @for (note of notes; track note.categoryId){
+        <app-note></app-note>
+      }
+    }
+  </div>
 </main>
 <div class="buttons-footer">
   <app-button [text]="'Cancelar'" [type]="'button'" [name]="'note-cancel'" [context]="'default'" (pressed)="onCancel()"></app-button>

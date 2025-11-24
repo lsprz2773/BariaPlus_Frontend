@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormItem} from '../../core/interfaces/form-item';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Note} from '../../core/interfaces/note';
+import {Note} from '../../core/interfaces/consultation';
 
 @Component({
   selector: 'app-notes-register',

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Note} from '../../../core/interfaces/consultation';
 
 @Component({
   selector: 'app-notes-container',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './notes-container.css'
 })
 export class NotesContainer {
+  @Input() notes!: Note[];
     onCancel(){}
     onContinue(){}
 }

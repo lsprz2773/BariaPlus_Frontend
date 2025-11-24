@@ -116,3 +116,15 @@
 :host(.input-form-register) .form-select.ng-invalid.ng-touched {
   border-color: red;
 }
+
+:host(.note-form) .error-message {
+  font-size: 10px;
+  display: flex;
+  justify-content: flex-end;
+  color: red;
+}
+
+:host(.note-form) .form-input.ng-invalid.ng-touched,
+:host(.note-form) .form-select.ng-invalid.ng-touched {
+  border-color: red;
+}

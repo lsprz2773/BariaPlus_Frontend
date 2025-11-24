@@ -36,6 +36,9 @@ import {authInterceptor} from './core/interceptors/auth-interceptor';
 import {authTokenInterceptor} from './core/interceptors/auth-token-interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AnthropometricMeasurements } from './pages/anthropometric-measurements/anthropometric-measurements';
+import {NotesRegister} from './pages/notes-register/notes-register';
+import {NotesContainer} from './pages/notes-register/notes-container/notes-container';
+import {Note} from './pages/notes-register/note/note';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,10 @@ import { AnthropometricMeasurements } from './pages/anthropometric-measurements/
     TopInfo,
     BottomInfo,
     Login,
-    AnthropometricMeasurements
+    AnthropometricMeasurements,
+    NotesRegister,
+    NotesContainer,
+    Note
     ],
   imports: [
     BrowserModule,
