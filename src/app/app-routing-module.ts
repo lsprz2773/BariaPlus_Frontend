@@ -9,7 +9,7 @@ import { Reviews } from './pages/reviews/reviews';
 import {Register} from './pages/auth/register/register';
 import {Patient} from './pages/patient/patient';
 import {Login} from './pages/auth/login/login';
-import {authGuard} from './core/guards/auth-guard';
+import { AnthropometricMeasurements } from './pages/anthropometric-measurements/anthropometric-measurements';
 
 const routes: Routes = [
   {
@@ -47,6 +47,10 @@ const routes: Routes = [
       {
         path: 'patient/:id',
         component: Patient
+      },
+      {
+        path: 'measurements',
+        component: AnthropometricMeasurements
       }
     ]
   }
