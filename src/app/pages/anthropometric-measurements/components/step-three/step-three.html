@@ -1,0 +1,63 @@
+<form class="step-three-layout" [formGroup]="form">
+
+  <div class="left-column">
+    <div class="bio-field">
+      <label>Porcentaje de grasa corporal</label>
+      <input type="number" formControlName="porcentajeGrasaCorporal"
+        placeholder="Ingrese el porcentaje de grasa corporal" step="0.1" />
+    </div>
+
+    <div class="bio-field">
+      <label>Kg de músculo</label>
+      <input type="number" formControlName="kgMusculo" placeholder="Ingrese el kg de músculo" step="0.1" />
+    </div>
+
+    <div class="bio-field">
+      <label>Kg de masa ósea</label>
+      <input type="number" formControlName="kgMasaOsea" placeholder="Ingrese el kg de masa ósea" step="0.1" />
+    </div>
+
+    <div class="bio-field">
+      <label>Porcentaje de agua corporal</label>
+      <input type="number" formControlName="porcentajeAguaCorporal" placeholder="Ingrese el porcentaje de agua corporal"
+        step="0.1" />
+    </div>
+
+    <div class="bio-field">
+      <label>Ingestión diaria en calorías</label>
+      <input type="number" formControlName="ingestaCaloriaDiaria" placeholder="Ingrese la ingestión diaria en calorías"
+        step="1" />
+    </div>
+  </div>
+
+  <div class="center-column">
+    <app-avatar-1></app-avatar-1>
+  </div>
+
+  <div class="right-column">
+
+    <div class="bio-field">
+      <label>Edad metabólica</label>
+      <input type="number" formControlName="edadMetabolica" placeholder="Ingrese la edad metabólica" step="1" />
+    </div>
+
+    <div class="bio-field">
+      <label>IMC (BMI)</label>
+      <input type="number" formControlName="imc" placeholder="Ingrese el IMC" step="0.1" />
+    </div>
+
+    <div class="bio-field">
+      <label>Nivel de grasa visceral</label>
+      <input type="number" formControlName="nivelGrasaVisceral" placeholder="Ingrese el nivel de grasa visceral"
+        step="1" />
+    </div>
+
+    <div class="bio-field">
+      <label>Proporción de grasa visceral</label>
+      <input type="number" formControlName="proporcionGrasaVisceral"
+        placeholder="Ingrese la proporción de grasa visceral" step="0.1" />
+    </div>
+
+  </div>
+
+</form>

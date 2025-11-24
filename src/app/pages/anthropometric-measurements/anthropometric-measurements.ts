@@ -35,7 +35,7 @@ export class AnthropometricMeasurements implements OnInit {
     { id: 12, type: 'number', placeholder: 'En contracción (cm)', name: 'contraido', step: '0.1', min: 0 }
   ];
 
-  // paso 2: pliegues cutáneos
+  // pliegues cutáneos
   step2Fields: FormItem[] = [
     { id: 13, type: 'number', placeholder: 'Bíceps (mm)', name: 'biceps', step: '0.1', min: 0 },
     { id: 14, type: 'number', placeholder: 'Tríceps (mm)', name: 'triceps', step: '0.1', min: 0 },
@@ -68,12 +68,12 @@ export class AnthropometricMeasurements implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private consultationService: ConsultationService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.patientId = Number(this.route.snapshot.paramMap.get('patientId')) || 0;
     this.medicalRecordId = Number(this.route.snapshot.paramMap.get('medicalRecordId')) || 0;
-    
+
     this.initForm();
   }
 
@@ -88,7 +88,30 @@ export class AnthropometricMeasurements implements OnInit {
     this.measurementsForm = this.fb.group(formConfig);
   }
 
+
+  // ver en donde esta y traer los campos de cada form
+  getCurrentStepFields(): FormItem[] {
+    switch (this.currentStep) {
+      case 1: return this.step1Fields;
+      case 2: return this.step2Fields;
+      case 3: return this.step3Fields;
+      default: return [];
+    }
+  }
+
   nextStep(): void {
+    const currentFields = this.getCurrentStepFields();
+    const hasErrors = currentFields.some(field =>
+      this.measurementsForm.get(field.name)?.invalid
+    );
+
+    if (hasErrors) {
+      currentFields.forEach(field => {
+        this.measurementsForm.get(field.name)?.markAsTouched();
+      });
+      return;
+    }
+
     if (this.currentStep < this.totalSteps) {
       this.currentStep++;
     }
@@ -108,62 +131,49 @@ export class AnthropometricMeasurements implements OnInit {
     return this.currentStep === 1;
   }
 
-  submitAllData(): void {
-    if (this.measurementsForm.invalid) {
-      alert('⚠️ Por favor completa todos los campos requeridos');
-      this.measurementsForm.markAllAsTouched();
-      return;
-    }
+  // submitAllData(): void {
+  //   const formValues = this.measurementsForm.value;
+  //   const metricValues: MetricValue[] = [];
 
-    const formValues = this.measurementsForm.value;
-    
-    const metricValues: MetricValue[] = [];
-    
-    [...this.step1Fields, ...this.step2Fields, ...this.step3Fields].forEach(field => {
-      if (field.id && field.id > 0) {
-        const value = formValues[field.name];
-        if (value !== null && value !== '' && value !== undefined) {
-          metricValues.push({
-            metricsCatalogId: field.id,
-            value: value.toString()
-          });
-        }
-      }
-    });
+  //   [...this.step1Fields, ...this.step2Fields, ...this.step3Fields].forEach(field => {
+  //     if (field.id && field.id > 0) {
+  //       const value = formValues[field.name];
+  //       if (value !== null && value !== '' && value !== undefined) {
+  //         metricValues.push({
+  //           metricsCatalogId: field.id,
+  //           value: value.toString()
+  //         });
+  //       }
+  //     }
+  //   });
 
-    const activityMap: { [key: string]: number } = {
-      'Ligero': 1,
-      'Moderado': 2,
-      'Intenso': 3,
-      'Muy intenso': 4
-    };
+  //   const activityMap: { [key: string]: number } = {
+  //     'Ligero': 1,
+  //     'Moderado': 2,
+  //     'Intenso': 3,
+  //     'Muy intenso': 4
+  //   };
 
-    const consultationData: ConsultationRequest = {
-      patientId: this.patientId,
-      medicalRecordId: this.medicalRecordId,
-      reason: 'Evaluación antropométrica',
-      notes: [],
-      metricValues: metricValues,
-      energeticExpenditure: {
-        physicalActivityId: activityMap[formValues.physicalActivityId] || 1,
-        reductionPercentage: '15'
-      }
-    };
+  //   const consultationData: ConsultationRequest = {
+  //     patientId: this.patientId,
+  //     medicalRecordId: this.medicalRecordId,
+  //     reason: 'Evaluación antropométrica',
+  //     notes: [],
+  //     metricValues: metricValues,
+  //     energeticExpenditure: {
+  //       physicalActivityId: activityMap[formValues.physicalActivityId] || 1,
+  //       reductionPercentage: '15'
+  //     }
+  //   };
 
-    console.log('📤 Enviando consulta:', consultationData);
+  //   console.log('📤 Enviando consulta:', consultationData);
 
-    this.consultationService.createConsultation(consultationData).subscribe({
-      next: (response) => {
-        console.log('✅ Respuesta:', response);
-        alert('✅ Mediciones guardadas exitosamente');
-        this.router.navigate(['/patient', this.patientId]);
-      },
-      error: (error) => {
-        console.error('❌ Error:', error);
-        alert('❌ Error al guardar las mediciones');
-      }
-    });
+  //   this.consultationService.createConsultation(consultationData).subscribe({
+  //     next: (response) => {
+  //       this.router.navigate(['/patient', this.patientId]);
+  //     }
+  //   });
 
-    this.isSubmitted = true;
-  }
+  //   this.isSubmitted = true;
+  // }
 }
