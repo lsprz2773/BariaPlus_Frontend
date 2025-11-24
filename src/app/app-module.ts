@@ -39,6 +39,7 @@ import { AnthropometricMeasurements } from './pages/anthropometric-measurements/
 import {NotesRegister} from './pages/notes-register/notes-register';
 import {NotesContainer} from './pages/notes-register/notes-container/notes-container';
 import {Note} from './pages/notes-register/note/note';
+import { Details } from './pages/notes-register/details/details';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import {Note} from './pages/notes-register/note/note';
     AnthropometricMeasurements,
     NotesRegister,
     NotesContainer,
-    Note
+    Note,
+    Details
     ],
   imports: [
     BrowserModule,
