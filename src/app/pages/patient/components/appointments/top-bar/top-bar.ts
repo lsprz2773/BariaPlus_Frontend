@@ -14,7 +14,6 @@ export class TopBar {
   ) { }
 
   routeToAppointmentCreation(): void {
-    this.route.navigate(['/measurements']);
+    this.route.navigate(['/note-register']);
   }
-
 }

@@ -19,8 +19,14 @@ export class NotesContainer implements OnInit {
     this.notes = this.consultationState.getNotes();
   }
 
-  onCancel(){}
+  onCancel(){
+    this.router.navigate(['/dashboard']);
+  }
   onContinue(){
+    this.router.navigate(['/measurements']);
+  }
+
+  onDetails(){
     this.router.navigate(['/notes-details']);
   }
 }
