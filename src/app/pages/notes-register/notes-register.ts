@@ -11,10 +11,72 @@ import {Note} from '../../core/interfaces/consultation';
 })
 export class NotesRegister implements OnInit {
 
-  notes:Note[] = [{
-    description: 'Medicamento',
-    categoryId: 2
-  }]
+  notes:Note[] = [
+    {
+      description: 'Medicamento',
+      categoryId: 2
+    },
+    {
+      description: 'Medicamento 2',
+      categoryId: 3
+    },
+    {
+      description: 'Medicamento',
+      categoryId: 2
+    },
+    {
+      description: 'Medicamento 2',
+      categoryId: 3
+    },
+    {
+      description: 'Medicamento',
+      categoryId: 2
+    },
+    {
+      description: 'Medicamento 2',
+      categoryId: 3
+    },
+    {
+      description: 'Medicamento',
+      categoryId: 2
+    },
+    {
+      description: 'Medicamento 2',
+      categoryId: 3
+    },
+    {
+      description: 'Medicamento',
+      categoryId: 2
+    },
+    {
+      description: 'Medicamento 2',
+      categoryId: 3
+    },
+    {
+      description: 'Medicamento',
+      categoryId: 2
+    },
+    {
+      description: 'Medicamento 2',
+      categoryId: 3
+    },
+    {
+      description: 'Medicamento',
+      categoryId: 2
+    },
+    {
+      description: 'Medicamento 2',
+      categoryId: 3
+    },
+    {
+      description: 'Medicamento',
+      categoryId: 2
+    },
+    {
+      description: 'Medicamento 2',
+      categoryId: 3
+    },
+    ]
 
   constructor(public fb: FormBuilder) {}
 

@@ -6,8 +6,9 @@
     @if (!notes || notes.length === 0){
       <h4>Aun no  hay notas registradas</h4>
     } @else {
+      <p>Seleccione una nota para ver mas detalles</p>
       @for (note of notes; track note.categoryId){
-        <app-note></app-note>
+        <app-note [description]="note.description" [categoryId]="note.categoryId"></app-note>
       }
     }
   </div>
