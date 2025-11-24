@@ -1,0 +1,10 @@
+<h1>Detalles</h1>
+<main class="notes-container">
+  @for (note of notes; track note.categoryId){
+    <app-note [description]="note.description" [categoryId]="note.categoryId" class="details-view"></app-note>
+  }
+</main>
+<div class="buttons-footer">
+  <app-button [text]="'Cancelar'" [type]="'button'" [name]="'note-cancel'" [context]="'default'" (pressed)="onCancel()"></app-button>
+  <app-button [text]="'Siguiente'" [type]="'button'" [name]="'note-next'" [context]="'primary'" (pressed)="onContinue()"></app-button>
+</div>

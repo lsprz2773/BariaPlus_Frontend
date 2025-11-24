@@ -6,6 +6,7 @@ button{
   font-weight: bolder;
   font-size: larger;
   transition: 100ms al ease-out;
+  cursor: pointer;
 }
 
 button:hover{
@@ -23,7 +24,7 @@ button:hover{
   transition: 100ms all ease-in;
 }
 
-.continue:hover{
+.continue:hover, .primary:hover{
   background-color: var(--hover-color);
   transition: 100ms all ease-out;
 }

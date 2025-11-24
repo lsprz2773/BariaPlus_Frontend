@@ -1,0 +1,29 @@
+*{
+  margin:0;
+  padding:0;
+}
+
+:host{
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 64% 34%;
+  grid-template-rows: 100%;
+  grid-column-gap: 2%;
+  box-sizing: border-box;
+}
+
+main{
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 100%;
+}
+
+.note-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3%;
+}

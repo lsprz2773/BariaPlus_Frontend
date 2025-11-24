@@ -10,6 +10,8 @@ import {Register} from './pages/auth/register/register';
 import {Patient} from './pages/patient/patient';
 import {Login} from './pages/auth/login/login';
 import { AnthropometricMeasurements } from './pages/anthropometric-measurements/anthropometric-measurements';
+import {NotesRegister} from './pages/notes-register/notes-register';
+import {Details} from './pages/notes-register/details/details';
 
 const routes: Routes = [
   {
@@ -51,6 +53,14 @@ const routes: Routes = [
       {
         path: 'measurements',
         component: AnthropometricMeasurements
+      },
+      {
+        path: 'note-register',
+        component: NotesRegister
+      },
+      {
+        path: 'notes-details',
+        component: Details
       }
     ]
   }

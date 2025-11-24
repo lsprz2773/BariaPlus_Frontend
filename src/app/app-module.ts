@@ -42,6 +42,10 @@ import { Default } from './pages/anthropometric-measurements/components/default/
 import { StepOne } from './pages/anthropometric-measurements/components/step-one/step-one';
 import { StepTwo } from './pages/anthropometric-measurements/components/step-two/step-two';
 import { StepThree } from './pages/anthropometric-measurements/components/step-three/step-three';
+import {NotesRegister} from './pages/notes-register/notes-register';
+import {NotesContainer} from './pages/notes-register/notes-container/notes-container';
+import {Note} from './pages/notes-register/note/note';
+import {Details} from './pages/notes-register/details/details';
 
 @NgModule({
   declarations: [
@@ -77,7 +81,11 @@ import { StepThree } from './pages/anthropometric-measurements/components/step-t
     Default,
     StepOne,
     StepTwo,
-    StepThree
+    StepThree,
+    NotesRegister,
+    NotesContainer,
+    Note,
+    Details
     ],
   imports: [
     BrowserModule,

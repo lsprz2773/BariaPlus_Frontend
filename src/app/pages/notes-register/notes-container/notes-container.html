@@ -1,0 +1,19 @@
+<main class="notes">
+  <div class="title-container">
+    <h2>Notas creadas</h2>
+  </div>
+  <div class="notes-container" [ngClass]="{'centered': !notes || notes.length === 0}">
+    @if (!notes || notes.length === 0){
+      <h4>Aun no  hay notas registradas</h4>
+    } @else {
+      <p>Seleccione una nota para ver mas detalles</p>
+      @for (note of notes; track note.categoryId){
+        <app-note [description]="note.description" [categoryId]="note.categoryId" (noteClick)="onDetails()"></app-note>
+      }
+    }
+  </div>
+</main>
+<div class="buttons-footer">
+  <app-button [text]="'Cancelar'" [type]="'button'" [name]="'note-cancel'" [context]="'default'" (pressed)="onCancel()"></app-button>
+  <app-button [text]="'Siguiente'" [type]="'button'" [name]="'note-next'" [context]="'primary'" (pressed)="onContinue()"></app-button>
+</div>
