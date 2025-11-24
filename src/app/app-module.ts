@@ -35,8 +35,7 @@ import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {authInterceptor} from './core/interceptors/auth-interceptor';
 import {authTokenInterceptor} from './core/interceptors/auth-token-interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
-import {NotesRegister} from './pages/notes-register/notes-register';
-import { NotesContainer } from './pages/notes-register/notes-container/notes-container';
+import { AnthropometricMeasurements } from './pages/anthropometric-measurements/anthropometric-measurements';
 
 @NgModule({
   declarations: [
@@ -66,8 +65,7 @@ import { NotesContainer } from './pages/notes-register/notes-container/notes-con
     TopInfo,
     BottomInfo,
     Login,
-    NotesRegister,
-    NotesContainer
+    AnthropometricMeasurements
     ],
   imports: [
     BrowserModule,

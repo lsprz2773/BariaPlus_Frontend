@@ -1,0 +1,23 @@
+.measurements{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.title{
+    font-size: 50px;
+}
+
+.title-container{
+    margin-top: -50px;
+    margin-bottom: -24px;
+    display: flex;
+    align-items: center;
+}
+
+app-step-indicator{
+    align-self: center;
+    max-width: 400px;
+    margin-left: 200px;
+    margin-top: 25px;
+}
