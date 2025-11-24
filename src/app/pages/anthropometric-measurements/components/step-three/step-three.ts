@@ -11,6 +11,8 @@ import { FormGroup } from '@angular/forms';
 export class StepThree {
   @Input() form!: FormGroup;
   @Input() fields: FormItem[] = [];
+  @Input() title: string = '';
+
 
   isFieldInvalid(fieldName: string): boolean {
     const control = this.form.get(fieldName);

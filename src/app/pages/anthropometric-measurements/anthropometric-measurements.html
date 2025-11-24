@@ -1,15 +1,16 @@
 <section class="measurements">
     <header class="title-container">
-        <h2 class="title">Medidas Antropométricas</h2>
+        <h2 class="title">
+            @switch (currentStep) {
+            @case (1) { Medidas antropométricas }
+            @case (2) { Registro de pliegues }
+            @case (3) { Bioimpedancia }
+            }
+        </h2> 
         <app-step-indicator [currentStep]="currentStep" [totalSteps]="totalSteps"></app-step-indicator>
     </header>
 
-    <div class="avatar-container">
-        <app-avatar-1></app-avatar-1>
-    </div>
-
     <form [formGroup]="measurementsForm">
-
         @if (currentStep === 1) {
         <app-step-one [form]="measurementsForm" [fields]="step1Fields">
         </app-step-one>

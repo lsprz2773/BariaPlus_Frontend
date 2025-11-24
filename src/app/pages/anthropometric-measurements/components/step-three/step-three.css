@@ -1,0 +1,97 @@
+.step-three-layout {
+    display: grid;
+    grid-template-columns: 350px 1fr 350px;
+    gap: 40px;
+    max-width: 1400px;
+    margin-right: 60px;
+    margin-bottom: 30px;
+}
+
+.left-column,
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: -15px;
+}
+
+.bio-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bio-field label {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.bio-field input {
+    padding: 12px 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 13px;
+    background: #fef9f3;
+    transition: all 0.3s ease;
+}
+
+.bio-field input:focus {
+    outline: none;
+    border-color: var(--hover-color);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(93, 187, 158, 0.1);
+}
+
+.bio-field input::placeholder {
+    color: var(--text-color);
+    font-size: 13px;
+}
+
+.center-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.center-column app-avatar-1 {
+    width: 100%;
+    max-width: 300px;
+}
+
+.analysis-button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-analysis {
+    padding: 14px 32px;
+    background: var(--hover-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-analysis:hover {
+    background: #4ca88e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(93, 187, 158, 0.3);
+}
+
+input.error {
+    border-color: #e74c3c !important;
+    background: #fef5f5 !important;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
