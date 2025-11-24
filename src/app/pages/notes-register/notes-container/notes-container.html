@@ -8,7 +8,7 @@
     } @else {
       <p>Seleccione una nota para ver mas detalles</p>
       @for (note of notes; track note.categoryId){
-        <app-note [description]="note.description" [categoryId]="note.categoryId"></app-note>
+        <app-note [description]="note.description" [categoryId]="note.categoryId" (noteClick)="onContinue()"></app-note>
       }
     }
   </div>

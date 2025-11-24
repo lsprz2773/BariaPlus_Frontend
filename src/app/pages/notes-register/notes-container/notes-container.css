@@ -34,7 +34,7 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  gap: 2%;
+  gap: 10px;
 }
 
 .notes-container.centered{
