@@ -4,90 +4,43 @@
         <app-step-indicator [currentStep]="currentStep" [totalSteps]="totalSteps"></app-step-indicator>
     </header>
 
-    <form [formGroup]="measurementsForm" class="measurements-form">
-        
-        <!-- Paso 1: Talla, Peso, Gasto energético, Circunferencias -->
+    <div class="avatar-container">
+        <app-avatar-1></app-avatar-1>
+    </div>
+
+    <form [formGroup]="measurementsForm">
+
         @if (currentStep === 1) {
-            <div class="form-step">
-                @for (field of step1Fields; track field.name) {
-                    <div class="form-group">
-                        @if (field.label) {
-                            <label>{{ field.label }}</label>
-                        }
-                        
-                        @if (field.type === 'select') {
-                            <select [formControlName]="field.name">
-                                <option value="">{{ field.placeholder }}</option>
-                                @for (option of field.options; track option) {
-                                    <option [value]="option">{{ option }}</option>
-                                }
-                            </select>
-                        } @else if (field.type === 'number') {
-                            <input 
-                                type="number" 
-                                [formControlName]="field.name"
-                                [placeholder]="field.placeholder"
-                                [step]="field.step || '0.1'"
-                                [min]="field.min || 0"
-                            />
-                        }
-                    </div>
-                }
-            </div>
+        <app-step-one [form]="measurementsForm" [fields]="step1Fields">
+        </app-step-one>
         }
 
-        <!-- Paso 2: Pliegues cutáneos -->
         @if (currentStep === 2) {
-            <div class="form-step">
-                @for (field of step2Fields; track field.name) {
-                    <div class="form-group">
-                        <input 
-                            type="number" 
-                            [formControlName]="field.name"
-                            [placeholder]="field.placeholder"
-                            [step]="field.step || '0.1'"
-                            [min]="field.min || 0"
-                        />
-                    </div>
-                }
-            </div>
+        <app-step-two [form]="measurementsForm" [fields]="step2Fields">
+        </app-step-two>
         }
 
-        <!-- Paso 3: Bioimpedancia -->
         @if (currentStep === 3) {
-            <div class="form-step">
-                @for (field of step3Fields; track field.name) {
-                    <div class="form-group">
-                        <input 
-                            type="number" 
-                            [formControlName]="field.name"
-                            [placeholder]="field.placeholder"
-                            [step]="field.step || '0.1'"  
-                            [min]="field.min || 0"
-                        />
-                    </div>
-                }
-            </div>
+        <app-step-three [form]="measurementsForm" [fields]="step3Fields">
+        </app-step-three>
         }
-
     </form>
 
     <div class="buttons-container">
         @if (!isFirstStep()) {
-            <button type="button" class="back" (click)="previousStep()">
-                <i class="fa fa-arrow-left"></i>
-                Anterior
-            </button>
+        <button type="button" class="back" (click)="previousStep()">
+            <i class="fa fa-arrow-left"></i>
+            Anterior
+        </button>
         }
 
-        <button type="button" class="next" (click)="isLastStep() ? submitAllData() : nextStep()"
-            [disabled]="isSubmitted">
+        <button type="button" class="next" (click)="isLastStep() ? nextStep() : nextStep()" [disabled]="isSubmitted">
             @if (isLastStep()) {
-                {{ isSubmitted ? 'Enviando...' : 'Finalizar' }}
-                <i class="fa fa-check"></i>
+            {{ isSubmitted ? 'Enviando...' : 'Finalizar' }}
+            <i class="fa fa-check"></i>
             } @else {
-                Siguiente
-                <i class="fa fa-arrow-right"></i>
+            Siguiente
+            <i class="fa fa-arrow-right"></i>
             }
         </button>
     </div>
