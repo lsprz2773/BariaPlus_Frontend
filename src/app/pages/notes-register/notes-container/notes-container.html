@@ -1,0 +1,10 @@
+<main class="notes">
+  <div class="title-container">
+    <h2>Notas creadas</h2>
+  </div>
+  <div class="notes-container"></div>
+</main>
+<div class="buttons-footer">
+  <app-button [text]="'Cancelar'" [type]="'button'" [name]="'note-cancel'" [context]="'default'" (pressed)="onCancel()"></app-button>
+  <app-button [text]="'Siguiente'" [type]="'button'" [name]="'note-next'" [context]="'primary'" (pressed)="onContinue()"></app-button>
+</div>

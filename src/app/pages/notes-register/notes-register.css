@@ -1,0 +1,23 @@
+*{
+  margin:0;
+  padding:0;
+}
+
+:host{
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns:64% 34%;
+  grid-template-rows: 100%;
+  grid-column-gap: 2%;
+  box-sizing: border-box;
+}
+
+.notes{
+  height: 100%;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 2%;
+  box-sizing: border-box;
+}

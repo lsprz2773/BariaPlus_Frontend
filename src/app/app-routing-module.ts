@@ -9,7 +9,7 @@ import { Reviews } from './pages/reviews/reviews';
 import {Register} from './pages/auth/register/register';
 import {Patient} from './pages/patient/patient';
 import {Login} from './pages/auth/login/login';
-import {authGuard} from './core/guards/auth-guard';
+import {NotesRegister} from './pages/notes-register/notes-register';
 
 const routes: Routes = [
   {
@@ -47,6 +47,9 @@ const routes: Routes = [
       {
         path: 'patient',
         component: Patient
+      },{
+        path: 'note-register',
+        component: NotesRegister
       }
     ]
   }

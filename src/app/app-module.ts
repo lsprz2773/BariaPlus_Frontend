@@ -35,6 +35,8 @@ import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {authInterceptor} from './core/interceptors/auth-interceptor';
 import {authTokenInterceptor} from './core/interceptors/auth-token-interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+import {NotesRegister} from './pages/notes-register/notes-register';
+import { NotesContainer } from './pages/notes-register/notes-container/notes-container';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TopInfo,
     BottomInfo,
     Login,
+    NotesRegister,
+    NotesContainer
     ],
   imports: [
     BrowserModule,

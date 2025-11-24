@@ -10,7 +10,7 @@ export class Button {
   @Input() type: 'submit' | 'reset' | 'button' = 'button';
   @Input() name: string = '';
   @Input() text: string = 'Button';
-  @Input() context: 'continue' | 'default' | 'submit' | 'previous' | 'primary longButton' = 'default';
+  @Input() context: 'continue' | 'default' | 'submit' | 'previous' | 'primary longButton' | 'primary' = 'default';
   @Input() disabled: boolean = false;
 
   @Output() pressed = new EventEmitter<void>();
