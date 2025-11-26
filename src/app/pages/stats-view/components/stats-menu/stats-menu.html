@@ -1,0 +1,5 @@
+<app-stats-button [config]="{type:'bmi'}" [selected]="selectedType === 'bmi'" (clicked)="onTypeChange('bmi')"></app-stats-button>
+<app-stats-button [config]="{type:'body-mass'}" [selected]="selectedType === 'body-mass'" (clicked)="onTypeChange('body-mass')"></app-stats-button>
+<app-stats-button [config]="{type:'fat'}" [selected]="selectedType === 'fat'" (clicked)="onTypeChange('fat')"></app-stats-button>
+<app-stats-button [config]="{type:'visceral-fat'}" [selected]="selectedType === 'visceral-fat'" (clicked)="onTypeChange('visceral-fat')"></app-stats-button>
+<app-stats-button [config]="{type:'whr'}" [selected]="selectedType === 'whr'" (clicked)="onTypeChange('whr')"></app-stats-button>

@@ -46,6 +46,10 @@ import {NotesRegister} from './pages/notes-register/notes-register';
 import {NotesContainer} from './pages/notes-register/notes-container/notes-container';
 import {Note} from './pages/notes-register/note/note';
 import {Details} from './pages/notes-register/details/details';
+import { StatsView } from './pages/stats-view/stats-view';
+import { StatsMenu } from './pages/stats-view/components/stats-menu/stats-menu';
+import { Stat } from './pages/stats-view/components/stat/stat';
+import { StatsButton } from './pages/stats-view/components/stats-button/stats-button';
 
 @NgModule({
   declarations: [
@@ -85,7 +89,11 @@ import {Details} from './pages/notes-register/details/details';
     NotesRegister,
     NotesContainer,
     Note,
-    Details
+    Details,
+    StatsView,
+    StatsMenu,
+    Stat,
+    StatsButton
     ],
   imports: [
     BrowserModule,

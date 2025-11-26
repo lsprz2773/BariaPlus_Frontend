@@ -12,6 +12,7 @@ import {Login} from './pages/auth/login/login';
 import { AnthropometricMeasurements } from './pages/anthropometric-measurements/anthropometric-measurements';
 import {NotesRegister} from './pages/notes-register/notes-register';
 import {Details} from './pages/notes-register/details/details';
+import {StatsView} from './pages/stats-view/stats-view';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
       {
         path: 'notes-details',
         component: Details
+      },
+      {
+        path: 'stats',
+        component: StatsView
       }
     ]
   }

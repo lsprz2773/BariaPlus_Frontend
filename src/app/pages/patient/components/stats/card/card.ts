@@ -39,7 +39,6 @@ export class Card {
 
 export interface StatCardConfig {
   type: 'bmi' | 'body-mass' | 'fat' | 'visceral-fat' | 'chf';
-  value?: number;
   chartData?: number[];
 }
 
