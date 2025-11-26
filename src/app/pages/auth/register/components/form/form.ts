@@ -202,7 +202,7 @@ export class Form implements OnInit {
     this.authService.register(payload).subscribe({
       next: (res) => {
         console.log('Registro hecho',res);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['']);
       },
       error: (err) => {
         console.log('Error al registrar',err);
