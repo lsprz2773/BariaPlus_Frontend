@@ -14,12 +14,8 @@ export class StepOne {
   @Input() fields: FormItem[] = [];
   @Input() title: string = '';
 
-
   isFieldInvalid(fieldName: string): boolean {
     const control = this.form.get(fieldName);
     return !!(control?.invalid && control?.touched);
   }
-
-
-
 }
