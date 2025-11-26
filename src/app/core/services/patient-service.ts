@@ -13,25 +13,17 @@ export class PatientService {
 
   // /api para que funcione con el proxy
   createPatient(patient: Patient): Observable<PatientResponse> {
-    if (environment.enableDebugMode) {
-      console.log('Creando paciente con datos:', patient);
-    }    return this.http.post<PatientResponse>('/api/patient', patient);
+    return this.http.post<PatientResponse>('/api/patient', patient);
   }
 
   getPatients(): Observable<PatientResponse> {
-    if (environment.enableDebugMode) {
-      console.log('Obteniendo lista de pacientes');
-    }
     return this.http.get<PatientResponse>('/api/patient');
   }
 
   getPatientById(id: number): Observable<PatientResponse> {
-    if (environment.enableDebugMode) {
-      console.log('Obteniendo paciente con ID:', id);
-    }
     return this.http.get<PatientResponse>(`/api/patient/${id}`);
   }
-
+  
   deletePatient(id: number): Observable<any> {
     if (environment.enableDebugMode) {
       console.log('Eliminando paciente con ID:', id);

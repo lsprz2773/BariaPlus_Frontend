@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Note} from '../../core/interfaces/consultation';
 import {ConsultationService} from '../../core/services/consultation-service';
 import {ConsultationStateService} from '../../core/services/consultation-state-service';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-notes-register',
@@ -13,11 +14,21 @@ import {ConsultationStateService} from '../../core/services/consultation-state-s
 })
 export class NotesRegister implements OnInit {
 
-  constructor(public fb: FormBuilder, private consultation: ConsultationService, private consultationState: ConsultationStateService) {}
+  constructor(
+    public fb: FormBuilder, 
+    private consultation: ConsultationService, 
+    private consultationState: ConsultationStateService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   notesForm!: FormGroup;
+  patientId: number = 0;
+  medicalRecordId: number = 0;
   ngOnInit() {
     this.initForm();
+    this.patientId = Number(this.route.snapshot.queryParamMap.get('patientId')) || 0;
+    this.medicalRecordId = Number(this.route.snapshot.queryParamMap.get('medicalRecordId')) || 0;
   }
 
   initForm() {
@@ -73,5 +84,14 @@ export class NotesRegister implements OnInit {
       case 'Recordatorio 24 h': return 8;
       default: return 0;
     }
+  }
+
+  continueToMeasurements() {    
+    this.router.navigate(['/measurements'], {
+      queryParams: {
+        patientId: this.patientId,
+        medicalRecordId: this.medicalRecordId
+      }
+    });
   }
 }

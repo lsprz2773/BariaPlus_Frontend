@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ConsultationService } from '../../core/services/consultation-service';
 import { ConsultationRequest, MetricValue } from '../../core/interfaces/consultation';
 import { FormItem } from '../../core/interfaces/form-item';
+import { ConsultationStateService } from '../../core/services/consultation-state-service';
 
 @Component({
   selector: 'app-anthropometric-measurements',
@@ -23,16 +24,16 @@ export class AnthropometricMeasurements implements OnInit {
 
   // talla, peso actual, gasto energético, circunferencias
   step1Fields: FormItem[] = [
-    { id: 2, type: 'number', placeholder: 'Talla en cm', name: 'talla', required: true, step: '0.1', min: 0 },
     { id: 1, type: 'number', placeholder: 'Peso actual en kg', name: 'peso', required: true, step: '0.1', min: 0 },
-    { id: 0, type: 'select', label: 'Gasto energético', placeholder: 'Seleccione nivel de actividad', name: 'physicalActivityId', options: ['Ligero', 'Moderado', 'Intenso', 'Muy intenso'], required: true },
+    { id: 2, type: 'number', placeholder: 'Talla en cm', name: 'talla', required: true, step: '0.1', min: 0 },
+    { id: 0, type: 'select', label: 'Gasto energético', placeholder: 'Nivel de actividad física', name: 'physicalActivityId', options: ['Sedentario', 'Ligero', 'Moderado', 'Intenso', 'Muy intenso'], required: true },
     { id: 6, type: 'number', placeholder: 'Cintura (cm)', name: 'cintura', step: '0.1', min: 0 },
     { id: 7, type: 'number', placeholder: 'Cadera (cm)', name: 'cadera', step: '0.1', min: 0 },
-    { id: 8, type: 'number', placeholder: 'Muñeca (cm)', name: 'muñeca', step: '0.1', min: 0 },
+    { id: 8, type: 'number', placeholder: 'Muñeca (cm)', name: 'muneca', step: '0.1', min: 0 },
     { id: 9, type: 'number', placeholder: 'Brazo relajado (cm)', name: 'brazoRelajado', step: '0.1', min: 0 },
     { id: 10, type: 'number', placeholder: 'Cuello (cm)', name: 'cuello', step: '0.1', min: 0 },
     { id: 11, type: 'number', placeholder: 'Muslo (cm)', name: 'muslo', step: '0.1', min: 0 },
-    { id: 12, type: 'number', placeholder: 'En contracción (cm)', name: 'contraido', step: '0.1', min: 0 }
+    { id: 12, type: 'number', placeholder: 'En contracción (cm)', name: 'contraido', step: '0.1', min: 0 },
   ];
 
   // pliegues cutáneos
@@ -45,34 +46,29 @@ export class AnthropometricMeasurements implements OnInit {
     { id: 18, type: 'number', placeholder: 'Abdominal (mm)', name: 'abdominal', step: '0.1', min: 0 },
     { id: 19, type: 'number', placeholder: 'Axila medial (mm)', name: 'axilaMedial', step: '0.1', min: 0 },
     { id: 20, type: 'number', placeholder: 'Pectoral (mm)', name: 'pectoral', step: '0.1', min: 0 },
-    { id: 22, type: 'number', placeholder: 'Muslo frontal (mm)', name: 'musloFrontal', step: '0.1', min: 0 },
-    { id: 23, type: 'number', placeholder: 'Pantorrilla medial (mm)', name: 'pantorrillaMedial', step: '0.1', min: 0 }
   ];
 
   // bioimpedancia
   step3Fields: FormItem[] = [
     { id: 21, type: 'number', placeholder: 'Porcentaje de grasa corporal (%)', name: 'porcentajeGrasaCorporal', step: '0.1', min: 0 },
-    { id: 22, type: 'number', placeholder: 'Porcentaje de masa corporal (%)', name: 'porcentajeMasaCorporal', step: '0.1', min: 0 },
-    { id: 23, type: 'number', placeholder: 'Kg de músculo', name: 'kgMusculo', step: '0.1', min: 0 },
-    { id: 24, type: 'number', placeholder: 'Kg masa ósea', name: 'kgMasaOsea', step: '0.1', min: 0 },
-    { id: 25, type: 'number', placeholder: 'Porcentaje de agua corporal (%)', name: 'porcentajeAguaCorporal', step: '0.1', min: 0 },
-    { id: 26, type: 'number', placeholder: 'Ingesta diaria en calorías', name: 'ingestaCaloriaDiaria', step: '1', min: 0 },
-    { id: 27, type: 'number', placeholder: 'Edad metabólica', name: 'edadMetabolica', step: '1', min: 0 },
-    { id: 28, type: 'number', placeholder: 'IMC (BMI)', name: 'imc', step: '0.1', min: 0 },
-    { id: 29, type: 'number', placeholder: 'Nivel de grasa visceral', name: 'nivelGrasaVisceral', step: '1', min: 0 },
-    { id: 30, type: 'number', placeholder: 'Proporción de grasa visceral (%)', name: 'proporcionGrasaVisceral', step: '0.1', min: 0 }
+    { id: 22, type: 'number', placeholder: 'Kg de músculo', name: 'kgMusculo', step: '0.1', min: 0 },
+    { id: 23, type: 'number', placeholder: 'Kg masa ósea', name: 'kgMasaOsea', step: '0.1', min: 0 },
+    { id: 24, type: 'number', placeholder: 'Porcentaje de agua corporal (%)', name: 'porcentajeAguaCorporal', step: '0.1', min: 0 },
+    { id: 25, type: 'number', placeholder: 'Ingesta diaria en calorías', name: 'ingestaCaloriaDiaria', step: '1', min: 0 },
+    { id: 26, type: 'number', placeholder: 'Edad metabólica', name: 'edadMetabolica', step: '1', min: 0 },
   ];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
+    private consultationStateService: ConsultationStateService,
     private consultationService: ConsultationService
   ) { }
 
   ngOnInit(): void {
-    this.patientId = Number(this.route.snapshot.paramMap.get('patientId')) || 0;
-    this.medicalRecordId = Number(this.route.snapshot.paramMap.get('medicalRecordId')) || 0;
+    this.patientId = Number(this.route.snapshot.queryParamMap.get('patientId')) || 0;
+    this.medicalRecordId = Number(this.route.snapshot.queryParamMap.get('medicalRecordId')) || 0;
 
     this.initForm();
   }
@@ -131,49 +127,75 @@ export class AnthropometricMeasurements implements OnInit {
     return this.currentStep === 1;
   }
 
-  // submitAllData(): void {
-  //   const formValues = this.measurementsForm.value;
-  //   const metricValues: MetricValue[] = [];
+  submitAllData(): void {
+    if (this.measurementsForm.invalid) {
+      alert('Por favor completa todos los campos requeridos');
+      this.measurementsForm.markAllAsTouched();
+      return;
+    }
 
-  //   [...this.step1Fields, ...this.step2Fields, ...this.step3Fields].forEach(field => {
-  //     if (field.id && field.id > 0) {
-  //       const value = formValues[field.name];
-  //       if (value !== null && value !== '' && value !== undefined) {
-  //         metricValues.push({
-  //           metricsCatalogId: field.id,
-  //           value: value.toString()
-  //         });
-  //       }
-  //     }
-  //   });
+    this.isSubmitted = true;
 
-  //   const activityMap: { [key: string]: number } = {
-  //     'Ligero': 1,
-  //     'Moderado': 2,
-  //     'Intenso': 3,
-  //     'Muy intenso': 4
-  //   };
+    const formValues = this.measurementsForm.value;
 
-  //   const consultationData: ConsultationRequest = {
-  //     patientId: this.patientId,
-  //     medicalRecordId: this.medicalRecordId,
-  //     reason: 'Evaluación antropométrica',
-  //     notes: [],
-  //     metricValues: metricValues,
-  //     energeticExpenditure: {
-  //       physicalActivityId: activityMap[formValues.physicalActivityId] || 1,
-  //       reductionPercentage: '15'
-  //     }
-  //   };
+    // construir metricValues desde el formulario
+    const metricValues: MetricValue[] = [];
+    [...this.step1Fields, ...this.step2Fields, ...this.step3Fields].forEach(field => {
+      if (field.id && field.id > 0) {
+        const value = formValues[field.name];
+        if (value !== null && value !== '' && value !== undefined) {
+          metricValues.push({
+            metricsCatalogId: field.id,
+            value: value.toString()
+          });
+        }
+      }
+    });
 
-  //   console.log('📤 Enviando consulta:', consultationData);
+    this.consultationStateService.setMetricValues(metricValues);
 
-  //   this.consultationService.createConsultation(consultationData).subscribe({
-  //     next: (response) => {
-  //       this.router.navigate(['/patient', this.patientId]);
-  //     }
-  //   });
+    const activityMap: { [key: string]: number } = {
+      'Sedentario': 1,
+      'Ligero': 2,
+      'Moderado': 3,
+      'Intenso': 4,
+      'Muy intenso': 5
+    };
 
-  //   this.isSubmitted = true;
-  // }
+    const energeticExpenditure = {
+      physicalActivityId: activityMap[formValues.physicalActivityId] || 1,
+      reductionPercentage: formValues.reductionPercentage ? formValues.reductionPercentage.toString() : '0'
+    };
+    this.consultationStateService.setEnergeticExpenditure(energeticExpenditure);
+
+    const notes = this.consultationStateService.getNotes();
+
+    const consultationData: ConsultationRequest = {
+      patientId: this.patientId,
+      medicalRecordId: this.medicalRecordId,
+      reason: 'Evaluación del paciente',
+      notes: notes,
+      metricValues: metricValues,
+      energeticExpenditure: energeticExpenditure
+    };
+
+    console.log('Enviando consulta:', consultationData);
+
+    this.consultationService.createConsultation(consultationData).subscribe({
+      next: (response) => {
+        console.log('Consulta creada exitosamente:', response);
+
+        // Limpiar datos del estado después de enviar exitosamente
+        this.consultationStateService.clearAllConsultationData();
+
+        alert('Consulta guardada exitosamente');
+        this.router.navigate(['/patient', this.patientId]);
+      },
+      error: (error) => {
+        console.error('Error al crear consulta:', error);
+        alert('Error al guardar la consulta. Por favor intenta de nuevo.');
+        this.isSubmitted = false;
+      }
+    });
+  }
 }
