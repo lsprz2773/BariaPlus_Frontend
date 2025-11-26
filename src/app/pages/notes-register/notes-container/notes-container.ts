@@ -25,6 +25,7 @@ export class NotesContainer implements OnInit {
   }
   onContinue(){
     this.continuePressed.emit();
+    this.router.navigate(['/measurements']);
   }
 
   onDetails(){
