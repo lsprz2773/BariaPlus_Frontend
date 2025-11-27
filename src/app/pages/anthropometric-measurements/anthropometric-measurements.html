@@ -35,7 +35,7 @@
         </button>
         }
 
-        <button type="button" class="next" (click)="isLastStep() ? nextStep() : nextStep()" [disabled]="isSubmitted">
+        <button type="button" class="next" (click)="isLastStep() ? submitAllData() : nextStep()" [disabled]="isSubmitted">
             @if (isLastStep()) {
             Finalizar
             <i class="fa fa-check"></i>

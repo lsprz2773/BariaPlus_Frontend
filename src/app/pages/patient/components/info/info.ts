@@ -13,6 +13,7 @@ export class Info implements OnInit {
   patientData: PatientResponse | null = null;
   isLoading: boolean = true;
   errorMessage: string = '';
+  medicalRecordId: number | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,8 +27,8 @@ export class Info implements OnInit {
   loadPatientData(patientId: number): void {
     this.patientService.getPatientById(patientId).subscribe({
       next: (response: PatientResponse) => {
-        console.log('✅ Paciente cargado en Info:', response);
         this.patientData = response;
+        this.medicalRecordId = response.patient.medicalRecordId;
         this.isLoading = false;
       },
       error: (error) => {

@@ -16,7 +16,7 @@ export class SideInfo implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['patient'] && this.patient?.patient) {
-      // ✅ Extraer nombres de los arrays
+      // Extraer nombres de los arrays
       const medHis = this.patient.patient.medicalHistories || [];
       const allergies = this.patient.patient.allergies || [];
       const diseases = this.patient.patient.diseases || [];
