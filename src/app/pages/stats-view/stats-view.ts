@@ -14,10 +14,11 @@ export class StatsView {
   selectedType: StatViewCardConfig['type'] = 'bmi';
 
   onBack(){
-    this.router.navigate(['dashboard']);
+    this.router.navigate([`/patient/${8}`]);
   }
 
   onMenuTypeChange(type: StatViewCardConfig['type']) {
     this.selectedType = type;
+    console.log('type',type);
   }
 }

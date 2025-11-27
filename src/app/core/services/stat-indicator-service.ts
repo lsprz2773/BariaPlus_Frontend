@@ -8,10 +8,11 @@ import {StatSeries, StatsResponse} from '../interfaces/api/stats-response';
   providedIn: 'root'
 })
 export class StatIndicatorService {
-  constructor(private http: HttpClient, private cookiesStorage:CookiesStorage) { }
+  constructor(private http: HttpClient) { }
 
   getIndicatorSeries(patientId: number, indicatorId: number):Observable<StatSeries> {
-    return this.http.get<StatsResponse>(`api/patient/${patientId}/stats?indicatorId=${indicatorId}`).pipe(
+    console.log('id en service: ', indicatorId);
+    return this.http.get<StatsResponse>(`api/patient/${patientId}/stats?indicator=${indicatorId}`).pipe(
       map(res => ({
           name: res.indicatorName,
           points:res.data

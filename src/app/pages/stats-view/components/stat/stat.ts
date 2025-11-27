@@ -29,7 +29,7 @@ export class Stat implements OnChanges{
 
   chartOptions!:Partial<ChartOptions>;
   loading = false;
-  readonly patientId = 6;
+  readonly patientId = 8;
 
   constructor(private indicatorService:StatIndicatorService) {
   }
@@ -38,6 +38,7 @@ export class Stat implements OnChanges{
     if (!this.type){ return; }
 
     const indicatorId =  this.mapTypeToIndicator(this.type);
+    console.log('id: ', indicatorId);
     this.loadData(indicatorId)
   }
 
@@ -55,8 +56,10 @@ export class Stat implements OnChanges{
   private loadData(indicatorId:number){
     this.loading = true;
 
+    console.log('id a service: ', indicatorId);
     this.indicatorService.getIndicatorSeries(this.patientId, indicatorId).subscribe({
       next: series => {
+        console.log('type:', this.type, 'indicatorId:', indicatorId, 'series:', series)
         this.buildChartOptions(series);
         this.loading = false;
       }, error: () => {
@@ -80,13 +83,13 @@ export class Stat implements OnChanges{
       ],
       chart: {
         type: 'area',
-        height: 300,
+        height: 450,
         toolbar: {show: false},
         zoom: {enabled: false}
       },
       stroke: {
         curve: 'smooth',
-        width: 3
+        width: 5
       },
       dataLabels: {
         enabled: false
@@ -106,14 +109,14 @@ export class Stat implements OnChanges{
         type: 'gradient',
         gradient: {
           shadeIntensity: 1,
-          opacityFrom: 0.5,
+          opacityFrom: 0.9,
           opacityTo: 0,
           stops: [0,100]
         }
       },
       markers: {
         size: 0,
-        hover: {size: 6}
+        hover: {size: 10}
       },
       tooltip: {
         x: {format: 'dd/MMM/yyyy'}
