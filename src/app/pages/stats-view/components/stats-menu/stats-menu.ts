@@ -12,6 +12,7 @@ export class StatsMenu {
 
     onTypeChange(type: StatViewCardConfig['type']) {
       this.selectedType = type;
+      console.log(this.selectedType);
 
       //aqui pondre la logica del cambio de botones para los cambios de grafica
     }
