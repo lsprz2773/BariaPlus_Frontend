@@ -48,6 +48,7 @@ import { StatsView } from './pages/stats-view/stats-view';
 import { StatsMenu } from './pages/stats-view/components/stats-menu/stats-menu';
 import { Stat } from './pages/stats-view/components/stat/stat';
 import { StatsButton } from './pages/stats-view/components/stats-button/stats-button';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { StatsButton } from './pages/stats-view/components/stats-button/stats-bu
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgApexchartsModule
   ],
   providers: [
     Modal,

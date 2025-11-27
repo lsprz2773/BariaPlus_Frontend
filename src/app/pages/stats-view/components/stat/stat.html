@@ -1,1 +1,20 @@
-<p>stat works!</p>
+<div class="content">
+  @if (loading){
+    <h4>Cargando...</h4>
+  }
+  @if (!loading && chartOptions){
+    <apx-chart
+      [series]="chartOptions.series!"
+      [chart]="chartOptions.chart!"
+      [xaxis]="chartOptions.xaxis!"
+      [yaxis]="chartOptions.yaxis!"
+      [stroke]="chartOptions.stroke!"
+      [dataLabels]="chartOptions.dataLabels!"
+      [fill]="chartOptions.fill!"
+      [grid]="chartOptions.grid!"
+      [markers]="chartOptions.markers!"
+      [tooltip]="chartOptions.tooltip!"
+    ></apx-chart>
+  }
+
+</div>

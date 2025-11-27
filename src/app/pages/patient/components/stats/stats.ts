@@ -7,6 +7,5 @@ import {Component, Input} from '@angular/core';
   styleUrl: './stats.css'
 })
 export class Stats {
-
 }
 

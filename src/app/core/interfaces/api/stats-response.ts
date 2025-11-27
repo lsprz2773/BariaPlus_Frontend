@@ -11,3 +11,8 @@ export interface Stat{
   date: string,
   value: number
 }
+
+export interface StatSeries{
+  name: string,
+  points: Stat[]
+}

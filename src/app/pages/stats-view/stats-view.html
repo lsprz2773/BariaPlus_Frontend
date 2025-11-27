@@ -1,5 +1,7 @@
 <h1>Estadisticas</h1>
-<span><i class="fa-solid fa-arrow-left"></i> Regresar</span>
+<span class="back-button" (click)="onBack()"><i class="fa-solid fa-arrow-left"></i> Regresar</span>
 <p>Selecciona una opcion para ver sus estadisticas</p>
 <app-stats-menu></app-stats-menu>
-<app-stat></app-stat>
+<div class="grap-container">
+  <app-stat [type]="selectedType"></app-stat>
+</div>
