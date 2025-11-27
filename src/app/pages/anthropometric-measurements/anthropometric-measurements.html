@@ -37,7 +37,7 @@
 
         <button type="button" class="next" (click)="isLastStep() ? nextStep() : nextStep()" [disabled]="isSubmitted">
             @if (isLastStep()) {
-            {{ isSubmitted ? 'Enviando...' : 'Finalizar' }}
+            Finalizar
             <i class="fa fa-check"></i>
             } @else {
             Siguiente

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Note} from '../../../core/interfaces/consultation';
 import {Router} from '@angular/router';
 import {ConsultationStateService} from '../../../core/services/consultation-state-service';
@@ -12,6 +12,7 @@ import {ConsultationStateService} from '../../../core/services/consultation-stat
 export class NotesContainer implements OnInit {
 
   notes: Note[] = [];
+  @Output() continuePressed = new EventEmitter<void>();
 
   constructor(private router: Router, private consultationState: ConsultationStateService) {}
 
@@ -23,6 +24,7 @@ export class NotesContainer implements OnInit {
     this.router.navigate(['/dashboard']);
   }
   onContinue(){
+    this.continuePressed.emit();
     this.router.navigate(['/measurements']);
   }
 

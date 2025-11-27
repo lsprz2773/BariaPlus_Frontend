@@ -39,7 +39,7 @@ export class Auth {
   register(request: RegisterRequest): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>('/api/auth/register', request).pipe(
       tap(response => {
-        console.log('✅ Registro exitoso:', response);
+        console.log('Registro exitoso:', response);
       })
     );
   }

@@ -36,8 +36,6 @@ import {authInterceptor} from './core/interceptors/auth-interceptor';
 import {authTokenInterceptor} from './core/interceptors/auth-token-interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AnthropometricMeasurements } from './pages/anthropometric-measurements/anthropometric-measurements';
-import { Avatar1 } from './pages/anthropometric-measurements/components/avatar-1/avatar-1';
-import { Avatar2 } from './pages/anthropometric-measurements/components/avatar-2/avatar-2';
 import { Default } from './pages/anthropometric-measurements/components/default/default';
 import { StepOne } from './pages/anthropometric-measurements/components/step-one/step-one';
 import { StepTwo } from './pages/anthropometric-measurements/components/step-two/step-two';
@@ -80,8 +78,6 @@ import { StatsButton } from './pages/stats-view/components/stats-button/stats-bu
     BottomInfo,
     Login,
     AnthropometricMeasurements,
-    Avatar1,
-    Avatar2,
     Default,
     StepOne,
     StepTwo,

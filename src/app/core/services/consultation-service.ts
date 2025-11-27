@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {
-    ConsultationRequest,
-} from '../interfaces/consultation';
-import {
-    ConsultationResponse
-} from '../interfaces/api/consultation-response';
+import {ConsultationRequest } from '../interfaces/consultation';
+import { ConsultationResponse } from '../interfaces/api/consultation-response';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
