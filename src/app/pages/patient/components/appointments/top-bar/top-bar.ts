@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,11 +9,20 @@ import { Router } from '@angular/router';
 })
 export class TopBar {
 
+  @Input() patientId: number = 0;
+  @Input() medicalRecordId: number = 0;
+
   constructor(
     private route: Router
   ) { }
 
   routeToAppointmentCreation(): void {
-    this.route.navigate(['/note-register']);
+    this.route.navigate(['/note-register']), {
+      queryParams: {
+        patientId: this.patientId,
+        medicalRecordId: this.medicalRecordId
+      }
+    }
   }
 }
+

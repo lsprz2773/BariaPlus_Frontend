@@ -1,4 +1,4 @@
-<app-top-bar></app-top-bar>
+<app-top-bar [patientId]="patientId" [medicalRecordId]="medicalRecordId"></app-top-bar>
 <section class="appointments-list">
   @if (appointments.length === 0){
     <h5>Aun no hay consultas registradas</h5>

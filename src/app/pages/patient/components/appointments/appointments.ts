@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-appointments',
@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './appointments.css'
 })
 export class Appointments {
- appointments: {id:string, date:string}[] = [];
+  @Input() patientId: number = 0;
+  @Input() medicalRecordId: number = 0;
+
+  appointments: { id: string, date: string }[] = [];
 }

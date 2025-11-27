@@ -27,6 +27,7 @@ export class AnthropometricMeasurements implements OnInit {
     { id: 1, type: 'number', placeholder: 'Peso actual en kg', name: 'peso', required: true, step: '0.1', min: 0 },
     { id: 2, type: 'number', placeholder: 'Talla en cm', name: 'talla', required: true, step: '0.1', min: 0 },
     { id: 0, type: 'select', label: 'Gasto energético', placeholder: 'Nivel de actividad física', name: 'physicalActivityId', options: ['Sedentario', 'Ligero', 'Moderado', 'Intenso', 'Muy intenso'], required: true },
+    { id: 0, type: 'number', label: 'Porcentaje de reducción', placeholder: 'Porcentaje (%)', name: 'reductionPercentage', step: '1', min: 0, max: 100, required: false },
     { id: 6, type: 'number', placeholder: 'Cintura (cm)', name: 'cintura', step: '0.1', min: 0 },
     { id: 7, type: 'number', placeholder: 'Cadera (cm)', name: 'cadera', step: '0.1', min: 0 },
     { id: 8, type: 'number', placeholder: 'Muñeca (cm)', name: 'muneca', step: '0.1', min: 0 },
@@ -50,12 +51,12 @@ export class AnthropometricMeasurements implements OnInit {
 
   // bioimpedancia
   step3Fields: FormItem[] = [
-    { id: 21, type: 'number', placeholder: 'Porcentaje de grasa corporal (%)', name: 'porcentajeGrasaCorporal', step: '0.1', min: 0 },
-    { id: 22, type: 'number', placeholder: 'Kg de músculo', name: 'kgMusculo', step: '0.1', min: 0 },
-    { id: 23, type: 'number', placeholder: 'Kg masa ósea', name: 'kgMasaOsea', step: '0.1', min: 0 },
-    { id: 24, type: 'number', placeholder: 'Porcentaje de agua corporal (%)', name: 'porcentajeAguaCorporal', step: '0.1', min: 0 },
-    { id: 25, type: 'number', placeholder: 'Ingesta diaria en calorías', name: 'ingestaCaloriaDiaria', step: '1', min: 0 },
-    { id: 26, type: 'number', placeholder: 'Edad metabólica', name: 'edadMetabolica', step: '1', min: 0 },
+    { id: 22, type: 'number', placeholder: 'Porcentaje de grasa corporal (%)', name: 'porcentajeGrasaCorporal', step: '0.1', min: 0 },
+    { id: 23, type: 'number', placeholder: 'Kg de músculo', name: 'kgMusculo', step: '0.1', min: 0 },
+    { id: 24, type: 'number', placeholder: 'Kg masa ósea', name: 'kgMasaOsea', step: '0.1', min: 0 },
+    { id: 25, type: 'number', placeholder: 'Porcentaje de agua corporal (%)', name: 'porcentajeAguaCorporal', step: '0.1', min: 0 },
+    { id: 26, type: 'number', placeholder: 'Ingesta diaria en calorías', name: 'ingestaCaloriaDiaria', step: '1', min: 0 },
+    { id: 27, type: 'number', placeholder: 'Edad metabólica', name: 'edadMetabolica', step: '1', min: 0 },
   ];
 
   constructor(
@@ -67,8 +68,11 @@ export class AnthropometricMeasurements implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.patientId = Number(this.route.snapshot.queryParamMap.get('patientId')) || 0;
-    this.medicalRecordId = Number(this.route.snapshot.queryParamMap.get('medicalRecordId')) || 0;
+    this.route.queryParamMap.subscribe(params => {
+      this.patientId = Number(this.route.snapshot.queryParamMap.get('patientId')) || 0;
+      this.medicalRecordId = Number(this.route.snapshot.queryParamMap.get('medicalRecordId')) || 0;
+
+    })
 
     this.initForm();
   }
@@ -128,22 +132,37 @@ export class AnthropometricMeasurements implements OnInit {
   }
 
   submitAllData(): void {
+    console.log('🔍 Form valid:', this.measurementsForm.valid);
+    console.log('🔍 Form values:', this.measurementsForm.value);
+    console.log('🔍 Patient ID:', this.patientId);
+    console.log('🔍 Medical Record ID:', this.medicalRecordId);
+
+    // ✅ Validar que los IDs no sean 0
+    if (this.patientId === 0 || this.medicalRecordId === 0) {
+      alert('❌ Error: IDs de paciente o historial médico no válidos');
+      console.error('❌ IDs inválidos:', {
+        patientId: this.patientId,
+        medicalRecordId: this.medicalRecordId
+      });
+      return;
+    }
+
     if (this.measurementsForm.invalid) {
-      alert('Por favor completa todos los campos requeridos');
+      alert('⚠️ Por favor completa todos los campos requeridos');
       this.measurementsForm.markAllAsTouched();
       return;
     }
 
     this.isSubmitted = true;
-
     const formValues = this.measurementsForm.value;
-
-    // construir metricValues desde el formulario
+    
+    // ✅ Construir metricValues (SOLO enviar valores que NO estén vacíos)
     const metricValues: MetricValue[] = [];
     [...this.step1Fields, ...this.step2Fields, ...this.step3Fields].forEach(field => {
       if (field.id && field.id > 0) {
         const value = formValues[field.name];
-        if (value !== null && value !== '' && value !== undefined) {
+        // ✅ Solo agregar si tiene valor
+        if (value !== null && value !== '' && value !== undefined && value !== 0) {
           metricValues.push({
             metricsCatalogId: field.id,
             value: value.toString()
@@ -152,8 +171,23 @@ export class AnthropometricMeasurements implements OnInit {
       }
     });
 
-    this.consultationStateService.setMetricValues(metricValues);
+    console.log('📊 Metric values construidas:', metricValues);
 
+    // ✅ Validar que physicalActivityId exista
+    if (!formValues.physicalActivityId) {
+      alert('⚠️ Selecciona un nivel de actividad física');
+      this.isSubmitted = false;
+      return;
+    }
+
+    // ✅ Validar que reductionPercentage exista
+    if (!formValues.reductionPercentage && formValues.reductionPercentage !== 0) {
+      alert('⚠️ Ingresa el porcentaje de reducción calórica');
+      this.isSubmitted = false;
+      return;
+    }
+
+    // ✅ Mapear actividad física
     const activityMap: { [key: string]: number } = {
       'Sedentario': 1,
       'Ligero': 2,
@@ -162,38 +196,60 @@ export class AnthropometricMeasurements implements OnInit {
       'Muy intenso': 5
     };
 
-    const energeticExpenditure = {
-      physicalActivityId: activityMap[formValues.physicalActivityId] || 1,
-      reductionPercentage: formValues.reductionPercentage ? formValues.reductionPercentage.toString() : '0'
-    };
-    this.consultationStateService.setEnergeticExpenditure(energeticExpenditure);
+    const physicalActivityId = activityMap[formValues.physicalActivityId];
+    
+    if (!physicalActivityId) {
+      alert('❌ Nivel de actividad física inválido');
+      console.error('❌ physicalActivityId no mapeado:', formValues.physicalActivityId);
+      this.isSubmitted = false;
+      return;
+    }
 
+    // ✅ Obtener notas del state service
     const notes = this.consultationStateService.getNotes();
+    console.log('📝 Notas obtenidas:', notes);
 
+    // ✅ Construir request completo
     const consultationData: ConsultationRequest = {
       patientId: this.patientId,
       medicalRecordId: this.medicalRecordId,
       reason: 'Evaluación del paciente',
       notes: notes,
       metricValues: metricValues,
-      energeticExpenditure: energeticExpenditure
+      energeticExpenditure: {
+        physicalActivityId: physicalActivityId,
+        reductionPercentage: formValues.reductionPercentage.toString()
+      }
     };
 
-    console.log('Enviando consulta:', consultationData);
+    console.log('📤 REQUEST COMPLETO A ENVIAR:', JSON.stringify(consultationData, null, 2));
 
+    // ✅ Enviar a la API
     this.consultationService.createConsultation(consultationData).subscribe({
       next: (response) => {
-        console.log('Consulta creada exitosamente:', response);
-
-        // Limpiar datos del estado después de enviar exitosamente
+        console.log('✅ RESPUESTA EXITOSA:', response);
+        alert('✅ Mediciones guardadas exitosamente');
+        
+        // ✅ Limpiar estado
         this.consultationStateService.clearAllConsultationData();
-
-        alert('Consulta guardada exitosamente');
+        
+        // ✅ Navegar de vuelta
         this.router.navigate(['/patient', this.patientId]);
       },
       error: (error) => {
-        console.error('Error al crear consulta:', error);
-        alert('Error al guardar la consulta. Por favor intenta de nuevo.');
+        console.error('❌ ERROR COMPLETO:', error);
+        console.error('❌ Error status:', error.status);
+        console.error('❌ Error message:', error.error);
+        
+        let errorMessage = '❌ Error al guardar las mediciones';
+        
+        if (error.error?.message) {
+          errorMessage += ': ' + error.error.message;
+        } else if (error.message) {
+          errorMessage += ': ' + error.message;
+        }
+        
+        alert(errorMessage);
         this.isSubmitted = false;
       }
     });
