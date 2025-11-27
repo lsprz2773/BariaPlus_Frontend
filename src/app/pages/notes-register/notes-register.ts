@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormItem} from '../../core/interfaces/form-item';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Note} from '../../core/interfaces/consultation';
-import {ConsultationService} from '../../core/services/consultation-service';
-import {ConsultationStateService} from '../../core/services/consultation-state-service';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormItem } from '../../core/interfaces/form-item';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Note } from '../../core/interfaces/consultation';
+import { ConsultationService } from '../../core/services/consultation-service';
+import { ConsultationStateService } from '../../core/services/consultation-state-service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-notes-register',
@@ -15,20 +15,23 @@ import {Router, ActivatedRoute} from '@angular/router';
 export class NotesRegister implements OnInit {
 
   constructor(
-    public fb: FormBuilder, 
-    private consultation: ConsultationService, 
+    public fb: FormBuilder,
+    private consultation: ConsultationService,
     private consultationState: ConsultationStateService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   notesForm!: FormGroup;
   patientId: number = 0;
   medicalRecordId: number = 0;
   ngOnInit() {
     this.initForm();
-    this.patientId = Number(this.route.snapshot.queryParamMap.get('patientId')) || 0;
-    this.medicalRecordId = Number(this.route.snapshot.queryParamMap.get('medicalRecordId')) || 0;
+    this.route.queryParamMap.subscribe(params => {
+      this.patientId = Number(params.get('patientId')) || 0;
+      this.medicalRecordId = Number(params.get('medicalRecordId')) || 0;
+    });
+
   }
 
   initForm() {
@@ -38,21 +41,21 @@ export class NotesRegister implements OnInit {
     })
   }
 
-    noteForm:FormItem[] = [
-      {
-        type: "select",
-        placeholder: 'Categoria de nota',
-        required: true,
-        name: "category",
-        options: ['Recordatorio 24 h', 'Alimentos', 'Estado emocional', 'Calidad de sueño', 'Dieta', 'Opinion dieta', 'Evolucion del paciente', 'Terapia farmacologica']
-      },
-      {
-        type: "text",
-        placeholder: "Describa la nota",
-        name: "description",
-        required: true,
-      }
-      ]
+  noteForm: FormItem[] = [
+    {
+      type: "select",
+      placeholder: 'Categoria de nota',
+      required: true,
+      name: "category",
+      options: ['Recordatorio 24 h', 'Alimentos', 'Estado emocional', 'Calidad de sueño', 'Dieta', 'Opinion dieta', 'Evolucion del paciente', 'Terapia farmacologica']
+    },
+    {
+      type: "text",
+      placeholder: "Describa la nota",
+      name: "description",
+      required: true,
+    }
+  ]
 
   addNote() {
     if (this.notesForm.invalid) {
@@ -72,7 +75,7 @@ export class NotesRegister implements OnInit {
     this.notesForm.reset();
   }
 
-  mapCategory(category:string):number{
+  mapCategory(category: string): number {
     switch (category) {
       case 'Estado emocional': return 1;
       case 'Calidad de sueño': return 2;
@@ -86,7 +89,9 @@ export class NotesRegister implements OnInit {
     }
   }
 
-  continueToMeasurements() {    
+  continueToMeasurements() {
+    const notes = this.consultationState.getNotes();
+
     this.router.navigate(['/measurements'], {
       queryParams: {
         patientId: this.patientId,

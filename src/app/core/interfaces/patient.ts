@@ -7,23 +7,27 @@ export interface Patient {
     emergencyNumber: string; // Cambiado a string para coincidir con la API
     genderId: number;
     statusId: number;
+    medicalRecordId?: number;
     allergies: Allergy[];
     diseases: Disease[]; 
     medicalHistories: MedicalHistory[];
 }
 
 export interface MedicalHistory {
+    id?: number;
     name: string;
     detectionDate: Date | null;
     historyTypesId: number;
 }
 
 export interface Disease {
+    id?: number;
     name: string;
     actualStateId: number;
 }
 
 export interface Allergy {
+    id?: number;
     name: string;
     allergicReaction: string;
 }

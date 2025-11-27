@@ -5,6 +5,7 @@
     <app-stats></app-stats>
   </div>
   <div class="list-wrapper">
-    <app-appointments></app-appointments>
+    <app-appointments [patientId]="patientId" [medicalRecordId]="medicalRecordId">
+    </app-appointments>
   </div>
 </main>

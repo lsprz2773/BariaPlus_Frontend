@@ -8,4 +8,5 @@ export interface FormItem {
   options?: string[];
   step?: string; //contar numero decimales
   min?: number; // validacion de datos q no sean negativo
+  max?: number; // validacion de valor máximo
 }
