@@ -68,13 +68,15 @@ export class AnthropometricMeasurements implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.initForm();
+
     this.route.queryParamMap.subscribe(params => {
       this.patientId = Number(this.route.snapshot.queryParamMap.get('patientId')) || 0;
       this.medicalRecordId = Number(this.route.snapshot.queryParamMap.get('medicalRecordId')) || 0;
 
     })
 
-    this.initForm();
   }
 
   initForm(): void {
@@ -137,10 +139,10 @@ export class AnthropometricMeasurements implements OnInit {
     console.log('🔍 Patient ID:', this.patientId);
     console.log('🔍 Medical Record ID:', this.medicalRecordId);
 
-    // ✅ Validar que los IDs no sean 0
+    // Validar que los IDs no sean 0
     if (this.patientId === 0 || this.medicalRecordId === 0) {
-      alert('❌ Error: IDs de paciente o historial médico no válidos');
-      console.error('❌ IDs inválidos:', {
+      alert('   Error: IDs de paciente o historial médico no válidos');
+      console.error('IDs inválidos:', {
         patientId: this.patientId,
         medicalRecordId: this.medicalRecordId
       });
@@ -155,13 +157,12 @@ export class AnthropometricMeasurements implements OnInit {
 
     this.isSubmitted = true;
     const formValues = this.measurementsForm.value;
-    
-    // ✅ Construir metricValues (SOLO enviar valores que NO estén vacíos)
+
     const metricValues: MetricValue[] = [];
     [...this.step1Fields, ...this.step2Fields, ...this.step3Fields].forEach(field => {
       if (field.id && field.id > 0) {
         const value = formValues[field.name];
-        // ✅ Solo agregar si tiene valor
+        // Solo agregar si tiene valor
         if (value !== null && value !== '' && value !== undefined && value !== 0) {
           metricValues.push({
             metricsCatalogId: field.id,
@@ -171,23 +172,7 @@ export class AnthropometricMeasurements implements OnInit {
       }
     });
 
-    console.log('📊 Metric values construidas:', metricValues);
-
-    // ✅ Validar que physicalActivityId exista
-    if (!formValues.physicalActivityId) {
-      alert('⚠️ Selecciona un nivel de actividad física');
-      this.isSubmitted = false;
-      return;
-    }
-
-    // ✅ Validar que reductionPercentage exista
-    if (!formValues.reductionPercentage && formValues.reductionPercentage !== 0) {
-      alert('⚠️ Ingresa el porcentaje de reducción calórica');
-      this.isSubmitted = false;
-      return;
-    }
-
-    // ✅ Mapear actividad física
+    // Mapear actividad física
     const activityMap: { [key: string]: number } = {
       'Sedentario': 1,
       'Ligero': 2,
@@ -197,7 +182,7 @@ export class AnthropometricMeasurements implements OnInit {
     };
 
     const physicalActivityId = activityMap[formValues.physicalActivityId];
-    
+
     if (!physicalActivityId) {
       alert('❌ Nivel de actividad física inválido');
       console.error('❌ physicalActivityId no mapeado:', formValues.physicalActivityId);
@@ -205,11 +190,10 @@ export class AnthropometricMeasurements implements OnInit {
       return;
     }
 
-    // ✅ Obtener notas del state service
+    // Obtener notas del state service
     const notes = this.consultationStateService.getNotes();
-    console.log('📝 Notas obtenidas:', notes);
 
-    // ✅ Construir request completo
+    // Construir request completo
     const consultationData: ConsultationRequest = {
       patientId: this.patientId,
       medicalRecordId: this.medicalRecordId,
@@ -224,31 +208,31 @@ export class AnthropometricMeasurements implements OnInit {
 
     console.log('📤 REQUEST COMPLETO A ENVIAR:', JSON.stringify(consultationData, null, 2));
 
-    // ✅ Enviar a la API
+    // Enviar a la API
     this.consultationService.createConsultation(consultationData).subscribe({
       next: (response) => {
         console.log('✅ RESPUESTA EXITOSA:', response);
-        alert('✅ Mediciones guardadas exitosamente');
-        
-        // ✅ Limpiar estado
+        alert('Mediciones guardadas exitosamente');
+
+        // Limpiar estado
         this.consultationStateService.clearAllConsultationData();
-        
-        // ✅ Navegar de vuelta
+
+        // Navegar de vuelta
         this.router.navigate(['/patient', this.patientId]);
       },
       error: (error) => {
         console.error('❌ ERROR COMPLETO:', error);
         console.error('❌ Error status:', error.status);
         console.error('❌ Error message:', error.error);
-        
-        let errorMessage = '❌ Error al guardar las mediciones';
-        
+
+        let errorMessage = 'Error al guardar las mediciones';
+
         if (error.error?.message) {
           errorMessage += ': ' + error.error.message;
         } else if (error.message) {
           errorMessage += ': ' + error.message;
         }
-        
+
         alert(errorMessage);
         this.isSubmitted = false;
       }
