@@ -47,7 +47,6 @@ export class PatientCard {
     event.stopPropagation();
     this.menuOpen = false;
 
-    // ✅ Abre el modal de confirmación
     this.patientToDeleteName = `${this.patient.firstName} ${this.patient.lastName}`;
     this.modalService.openModal();
   }

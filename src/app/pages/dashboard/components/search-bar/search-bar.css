@@ -11,7 +11,7 @@
 
 }
 
-.search-for input[type="search"] {
+.search-for input[type="text"] {
     flex: 1;
     border: none;
     background-color: transparent;
@@ -21,7 +21,7 @@
     outline: none;
 }
 
-.search-for input[type="search"]::placeholder {
+.search-for input[type="text"]::placeholder {
     color: #999;
     font-size: 14px;
 }

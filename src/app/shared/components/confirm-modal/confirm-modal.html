@@ -4,7 +4,7 @@
 
         <div class="icon-container" [class.danger]="isDangerous">
             @if(isDangerous){
-            <i class="fa fa-exclamation-triangle"></i>
+            <i class="fa {{ icon }}" [style.color]="iconColor"></i>
             }
         </div>
 
@@ -15,7 +15,7 @@
             <button type="button" class="btn btn-cancel" (click)="onCancel()">
                 {{ cancelText }}
             </button>
-            <button type="button" class="btn btn-confirm" [class.btn-danger]="isDangerous" (click)="onConfirm()">
+            <button type="button" class="btn {{ confirmButtonClass }}" (click)="onConfirm()">
                 {{ confirmText }}
             </button>
         </div>
