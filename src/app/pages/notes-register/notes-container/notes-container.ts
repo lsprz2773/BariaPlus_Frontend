@@ -24,8 +24,8 @@ export class NotesContainer implements OnInit {
     this.router.navigate(['/dashboard']);
   }
   onContinue(){
+    // ✅ Solo emite el evento, el padre (notes-register) maneja la navegación
     this.continuePressed.emit();
-    this.router.navigate(['/measurements']);
   }
 
   onDetails(){

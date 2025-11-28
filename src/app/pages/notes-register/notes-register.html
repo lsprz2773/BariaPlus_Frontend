@@ -5,4 +5,4 @@
     <app-button [type]="'submit'" [name]="'add-note'" [context]="'primary'" [text]="'Agregar'" (pressed)="addNote()"></app-button>
   </div>
 </main>
-<app-notes-container></app-notes-container>
+<app-notes-container (continuePressed)="continueToMeasurements()"></app-notes-container>

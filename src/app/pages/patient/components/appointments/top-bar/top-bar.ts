@@ -31,12 +31,12 @@ export class TopBar {
       return;
     }
 
-    this.route.navigate(['/note-register']), {
+    this.route.navigate(['/note-register'], {
       queryParams: {
         patientId: this.patientId,
         medicalRecordId: this.medicalRecordId
       }
-    }
+    });
   }
 }
 

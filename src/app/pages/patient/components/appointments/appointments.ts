@@ -17,13 +17,11 @@ export class Appointments implements OnInit, OnChanges{
       patientId: this.patientId,
       medicalRecordId: this.medicalRecordId
     });
-  }
+   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('📅 Appointments ngOnChanges - Cambios detectados:', changes);
-
     if (changes['patientId']) {
-      console.log('🔄 patientId cambió:', changes['patientId'].currentValue);
+      console.log(changes['patientId'].currentValue);
     }
     if (changes['medicalRecordId']) {
       console.log('🔄 medicalRecordId cambió:', changes['medicalRecordId'].currentValue);

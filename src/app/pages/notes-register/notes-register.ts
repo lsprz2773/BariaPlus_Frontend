@@ -92,6 +92,26 @@ export class NotesRegister implements OnInit {
   continueToMeasurements() {
     const notes = this.consultationState.getNotes();
 
+    console.log('🚀 continueToMeasurements - IDs:', {
+      patientId: this.patientId,
+      medicalRecordId: this.medicalRecordId,
+      notesCount: notes.length
+    });
+
+    if (this.patientId === 0 || this.medicalRecordId === 0) {
+      alert('❌ Error: No se pudieron cargar los IDs. Intenta recargar la página.');
+      console.error('❌ IDs inválidos en notes-register:', {
+        patientId: this.patientId,
+        medicalRecordId: this.medicalRecordId
+      });
+      return;
+    }
+
+    if (notes.length === 0) {
+      alert('⚠️ Debes agregar al menos una nota antes de continuar');
+      return;
+    }
+
     this.router.navigate(['/measurements'], {
       queryParams: {
         patientId: this.patientId,

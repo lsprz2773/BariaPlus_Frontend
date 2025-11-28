@@ -68,15 +68,36 @@ export class AnthropometricMeasurements implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.initForm();
 
+    // ✅ Intentar primero con snapshot (puede tener los valores)
+    const snapshotPatientId = Number(this.route.snapshot.queryParamMap.get('patientId')) || 0;
+    const snapshotMedicalRecordId = Number(this.route.snapshot.queryParamMap.get('medicalRecordId')) || 0;
+
+    if (snapshotPatientId > 0 && snapshotMedicalRecordId > 0) {
+      this.patientId = snapshotPatientId;
+      this.medicalRecordId = snapshotMedicalRecordId;
+      console.log('✅ IDs obtenidos de snapshot:', {
+        patientId: this.patientId,
+        medicalRecordId: this.medicalRecordId
+      });
+    }
+
+    // ✅ También suscribirse para actualizaciones
     this.route.queryParamMap.subscribe(params => {
-      this.patientId = Number(this.route.snapshot.queryParamMap.get('patientId')) || 0;
-      this.medicalRecordId = Number(this.route.snapshot.queryParamMap.get('medicalRecordId')) || 0;
+      const paramPatientId = Number(params.get('patientId')) || 0;
+      const paramMedicalRecordId = Number(params.get('medicalRecordId')) || 0;
 
-    })
-
+      // Solo actualizar si vienen valores válidos
+      if (paramPatientId > 0 && paramMedicalRecordId > 0) {
+        this.patientId = paramPatientId;
+        this.medicalRecordId = paramMedicalRecordId;
+        console.log('✅ IDs actualizados del subscribe:', {
+          patientId: this.patientId,
+          medicalRecordId: this.medicalRecordId
+        });
+      }
+    });
   }
 
   initForm(): void {
@@ -134,14 +155,8 @@ export class AnthropometricMeasurements implements OnInit {
   }
 
   submitAllData(): void {
-    console.log('🔍 Form valid:', this.measurementsForm.valid);
-    console.log('🔍 Form values:', this.measurementsForm.value);
-    console.log('🔍 Patient ID:', this.patientId);
-    console.log('🔍 Medical Record ID:', this.medicalRecordId);
-
-    // Validar que los IDs no sean 0
     if (this.patientId === 0 || this.medicalRecordId === 0) {
-      alert('   Error: IDs de paciente o historial médico no válidos');
+      alert(' Error: IDs de paciente o historial médico no válidos');
       console.error('IDs inválidos:', {
         patientId: this.patientId,
         medicalRecordId: this.medicalRecordId
@@ -172,7 +187,6 @@ export class AnthropometricMeasurements implements OnInit {
       }
     });
 
-    // Mapear actividad física
     const activityMap: { [key: string]: number } = {
       'Sedentario': 1,
       'Ligero': 2,
@@ -184,16 +198,15 @@ export class AnthropometricMeasurements implements OnInit {
     const physicalActivityId = activityMap[formValues.physicalActivityId];
 
     if (!physicalActivityId) {
-      alert('❌ Nivel de actividad física inválido');
-      console.error('❌ physicalActivityId no mapeado:', formValues.physicalActivityId);
+      alert('Nivel de actividad física inválido');
+      console.error('physicalActivityId no mapeado:', formValues.physicalActivityId);
       this.isSubmitted = false;
       return;
     }
 
-    // Obtener notas del state service
+    // obtener notas del state service
     const notes = this.consultationStateService.getNotes();
 
-    // Construir request completo
     const consultationData: ConsultationRequest = {
       patientId: this.patientId,
       medicalRecordId: this.medicalRecordId,
@@ -206,18 +219,14 @@ export class AnthropometricMeasurements implements OnInit {
       }
     };
 
-    console.log('📤 REQUEST COMPLETO A ENVIAR:', JSON.stringify(consultationData, null, 2));
-
-    // Enviar a la API
+    // enviar a la API
     this.consultationService.createConsultation(consultationData).subscribe({
       next: (response) => {
         console.log('✅ RESPUESTA EXITOSA:', response);
-        alert('Mediciones guardadas exitosamente');
-
-        // Limpiar estado
+        
+        // limpiar estado
         this.consultationStateService.clearAllConsultationData();
 
-        // Navegar de vuelta
         this.router.navigate(['/patient', this.patientId]);
       },
       error: (error) => {
