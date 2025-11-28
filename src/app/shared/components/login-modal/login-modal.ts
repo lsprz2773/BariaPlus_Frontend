@@ -83,8 +83,6 @@ export class LoginModal implements OnInit, OnDestroy {
       password: this.loginForm.value.password
     };
 
-    console.log('Enviando login:', loginRequest);
-
     this.authService.login(loginRequest).subscribe({
       next: (response) => {
         
