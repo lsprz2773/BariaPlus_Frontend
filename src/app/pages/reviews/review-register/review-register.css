@@ -1,0 +1,125 @@
+.page-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  margin-left: 0;
+}
+
+.content-area {
+  width: 100%;
+  max-width: 100%;
+  padding: 2.5rem 3.75rem 2.5rem 1.25rem;
+}
+
+.header-section {
+  margin-top: -3.125rem;
+  margin-bottom: -1.5rem;
+  text-align: left;
+}
+
+.page-title {
+  font-size: 3.125rem;
+  font-weight: 700;
+  color:var(--text-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.page-subtitle {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+}
+
+.rating-section {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+}
+
+.comments-card {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 1.875rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.875rem;
+  max-width: 90%;
+}
+
+.comments-title {
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+.comments-textarea {
+  width: 100%;
+  padding: 0.9375rem;
+  border: 0.0625rem solid #e0e0e0;
+  border-radius: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(0.8125rem, 1.2vw, 0.875rem);
+  color: #555;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.comments-textarea:focus {
+  outline: none;
+  border-color: #5eb5a6;
+}
+
+.comments-textarea::placeholder {
+  color: #aaa;
+}
+
+.actions-section {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 90%;
+}
+
+.btn-save {
+  background: #5eb5a6;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 2.5rem;
+  border-radius: 0.5rem;
+  font-size: clamp(0.875rem, 1.2vw, 1rem);
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0.125rem 0.375rem rgba(94, 181, 166, 0.3);
+}
+
+.btn-save:hover {
+  background: #4a9688;
+  box-shadow: 0 0.25rem 0.625rem rgba(94, 181, 166, 0.4);
+  transform: translateY(-0.0625rem);
+}
+
+.btn-save:active {
+  transform: translateY(0);
+}
+
+
+.error-alert {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  color: #c00;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.btn-save:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}

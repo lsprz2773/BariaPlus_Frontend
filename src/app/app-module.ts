@@ -44,6 +44,12 @@ import {NotesRegister} from './pages/notes-register/notes-register';
 import {NotesContainer} from './pages/notes-register/notes-container/notes-container';
 import {Note} from './pages/notes-register/note/note';
 import {Details} from './pages/notes-register/details/details';
+import { ReviewRegister } from './pages/reviews/review-register/review-register';
+import { ReviewRating } from './pages/reviews/review-rating/review-rating';
+import { RatingDisplay } from './pages/reviews/components/rating-display/rating-display';
+import { ReviewCard } from './pages/reviews/components/review-card/review-card';
+import { ReviewList } from './pages/reviews/components/review-list/review-list';
+import { FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -81,13 +87,19 @@ import {Details} from './pages/notes-register/details/details';
     NotesRegister,
     NotesContainer,
     Note,
-    Details
+    Details,
+    ReviewRegister,
+    ReviewRating,
+    RatingDisplay,
+    ReviewCard,
+    ReviewList
     ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     Modal,
