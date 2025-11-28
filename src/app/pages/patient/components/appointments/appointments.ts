@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-appointments',
@@ -6,9 +6,25 @@ import { Component, Input } from '@angular/core';
   templateUrl: './appointments.html',
   styleUrl: './appointments.css'
 })
-export class Appointments {
+export class Appointments implements OnInit, OnChanges{
   @Input() patientId: number = 0;
   @Input() medicalRecordId: number = 0;
 
   appointments: { id: string, date: string }[] = [];
+
+  ngOnInit() {
+    console.log('📅 Appointments ngOnInit - IDs:', {
+      patientId: this.patientId,
+      medicalRecordId: this.medicalRecordId
+    });
+   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['patientId']) {
+      console.log(changes['patientId'].currentValue);
+    }
+    if (changes['medicalRecordId']) {
+      console.log('🔄 medicalRecordId cambió:', changes['medicalRecordId'].currentValue);
+    }
+  }
 }
