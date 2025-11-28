@@ -1,11 +1,20 @@
 <div class="rating-display">
-  <div class="rating-number">0.0</div>
-  <div class="stars-container">
-    <span class="star">★</span>
-    <span class="star">★</span>
-    <span class="star">★</span>
-    <span class="star">★</span>
-    <span class="star">★</span>
+  <div class="rating-number">{{ rating.toFixed(1) }}</div>
+  
+  <div class="stars-container" (mouseleave)="onMouseLeave()">
+    @for (star of stars; track $index) {
+      <span 
+        class="star"
+        [class]="getStarClass($index + 1)"
+        [class.interactive]="interactive"
+        (click)="onStarClick($index + 1)"
+        (mouseenter)="onStarHover($index + 1)">
+        ★
+      </span>
+    }
   </div>
-  <div class="rating-note">*Nota: El aumento sólo puede ser incrementado en 0.5</div>
+  
+  @if (interactive) {
+    <div class="rating-note">*Nota: El aumento sólo puede ser incrementado en 0.5</div>
+  }
 </div>

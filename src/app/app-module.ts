@@ -49,6 +49,7 @@ import { ReviewRating } from './pages/reviews/review-rating/review-rating';
 import { RatingDisplay } from './pages/reviews/components/rating-display/rating-display';
 import { ReviewCard } from './pages/reviews/components/review-card/review-card';
 import { ReviewList } from './pages/reviews/components/review-list/review-list';
+import { FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { ReviewList } from './pages/reviews/components/review-list/review-list';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     Modal,

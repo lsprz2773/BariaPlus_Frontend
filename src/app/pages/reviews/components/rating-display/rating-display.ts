@@ -17,13 +17,11 @@ export class RatingDisplay {
   onStarClick(star: number): void {
     if (!this.interactive) return;
     
-    // Si el click es en la misma estrella, alternar entre .0 y .5
-    if (Math.floor(this.rating) === star) {
-      if (this.rating === star) {
-        this.rating = star - 0.5;
-      } else {
-        this.rating = star;
-      }
+    // Si clickea la misma estrella, alterna entre .0 y .5
+    if (Math.floor(this.rating) === star - 1 && this.rating % 1 === 0.5) {
+      this.rating = star;
+    } else if (this.rating === star) {
+      this.rating = star - 0.5;
     } else {
       this.rating = star;
     }
@@ -42,7 +40,9 @@ export class RatingDisplay {
   }
 
   getStarClass(star: number): string {
-    const currentRating = this.hoverRating || this.rating;
+    const currentRating = this.interactive && this.hoverRating > 0 
+      ? this.hoverRating 
+      : this.rating;
     
     if (currentRating >= star) {
       return 'full';

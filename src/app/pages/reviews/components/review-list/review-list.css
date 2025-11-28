@@ -1,33 +1,41 @@
 .review-list-wrapper {
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  padding: 30px;
-  max-width: 900px;
-  margin: 0 auto;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
+  padding: 1.875rem;
+  width: 100%;
+  max-width: 56.25rem;
 }
 
 .review-list-container {
-  max-height: 400px;
+  max-height: 25rem;
   overflow-y: auto;
-  padding-right: 10px;
+  padding-right: 0.625rem;
 }
 
 /* Estilo del scrollbar */
 .review-list-container::-webkit-scrollbar {
-  width: 8px;
+  width: 0.5rem;
 }
 
 .review-list-container::-webkit-scrollbar-track {
   background: #f1f1f1;
-  border-radius: 10px;
+  border-radius: 0.625rem;
 }
 
 .review-list-container::-webkit-scrollbar-thumb {
   background: #5eb5a6;
-  border-radius: 10px;
+  border-radius: 0.625rem;
 }
 
 .review-list-container::-webkit-scrollbar-thumb:hover {
   background: #4a9688;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .review-list-wrapper {
+    padding: 1.25rem;
+    max-width: 100%;
+  }
 }
