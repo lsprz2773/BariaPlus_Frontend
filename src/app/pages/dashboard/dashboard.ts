@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Patient } from '../../core/interfaces/patient';
 import { PatientService } from '../../core/services/patient-service';
+import { PatienFilterService } from '../../core/services/patien-filter-service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,18 +10,32 @@ import { PatientService } from '../../core/services/patient-service';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
-export class Dashboard implements OnInit {
+export class Dashboard implements OnInit, OnDestroy {
 
   patients: Patient[] = [];
   filteredPatients: Patient[] = [];
   searchTerm: string = '';
   isLoading: boolean = false;
   errorMessage: string = '';
+  private destroy$ = new Subject<void>();
 
-  constructor(private patientService: PatientService) {}
+  constructor(private patientService: PatientService,
+    private filterService: PatienFilterService
+  ) { }
 
   ngOnInit(): void {
     this.loadPatients();
+
+    this.filterService.filteredPatients$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(filteredPatients => {
+        this.filteredPatients = filteredPatients;
+      })
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   loadPatients(): void {
@@ -30,8 +46,10 @@ export class Dashboard implements OnInit {
       next: (response) => {
         if (response.success) {
           // Ajusta según respuesta de API - puede ser response.patients o response.data
-          this.patients = response.patients || []; 
-          this.filteredPatients = [...this.patients];
+          this.patients = response.patients || [];
+          this.filterService.setPatients(this.patients);
+
+          this.isLoading = false;
           console.log('Pacientes cargados:', this.patients);
         }
         this.isLoading = false;
@@ -42,25 +60,6 @@ export class Dashboard implements OnInit {
         this.isLoading = false;
       }
     });
-  }
-
-  onSearch(term: string): void {
-    this.searchTerm = term.toLowerCase();
-
-    if(!this.searchTerm){
-      this.filteredPatients = [...this.patients];
-      return;
-    }
-
-    this.filteredPatients = this.patients.filter(patient =>
-      patient.firstName.toLowerCase().includes(this.searchTerm) ||
-      patient.lastName.toLowerCase().includes(this.searchTerm)
-    );
-  }
-
-  onFilter(filterCriteria: any): void {
-    console.log('Filtrar con:', filterCriteria);
-    
   }
 
   onPatientDeleted(patientId: number): void {
