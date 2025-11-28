@@ -5,11 +5,18 @@
     </div>
 
     <div class="rating-section">
-      <app-rating-display class="readonly"></app-rating-display>
+      <app-rating-display 
+        [rating]="averageRating" 
+        [interactive]="false">
+      </app-rating-display>
     </div>
 
-    <div class="reviews-section">
-      <app-review-list></app-review-list>
+    <div class="reviews-section" *ngIf="!isLoading">
+      <app-review-list [reviews]="reviews"></app-review-list>
+    </div>
+
+    <div class="loading-section" *ngIf="isLoading">
+      <p>Cargando valoraciones...</p>
     </div>
   </div>
 </div>
