@@ -117,12 +117,13 @@
 }
 
 .btn-confirm:hover {
-    background-color: #0056b3;
+    background-color: var(--hover-color);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .btn-danger {
+    color: white;
     background-color: #d32f2f;
 }
 

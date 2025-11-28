@@ -1,6 +1,11 @@
 <div class="search-for">
-    <input type="search" placeholder="Busque a su paciente" name="" id="">
-    <button class="search_button" type="submit">
+    <input type="search" placeholder="Busque a su paciente" (input)="onSearch($event)">
+    <button class="search_button" type="submit" (keyup.enter)="onSearchSubmit($event)">
         <i class="fa fa-search"></i>
     </button>
+    @if(searchTerm){
+    <button class="search_button" type="submit" (click)="clearSearch()">
+        <i class="fa fa-times"></i>
+    </button>
+    }
 </div>

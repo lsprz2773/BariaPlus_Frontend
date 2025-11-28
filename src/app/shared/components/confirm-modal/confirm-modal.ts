@@ -12,14 +12,19 @@ export class ConfirmModal {
   @Input() message: string = 'Esta acción no se puede deshacer';
   @Input() confirmText: string = 'Eliminar';
   @Input() cancelText: string = 'Cancelar';
+  @Input() confirmButtonClass: string = 'btn-danger'; // Clase del botón
+  @Input() icon: string = 'fa-exclamation-triangle';
+  @Input() iconColor: string = '#d32f2f'; // 'danger' o 'info'
   @Input() isDangerous: boolean = true; // Para botones rojos (eliminar)
+  @Input() isVisible: boolean = false;
+
 
   @Output() confirmed = new EventEmitter<void>();
   @Output() cancelled = new EventEmitter<void>();
 
   isModalOpen: boolean = false;
 
-  constructor(public modalService: Modal) {}
+  constructor(public modalService: Modal) { }
 
   ngOnInit(): void {
     this.modalService.isModalOpen$.subscribe(isOpen => {
