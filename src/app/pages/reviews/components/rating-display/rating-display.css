@@ -9,7 +9,7 @@
 .rating-number {
   font-size: clamp(3rem, 4vw, 3.75rem);
   font-weight: 700;
-  color: #5eb5a6;
+  color:var(--primary-color);
   font-family: 'Poppins', sans-serif;
   line-height: 1;
 }
@@ -35,17 +35,16 @@
   transform: scale(1.15);
 }
 
-/* Estrella vacía */
 .star.empty {
   color: #ddd;
 }
 
 .star.full {
-  color: #f5c26b;
+  color: var(--secondary-color);
 }
 
 .star.half {
-  background: linear-gradient(90deg, #f5c26b 50%, #ddd 50%);
+  background: linear-gradient(90deg, var(--secondary-color) 50%, #ddd 50%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -53,7 +52,7 @@
 
 .rating-note {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--text-color);
   font-family: 'Poppins', sans-serif;
   margin-top: 0.25rem;
 }

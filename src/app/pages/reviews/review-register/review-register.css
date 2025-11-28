@@ -50,7 +50,7 @@
 .comments-title {
   font-size: clamp(0.875rem, 1.5vw, 1.125rem);
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
   margin: 0 0 1rem 0;
 }
 
@@ -61,7 +61,7 @@
   border-radius: 0.5rem;
   font-family: 'Poppins', sans-serif;
   font-size: clamp(0.8125rem, 1.2vw, 0.875rem);
-  color: #555;
+  color: var(--text-color);
   resize: vertical;
   transition: border-color 0.2s ease;
   box-sizing: border-box;
@@ -69,7 +69,7 @@
 
 .comments-textarea:focus {
   outline: none;
-  border-color: #5eb5a6;
+  border-color: var(--tertiary-color);
 }
 
 .comments-textarea::placeholder {
@@ -83,7 +83,7 @@
 }
 
 .btn-save {
-  background: #5eb5a6;
+  background: var(--primary-color);
   color: #fff;
   border: none;
   padding: 0.75rem 2.5rem;
@@ -97,7 +97,7 @@
 }
 
 .btn-save:hover {
-  background: #4a9688;
+  background: var(--hover-color);
   box-shadow: 0 0.25rem 0.625rem rgba(94, 181, 166, 0.4);
   transform: translateY(-0.0625rem);
 }

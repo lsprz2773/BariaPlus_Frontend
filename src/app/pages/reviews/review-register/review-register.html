@@ -7,26 +7,20 @@
 
     <div class="rating-section">
       <app-rating-display 
-        [rating]="rating"
+        [rating]="rating" 
         [interactive]="true"
         (ratingChange)="onRatingChange($event)">
       </app-rating-display>
     </div>
-
-    @if (errorMessage) {
-      <div class="error-alert">
-        {{ errorMessage }}
-      </div>
-    }
 
     <div class="comments-card">
       <h3 class="comments-title">Comentarios del paciente:</h3>
       <textarea 
         class="comments-textarea" 
         placeholder="Escribir comentario..."
-        rows="6"
         [(ngModel)]="comment"
-        [disabled]="isLoading">
+        rows="6"
+        [disabled]="isSubmitting">
       </textarea>
     </div>
 
@@ -34,8 +28,8 @@
       <button 
         class="btn-save" 
         (click)="onSave()"
-        [disabled]="isLoading">
-        {{ isLoading ? 'Guardando...' : 'Guardar' }}
+        [disabled]="isSubmitting || rating === 0">
+        {{ isSubmitting ? 'Guardando...' : 'Guardar' }}
       </button>
     </div>
   </div>

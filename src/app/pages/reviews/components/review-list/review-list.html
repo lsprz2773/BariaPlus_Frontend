@@ -1,7 +1,14 @@
 <div class="review-list-wrapper">
-  <div class="review-list-container">
-    <app-review-card></app-review-card>
-    <app-review-card></app-review-card>
-    <app-review-card></app-review-card>
+  <div class="review-list-container" *ngIf="reviews.length > 0">
+    <app-review-card 
+      *ngFor="let review of reviews"
+      [patientName]="review.patientName || 'Paciente'"
+      [comment]="review.comments"
+      [gender]="review.gender || 'male'">
+    </app-review-card>
+  </div>
+  
+  <div class="empty-state" *ngIf="reviews.length === 0">
+    <p>No hay valoraciones disponibles</p>
   </div>
 </div>

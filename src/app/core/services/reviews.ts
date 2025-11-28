@@ -7,7 +7,7 @@ import { AddReviewRequest, AddReviewResponse, Review } from '../interfaces/revie
   providedIn: 'root'
 })
 export class ReviewsService {
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = '/api'; // Usa el proxy
 
   constructor(private http: HttpClient) {}
 

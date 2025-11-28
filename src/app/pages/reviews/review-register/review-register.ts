@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReviewsService } from '../../../core/services/reviews';
+import { AddReviewRequest } from '../../../core/interfaces/review';
 
 @Component({
   selector: 'app-review-register',
@@ -12,77 +13,75 @@ export class ReviewRegister implements OnInit {
   rating: number = 0;
   comment: string = '';
   consultationId: number = 0;
-  isLoading: boolean = false;
-  errorMessage: string = '';
+  isSubmitting: boolean = false;
 
   constructor(
-    private reviewsService: ReviewsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private reviewsService: ReviewsService
   ) {}
 
   ngOnInit(): void {
-    // Obtener el ID de la consulta desde la ruta
-    this.route.params.subscribe(params => {
-      this.consultationId = +params['id'] || 0;
+    // Obtener el ID de la consulta desde los parámetros de la ruta
+    this.route.queryParams.subscribe(params => {
+      this.consultationId = params['consultationId'] ? +params['consultationId'] : 0;
+      
+      if (!this.consultationId) {
+        console.error('No se proporcionó ID de consulta');
+        // Opcionalmente redirigir
+        // this.router.navigate(['/reviews/promedio']);
+      }
     });
   }
 
   onRatingChange(newRating: number): void {
     this.rating = newRating;
-    console.log('Nueva calificación:', this.rating);
   }
 
   onSave(): void {
-    // Validaciones
-    if (this.rating === 0) {
-      this.errorMessage = 'Por favor selecciona una calificación';
+    if (this.rating < 0.5 || this.rating > 5) {
+      alert('La calificación debe estar entre 0.5 y 5.0');
       return;
     }
 
     if (!this.comment.trim()) {
-      this.errorMessage = 'Por favor escribe un comentario';
+      alert('Por favor ingrese un comentario');
       return;
     }
 
     if (!this.consultationId) {
-      this.errorMessage = 'ID de consulta inválido';
+      alert('No se puede guardar la valoración sin una consulta asociada');
       return;
     }
 
-    this.isLoading = true;
-    this.errorMessage = '';
+    this.isSubmitting = true;
 
-    // Convertir rating a entero (multiplicar por 2 para manejar 0.5)
-    // Por ejemplo: 4.5 -> 9, 5.0 -> 10
-    // Luego en el backend puedes dividir entre 2 si es necesario
-    // O simplemente mandar el valor como está si tu BD acepta decimales
-    const puntuationValue = Math.round(this.rating * 2);
+    // Convertir rating de 0.5-5.0 a 1-10 para la BD
+    const puntuationForDB = Math.round(this.rating * 2);
 
-    const reviewData = {
-      puntuation: puntuationValue,
-      comments: this.comment.trim()
+    const request: AddReviewRequest = {
+      puntuation: puntuationForDB,
+      comments: this.comment
     };
 
-    this.reviewsService.addReview(this.consultationId, reviewData)
-      .subscribe({
-        next: (response) => {
-          console.log('Review guardada exitosamente:', response);
-          this.isLoading = false;
-          
-          // Limpiar formulario
-          this.rating = 0;
-          this.comment = '';
-          
-          // Redirigir o mostrar mensaje de éxito
-          alert('Valoración guardada exitosamente');
-          this.router.navigate(['/reviews/promedio']);
-        },
-        error: (error) => {
-          console.error('Error al guardar review:', error);
-          this.isLoading = false;
-          this.errorMessage = error.error?.message || 'Error al guardar la valoración';
-        }
-      });
+    this.reviewsService.addReview(this.consultationId, request).subscribe({
+      next: (response) => {
+        console.log('Valoración guardada:', response);
+        alert('Valoración guardada exitosamente');
+        
+        // Limpiar formulario
+        this.rating = 0;
+        this.comment = '';
+        this.isSubmitting = false;
+        
+        // Redirigir a la vista de promedio
+        this.router.navigate(['/reviews/promedio']);
+      },
+      error: (error) => {
+        console.error('Error al guardar valoración:', error);
+        alert(error.error?.message || 'Error al guardar la valoración');
+        this.isSubmitting = false;
+      }
+    });
   }
 }
