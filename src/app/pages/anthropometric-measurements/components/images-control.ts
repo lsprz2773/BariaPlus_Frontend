@@ -9,7 +9,7 @@ export class ImagesControl {
   public selectedField$ = this.selectedFieldSubject.asObservable();
 
   private fieldImageMap: { [key: string]: string } = {
-    // Step 1 - Medidas básicas y circunferencias
+    //step 1
     'cintura': '/assets/avatar-pngs/grasa/hover-cintura.png',
     'cadera': '/assets/avatar-pngs/grasa/hover-cadera.png',
     'brazoRelajado': '/assets/avatar-pngs/grasa/hover-brazo.png',
@@ -17,7 +17,7 @@ export class ImagesControl {
     'muneca': '/assets/avatar-pngs/grasa/hover-muneca.png',
     'muslo': '/assets/avatar-pngs/grasa/hover-muslo-superior.png',
 
-    // Step 2 - Pliegues cutáneos
+    //step 2
     'biceps': '/assets/avatar-pngs/pliegues-frente/hover-bicep.png',
     'triceps': '/assets/avatar-pngs/pliegues-espalda/hover-tricep.png',
     'subescapular': '/assets/avatar-pngs/pliegues-espalda/hover-subescapular.png',
