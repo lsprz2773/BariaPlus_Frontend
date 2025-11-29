@@ -1,0 +1,37 @@
+:host{
+  display: block;
+  width: 19%;
+}
+
+.btn{
+  width: 100%;
+  height: 20px;
+  padding: 20px 15px;
+  box-sizing: border-box;
+  background-color: #d9d9d9;
+  border: 3px solid rgb(218, 225, 224);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  filter: grayscale(100%);
+  cursor: pointer;
+  transition: 200ms all ease-out;
+}
+
+:host(:not(.selected)) .btn:hover{
+  background-color: #c6c6c6;
+  border-color: #acacac;
+  transition: 200ms all ease-in;
+}
+
+:host(.selected) .btn{
+  background-color: #e9fdfb;
+  filter: none;
+  border-color: #bfe7e3;
+}
+
+.img{
+  height: 20px;
+}

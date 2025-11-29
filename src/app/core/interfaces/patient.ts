@@ -9,8 +9,9 @@ export interface Patient {
     statusId: number;
     medicalRecordId?: number;
     allergies: Allergy[];
-    diseases: Disease[]; 
+    diseases: Disease[];
     medicalHistories: MedicalHistory[];
+    consultations?: Consultation[];
 }
 
 export interface MedicalHistory {
@@ -39,4 +40,7 @@ export interface PatientResponse {
     patients?: Patient[];
 }
 
-
+interface Consultation{
+  id:number;
+  consultationDate:Date;
+}

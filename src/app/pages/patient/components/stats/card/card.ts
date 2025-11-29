@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {StatViewCardConfig} from '../../../../stats-view/components/stats-button/stats-button';
 
 @Component({
   selector: 'app-card',
@@ -7,7 +8,8 @@ import {Component, Input} from '@angular/core';
   styleUrl: './card.css'
 })
 export class Card {
-  @Input() config!: StatCardConfig;
+  @Input() config!: StatViewCardConfig;
+  @Input() existsConsultation!: boolean;
 
   get cardInfo():CardInfo {
     const configs = {
@@ -27,20 +29,13 @@ export class Card {
         iconPath: 'assets/iconos/viscfat.png',
         title: 'Grasa visceral'
       },
-      'chf':{
-        iconPath: 'assets/iconos/chf.png',
+      'whr':{
+        iconPath: 'assets/iconos/whr.png',
         title: 'ICC'
       }
     }
     return configs[this.config.type];
   }
-}
-
-
-export interface StatCardConfig {
-  type: 'bmi' | 'body-mass' | 'fat' | 'visceral-fat' | 'chf';
-  value?: number;
-  chartData?: number[];
 }
 
 interface CardInfo {
