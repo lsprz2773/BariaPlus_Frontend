@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-stats',
@@ -7,5 +8,13 @@ import {Component, Input} from '@angular/core';
   styleUrl: './stats.css'
 })
 export class Stats {
+  @Input() patientId!: number;
+
+  constructor(private router:Router) {
+  }
+
+  onViewStats(){
+    this.router.navigate(['stats', this.patientId])
+  }
 }
 

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {StatViewCardConfig} from './components/stats-button/stats-button';
 
 @Component({
@@ -8,13 +8,19 @@ import {StatViewCardConfig} from './components/stats-button/stats-button';
   templateUrl: './stats-view.html',
   styleUrl: './stats-view.css'
 })
-export class StatsView {
-  constructor(private router:Router) { }
+export class StatsView implements OnInit{
+  constructor(private router:Router, private route:ActivatedRoute) { }
 
   selectedType: StatViewCardConfig['type'] = 'bmi';
+  patientId!: number;
+
+  ngOnInit() {
+    this.patientId = +this.route.snapshot.paramMap.get('patientId')!;
+    console.log('ID PARA STATS',this.patientId);
+  }
 
   onBack(){
-    this.router.navigate([`/patient/${8}`]);
+    this.router.navigate([`/patient/${this.patientId}`]);
   }
 
   onMenuTypeChange(type: StatViewCardConfig['type']) {

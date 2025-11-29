@@ -81,7 +81,7 @@ const routes: Routes = [
         component: Details
       },
       {
-        path: 'stats/:id',
+        path: 'stats/:patientId',
         component: StatsView
       }
     ]

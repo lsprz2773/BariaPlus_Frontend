@@ -24,12 +24,12 @@ export type ChartOptions = {
   styleUrl: './stat.css'
 })
 export class Stat implements OnChanges{
+  @Input() patientId!: number;
 
   @Input() type!: StatViewCardConfig['type'];
 
   chartOptions!:Partial<ChartOptions>;
   loading = false;
-  readonly patientId = 8;
 
   constructor(private indicatorService:StatIndicatorService) {
   }

@@ -3,5 +3,5 @@
 <p>Selecciona una opcion para ver sus estadisticas</p>
 <app-stats-menu (typeChange)="onMenuTypeChange($event)"></app-stats-menu>
 <div class="grap-container">
-  <app-stat [type]="selectedType"></app-stat>
+  <app-stat [type]="selectedType" [patientId]="patientId"></app-stat>
 </div>
