@@ -62,7 +62,7 @@
         <div class="circumference-field">
             <label>Muñeca</label>
             <input type="number" formControlName="muneca" placeholder="Ingrese la circunferencia de la muñeca"
-                step="0.1" id="muneca" />
+                step="0.1" id="muneca" (focus)="onFieldFocus('muneca')" (blur)="onFieldBlur()"/>
         </div>
 
         <div class="circumference-field">

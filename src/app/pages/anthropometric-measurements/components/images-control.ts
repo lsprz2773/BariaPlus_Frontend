@@ -14,6 +14,7 @@ export class ImagesControl {
     'cadera': '/assets/avatar-pngs/grasa/hover-cadera.png',
     'brazoRelajado': '/assets/avatar-pngs/grasa/hover-brazo.png',
     'cuello': '/assets/avatar-pngs/grasa/hover-cuello.png',
+    'muneca': '/assets/avatar-pngs/grasa/hover-muneca.png',
     'muslo': '/assets/avatar-pngs/grasa/hover-muslo-superior.png',
 
     // Step 2 - Pliegues cutáneos
