@@ -15,6 +15,7 @@ import { Details } from './pages/notes-register/details/details';
 import { ReviewRegister } from './pages/reviews/review-register/review-register';
 import { ReviewRating } from './pages/reviews/review-rating/review-rating';
 import {StatsView} from './pages/stats-view/stats-view';
+import { Analysis } from './pages/analysis/analysis';
 
 const routes: Routes = [
   {
@@ -83,6 +84,10 @@ const routes: Routes = [
       {
         path: 'stats/:patientId',
         component: StatsView
+      },
+      { 
+        path: 'analysis/:id', 
+        component: Analysis 
       }
     ]
   }
