@@ -14,6 +14,7 @@ import { NotesRegister } from './pages/notes-register/notes-register';
 import { Details } from './pages/notes-register/details/details';
 import { ReviewRegister } from './pages/reviews/review-register/review-register';
 import { ReviewRating } from './pages/reviews/review-rating/review-rating';
+import {StatsView} from './pages/stats-view/stats-view';
 
 const routes: Routes = [
   {
@@ -44,7 +45,6 @@ const routes: Routes = [
         path: 'user-profile',
         component: UserProfile
       },
-      
       {
         path: 'reviews',
         component: Reviews,
@@ -80,6 +80,10 @@ const routes: Routes = [
         path: 'notes-details',
         component: Details
       },
+      {
+        path: 'stats/:patientId',
+        component: StatsView
+      }
     ]
   }
 ];

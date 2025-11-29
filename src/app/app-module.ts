@@ -50,6 +50,11 @@ import { RatingDisplay } from './pages/reviews/components/rating-display/rating-
 import { ReviewCard } from './pages/reviews/components/review-card/review-card';
 import { ReviewList } from './pages/reviews/components/review-list/review-list';
 import { FormsModule} from '@angular/forms';
+import {StatsView} from './pages/stats-view/stats-view';
+import {StatsMenu} from './pages/stats-view/components/stats-menu/stats-menu';
+import {Stat} from './pages/stats-view/components/stat/stat';
+import {StatsButton} from './pages/stats-view/components/stats-button/stats-button';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -92,14 +97,19 @@ import { FormsModule} from '@angular/forms';
     ReviewRating,
     RatingDisplay,
     ReviewCard,
-    ReviewList
+    ReviewList,
+    StatsView,
+    StatsMenu,
+    Stat,
+    StatsButton
     ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgApexchartsModule
   ],
   providers: [
     Modal,

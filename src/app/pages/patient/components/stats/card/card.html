@@ -3,7 +3,9 @@
   <h5>{{cardInfo.title}}</h5>
 </div>
 <div class="graph-container">
-  @if (!config.chartData){
+  @if (!existsConsultation){
     <h6>No hay nada para mostrar</h6>
+  } @else {
+    <img src="assets/otros/statcard.png" class="default-stat-img">
   }
 </div>
