@@ -36,27 +36,27 @@
         <div class="circumference-field">
             <label>Cuello</label>
             <input type="number" formControlName="cuello" placeholder="Ingrese la circunferencia del cuello"
-                step="0.1" id="cuello"/>
+                step="0.1" id="cuello" (focus)="onFieldFocus('cuello')" (blur)="onFieldBlur()"/>
         </div>
 
         <div class="circumference-field">
             <label>Brazo</label>
             <div class="dual-input">
-                <input type="number" formControlName="brazoRelajado" placeholder="En relajación" step="0.1" id="brazoRelajado"/>
-                <input type="number" formControlName="contraido" placeholder="En contracción" step="0.1" id="contraido"/>
+                <input type="number" formControlName="brazoRelajado" placeholder="En relajación" step="0.1" id="brazoRelajado" (focus)="onFieldFocus('brazoRelajado')" (blur)="onFieldBlur()"/>
+                <input type="number" formControlName="contraido" placeholder="En contracción" step="0.1" id="contraido" (focus)="onFieldFocus('brazoRelajado')" (blur)="onFieldBlur()"/>
             </div>
         </div>
 
         <div class="circumference-field">
             <label>Cintura</label>
             <input type="number" formControlName="cintura" placeholder="Ingrese la circunferencia de la cintura"
-                step="0.1" id="cintura" />
+                step="0.1" id="cintura" (focus)="onFieldFocus('cintura')" (blur)="onFieldBlur()"/>
         </div>
 
         <div class="circumference-field">
             <label>Cadera</label>
             <input type="number" formControlName="cadera" placeholder="Ingrese la circunferencia de la cadera"
-                step="0.1" id="cadera" />
+                step="0.1" id="cadera" (focus)="onFieldFocus('cadera')" (blur)="onFieldBlur()"/>
         </div>
 
         <div class="circumference-field">
@@ -67,7 +67,7 @@
 
         <div class="circumference-field">
             <label>Muslo</label>
-            <input type="number" formControlName="muslo" placeholder="Ingrese la circunferencia del muslo superior" step="0.1" id="muslo" />
+            <input type="number" formControlName="muslo" placeholder="Ingrese la circunferencia del muslo superior" step="0.1" id="muslo" (focus)="onFieldFocus('muslo')" (blur)="onFieldBlur()"/>
         </div>
     </div>
 </form>
