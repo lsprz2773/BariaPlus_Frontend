@@ -1,0 +1,58 @@
+.rating-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.rating-number {
+  font-size: clamp(3rem, 4vw, 3.75rem);
+  font-weight: 700;
+  color:var(--primary-color);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1;
+}
+
+.stars-container {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.star {
+  font-size: clamp(1.5rem, 2vw, 1.875rem);
+  color: #ddd;
+  transition: all 0.2s ease;
+  cursor: default;
+  user-select: none;
+}
+
+.star.interactive {
+  cursor: pointer;
+}
+
+.star.interactive:hover {
+  transform: scale(1.15);
+}
+
+.star.empty {
+  color: #ddd;
+}
+
+.star.full {
+  color: var(--secondary-color);
+}
+
+.star.half {
+  background: linear-gradient(90deg, var(--secondary-color) 50%, #ddd 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.rating-note {
+  font-size: 0.75rem;
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  margin-top: 0.25rem;
+}

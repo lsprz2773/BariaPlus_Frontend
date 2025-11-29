@@ -21,7 +21,7 @@
             <app-profile-info [title]="'Información profesional'" [data]="profesionalInfo"></app-profile-info>
         </div>
 
-        <button class="edit-btn">Editar</button>
+        <app-button [type]="'button'" [name]="'logOut'" [text]="'Cerrar sesión'" [context]="'primary'" (click)="logOut()"></app-button>
     </article>
 
 </section>

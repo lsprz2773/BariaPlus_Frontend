@@ -29,12 +29,17 @@ export class Patient implements OnInit {
   loadFromApi() {
     this.patientService.getPatientById(this.patientId).subscribe({
       next: (response: PatientResponse) => {
+        this.patientData = response;
+
         if (response.patient && response.patient.medicalRecordId) {
+
           this.medicalRecordId = response.patient.medicalRecordId;
+
           console.log('Medical Record ID:', this.medicalRecordId);
         } else {
           console.warn('No se encontró medicalRecordId en la respuesta');
         }
+
       },
       error: (error) => {
         console.error('Error al cargar paciente:', error);

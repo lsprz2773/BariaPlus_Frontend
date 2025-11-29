@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InfoItem } from '../../core/interfaces/info-item';
 import { DoctorResponse } from '../../core/interfaces/doctor';
 import { Auth } from '../../core/services/auth';
+import { Router } from '@angular/router';
 // import { DoctorService } from '../../core/services/doctor-service'; // TODO: Descomentar cuando API tenga endpoint
 
 @Component({
@@ -18,7 +19,8 @@ export class UserProfile implements OnInit {
   errorMessage: string = '';
 
   constructor(
-    private authService: Auth
+    private authService: Auth,
+    private router: Router
     // private doctorService: DoctorService // comentar cuando API tenga endpoint
   ) { }
 
@@ -40,36 +42,24 @@ export class UserProfile implements OnInit {
 
     console.log('Doctor cargado desde registro o login por ahi:', this.doctor);
 
-    // Mapear datos personales (disponibles del login)
+    // mapear datos personales (disponibles del login)
     this.personalInfo = [
       { label: 'Nombre(s)', value: this.doctor.firstName || 'No disponible' },
       { label: 'Apellido(s)', value: this.doctor.lastName || 'No disponible' },
       { label: 'Correo electrónico', value: this.doctor.email || 'No disponible' }
     ];
 
-    // Mapear datos profesionales (disponibles si vienen del registro)
+    // ,apear datos profesionales (disponibles si vienen del registro)
     this.profesionalInfo = [
       { label: 'Institución de proveniencia', value: this.doctor.graduationInstitution || 'Pendiente' },
       { label: 'Fecha de Inicio laboral', value: this.doctor.employmentStart || 'Pendiente' },
       { label: 'Número de cédula profesional', value: this.doctor.professionalLicense || 'Pendiente' },
       { label: 'Lugar actual de trabajo', value: this.doctor.currentWorkplace || 'Pendiente' }
     ];
+  }
 
-    /* TODO: Descomentar cuando el backend tenga GET /api/doctors/:id
-    if (this.doctor.id) {
-      this.doctorService.getDoctorById(this.doctor.id).subscribe({
-        next: (response) => {
-          if (response.success && response.doctor) {
-            this.doctor = response.doctor;
-            this.mapDoctorData(); // Actualizar con datos completos de la API
-          }
-        },
-        error: (error) => {
-          console.warn('Endpoint GET /api/doctors/:id no disponible:', error);
-          // Continuar mostrando datos de cookies
-        }
-      });
-    }
-    */
+  logOut(): void {
+    this.authService.logout();
+    this.router.navigate(['']);
   }
 }

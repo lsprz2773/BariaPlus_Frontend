@@ -1,0 +1,22 @@
+<div class="page-container">
+  <div class="content-area">
+    <div class="header-section">
+      <h1 class="page-title">Promedio Valoraciones</h1>
+    </div>
+
+    <div class="rating-section">
+      <app-rating-display 
+        [rating]="averageRating" 
+        [interactive]="false">
+      </app-rating-display>
+    </div>
+
+    <div class="reviews-section" *ngIf="!isLoading">
+      <app-review-list [reviews]="reviews"></app-review-list>
+    </div>
+
+    <div class="loading-section" *ngIf="isLoading">
+      <p>Cargando valoraciones...</p>
+    </div>
+  </div>
+</div>

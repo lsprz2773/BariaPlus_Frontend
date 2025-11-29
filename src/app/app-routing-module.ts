@@ -6,13 +6,14 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { PatientRegister } from './pages/patient-register/patient-register';
 import { UserProfile } from './pages/user-profile/user-profile';
 import { Reviews } from './pages/reviews/reviews';
-import {Register} from './pages/auth/register/register';
-import {Patient} from './pages/patient/patient';
-import {Login} from './pages/auth/login/login';
+import { Register } from './pages/auth/register/register';
+import { Patient } from './pages/patient/patient';
+import { Login } from './pages/auth/login/login';
 import { AnthropometricMeasurements } from './pages/anthropometric-measurements/anthropometric-measurements';
-import {NotesRegister} from './pages/notes-register/notes-register';
-import {Details} from './pages/notes-register/details/details';
-import {StatsView} from './pages/stats-view/stats-view';
+import { NotesRegister } from './pages/notes-register/notes-register';
+import { Details } from './pages/notes-register/details/details';
+import { ReviewRegister } from './pages/reviews/review-register/review-register';
+import { ReviewRating } from './pages/reviews/review-rating/review-rating';
 
 const routes: Routes = [
   {
@@ -43,9 +44,25 @@ const routes: Routes = [
         path: 'user-profile',
         component: UserProfile
       },
+
       {
         path: 'reviews',
-        component: Reviews
+        component: Reviews,
+        children: [
+          {
+            path: '',
+            redirectTo: 'registro',
+            pathMatch: 'full'
+          },
+          {
+            path: 'registro',
+            component: ReviewRegister
+          },
+          {
+            path: 'promedio',
+            component: ReviewRating
+          }
+        ]
       },
       {
         path: 'patient/:id',
@@ -63,10 +80,6 @@ const routes: Routes = [
         path: 'notes-details',
         component: Details
       },
-      {
-        path: 'stats',
-        component: StatsView
-      }
     ]
   }
 ];

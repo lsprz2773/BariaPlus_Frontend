@@ -1,0 +1,57 @@
+.page-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  margin-left: 0;
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 3.75rem 2.5rem 1.25rem;
+  max-width: none;
+}
+
+.header-section {
+  margin-top: -3.125rem;
+  margin-bottom: -1.5rem;
+  margin-left: 0;
+  align-self: flex-start;
+}
+
+.page-title {
+  font-size: 3.125rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.rating-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3.125rem;
+  margin-top: 3.125rem;
+  width: 100%;
+  align-self: center;
+}
+
+.reviews-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.loading-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  padding: 3rem;
+}
+
+.loading-section p {
+  color: #999;
+  font-size: 1.125rem;
+}

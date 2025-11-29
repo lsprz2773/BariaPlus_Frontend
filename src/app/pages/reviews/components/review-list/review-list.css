@@ -1,0 +1,45 @@
+.review-list-wrapper {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
+  padding: 1.875rem;
+  width: 100%;
+  max-width: 56.25rem;
+}
+
+.review-list-container {
+  max-height: 25rem;
+  overflow-y: auto;
+  padding-right: 0.625rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+  font-family: 'Poppins', sans-serif;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.review-list-container::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.review-list-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 0.625rem;
+}
+
+.review-list-container::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 0.625rem;
+}
+
+.review-list-container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+

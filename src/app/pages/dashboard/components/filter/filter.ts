@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import { PatienFilterService } from '../../../../core/services/patien-filter-service';
+import { SortOption } from '../../../../core/interfaces/api/patient-filter';
 
 @Component({
   selector: 'app-filter',
@@ -8,7 +10,11 @@ import { Component, HostListener } from '@angular/core';
 })
 export class Filter {
 
-   menuOpen = false;
+  menuOpen = false;
+  currentFilter: string = 'Recién Agregado';
+
+  constructor(private filterService: PatienFilterService) { }
+
 
   toggleMenu(event: Event) {
     event.stopPropagation(); // Evita que el click se propague
@@ -18,6 +24,13 @@ export class Filter {
   // Cierra el menú cuando haces click fuera
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
+    this.menuOpen = false;
+  }
+
+  
+  applyFilter(sortOption: SortOption, filterName: string): void {
+    this.filterService.sort(sortOption);
+    this.currentFilter = filterName;
     this.menuOpen = false;
   }
 }

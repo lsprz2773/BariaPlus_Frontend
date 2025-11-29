@@ -1,0 +1,36 @@
+<div class="page-container">
+  <div class="content-area">
+    <div class="header-section">
+      <h1 class="page-title">Valoraciones de la consulta</h1>
+      <p class="page-subtitle">Registre la calificación dada de la consulta</p>
+    </div>
+
+    <div class="rating-section">
+      <app-rating-display 
+        [rating]="rating" 
+        [interactive]="true"
+        (ratingChange)="onRatingChange($event)">
+      </app-rating-display>
+    </div>
+
+    <div class="comments-card">
+      <h3 class="comments-title">Comentarios del paciente:</h3>
+      <textarea 
+        class="comments-textarea" 
+        placeholder="Escribir comentario..."
+        [(ngModel)]="comment"
+        rows="6"
+        [disabled]="isSubmitting">
+      </textarea>
+    </div>
+
+    <div class="actions-section">
+      <button 
+        class="btn-save" 
+        (click)="onSave()"
+        [disabled]="isSubmitting || rating === 0">
+        {{ isSubmitting ? 'Guardando...' : 'Guardar' }}
+      </button>
+    </div>
+  </div>
+</div>
