@@ -1,3 +1,9 @@
 <div class="avatar">
-    <img src="/assets/avatar-pngs/antomia-blank.png" alt="">
+
+    @if(highlightImage){
+    <img [src]="highlightImage" alt="Área resaltada" class="avatar-highlight">
+    } @else {
+    <img src="/assets/avatar-pngs/antomia-blank.png" alt="" class="avatar-base">
+    }
+
 </div>

@@ -67,7 +67,7 @@
                 class="continue" 
                 (click)="onContinuar()"
                 [disabled]="isSubmitting"
-                (keyup.enter)="onContinuar()">
+                (keypress.enter)="onContinuar()">
                 {{ isSubmitting ? 'Cargando...' : 'Continuar' }}
             </button>
 

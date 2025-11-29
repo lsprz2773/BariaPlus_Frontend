@@ -175,7 +175,7 @@ button {
 }
 
 .continue:not(:disabled):hover {
-    background-color: #0056b3;
+    background-color: var(--hover-color);
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 86, 179, 0.3);
 }
