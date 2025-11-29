@@ -1,11 +1,12 @@
 <div class="title">
-  <h4 (click)="onViewStats()">Ver estadisticas <img src="assets/iconos/arrowright.png" class="btn-icon"></h4>
-
+  @if (verifyConsultations()){
+    <h4 (click)="onViewStats()">Ver estadisticas <img src="assets/iconos/arrowright.png" class="btn-icon"></h4>
+  }
 </div>
 <section class="stats-container">
-  <app-card [config]="{type:'bmi'}"></app-card>
-  <app-card [config]="{type:'body-mass'}"></app-card>
-  <app-card [config]="{type:'fat'}"></app-card>
-  <app-card [config]="{type:'visceral-fat'}"></app-card>
-  <app-card [config]="{type:'chf'}"></app-card>
+  <app-card [config]="{type:'bmi'}" [existsConsultation]="verifyConsultations()"></app-card>
+  <app-card [config]="{type:'body-mass'}" [existsConsultation]="verifyConsultations()"></app-card>
+  <app-card [config]="{type:'fat'}" [existsConsultation]="verifyConsultations()"></app-card>
+  <app-card [config]="{type:'visceral-fat'}" [existsConsultation]="verifyConsultations()"></app-card>
+  <app-card [config]="{type:'whr'}" [existsConsultation]="verifyConsultations()"></app-card>
 </section>
