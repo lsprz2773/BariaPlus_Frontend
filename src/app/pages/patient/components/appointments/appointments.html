@@ -4,7 +4,7 @@
     <h5>Aun no hay consultas registradas</h5>
   } @else if (appointments && appointments.length > 0){
     @for (appointment of appointments; track appointment.id){
-      <app-appointment [appointment]="appointment.date"></app-appointment>
+      <app-appointment [appointment]="appointment" (click)="onClick()"></app-appointment>
     }
   }
 </section>

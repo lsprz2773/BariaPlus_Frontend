@@ -11,7 +11,7 @@ export interface Patient {
     allergies: Allergy[];
     diseases: Disease[];
     medicalHistories: MedicalHistory[];
-    consultations?: Consultation[];
+    consultations?: ConsultationSummary[];
 }
 
 export interface MedicalHistory {
@@ -40,7 +40,7 @@ export interface PatientResponse {
     patients?: Patient[];
 }
 
-interface Consultation{
-  id:number;
-  consultationDate:Date;
+export interface ConsultationSummary {
+  id: number;
+  date: Date
 }

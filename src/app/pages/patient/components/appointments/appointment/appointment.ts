@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {ConsultationSummary} from '../../../../../core/interfaces/patient';
 
 @Component({
   selector: 'app-appointment',
@@ -7,5 +8,5 @@ import {Component, Input} from '@angular/core';
   styleUrl: './appointment.css'
 })
 export class Appointment {
-  @Input() appointment: string = '';
+  @Input() appointment!: ConsultationSummary;
 }
