@@ -1,20 +1,15 @@
-<div class="rating-display">
+<div class="rating-display" [class.interactive]="interactive" [class.readonly]="!interactive">
   <div class="rating-number">{{ rating.toFixed(1) }}</div>
-  
-  <div class="stars-container" (mouseleave)="onMouseLeave()">
-    @for (star of stars; track $index) {
-      <span 
-        class="star"
-        [class]="getStarClass($index + 1)"
-        [class.interactive]="interactive"
-        (click)="onStarClick($index + 1)"
-        (mouseenter)="onStarHover($index + 1)">
-        ★
-      </span>
-    }
+  <div class="stars-container">
+    <span 
+      *ngFor="let star of stars" 
+      class="star"
+      [class.full]="getStarClass(star) === 'full'"
+      [class.half]="getStarClass(star) === 'half'"
+      [class.empty]="getStarClass(star) === 'empty'"
+      (click)="onStarClick(star)">
+      ★
+    </span>
   </div>
-  
-  @if (interactive) {
-    <div class="rating-note">*Nota: El aumento sólo puede ser incrementado en 0.5</div>
-  }
+  <div class="rating-note" *ngIf="interactive">*Nota: Las estrellas representan valores del 1 al 5</div>
 </div>

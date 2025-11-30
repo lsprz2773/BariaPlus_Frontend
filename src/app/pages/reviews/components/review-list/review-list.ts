@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Review } from '../../../../core/interfaces/review';
+import { ReviewResponse } from '../../../../core/interfaces/review';
+
 @Component({
   selector: 'app-review-list',
   standalone: false,
@@ -7,5 +8,5 @@ import { Review } from '../../../../core/interfaces/review';
   styleUrl: './review-list.css'
 })
 export class ReviewList {
-  @Input() reviews: Review[] = [];
+  @Input() reviews: ReviewResponse[] = [];
 }

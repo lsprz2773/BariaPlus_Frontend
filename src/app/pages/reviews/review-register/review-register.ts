@@ -22,14 +22,11 @@ export class ReviewRegister implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Obtener el ID de la consulta desde los parámetros de la ruta
     this.route.queryParams.subscribe(params => {
       this.consultationId = params['consultationId'] ? +params['consultationId'] : 0;
       
       if (!this.consultationId) {
         console.error('No se proporcionó ID de consulta');
-        // Opcionalmente redirigir
-        // this.router.navigate(['/reviews/promedio']);
       }
     });
   }
@@ -39,8 +36,8 @@ export class ReviewRegister implements OnInit {
   }
 
   onSave(): void {
-    if (this.rating < 0.5 || this.rating > 5) {
-      alert('La calificación debe estar entre 0.5 y 5.0');
+    if (this.rating < 1 || this.rating > 5) {
+      alert('La calificación debe estar entre 1 y 5');
       return;
     }
 
@@ -56,26 +53,23 @@ export class ReviewRegister implements OnInit {
 
     this.isSubmitting = true;
 
-    // Convertir rating de 0.5-5.0 a 1-10 para la BD
-    const puntuationForDB = Math.round(this.rating * 2);
-
+    // La BD acepta del 1 al 5, guardar directamente
     const request: AddReviewRequest = {
-      puntuation: puntuationForDB,
-      comments: this.comment
+      puntuation: this.rating,
+      comments: this.comment.trim()
     };
 
     this.reviewsService.addReview(this.consultationId, request).subscribe({
       next: (response) => {
-        console.log('Valoración guardada:', response);
-        alert('Valoración guardada exitosamente');
-        
-        // Limpiar formulario
-        this.rating = 0;
-        this.comment = '';
+        if (response.success) {
+          alert('Valoración guardada exitosamente');
+          this.rating = 0;
+          this.comment = '';
+          this.router.navigate(['/reviews/promedio']);
+        } else {
+          alert(response.message || 'Error al guardar la valoración');
+        }
         this.isSubmitting = false;
-        
-        // Redirigir a la vista de promedio
-        this.router.navigate(['/reviews/promedio']);
       },
       error: (error) => {
         console.error('Error al guardar valoración:', error);
