@@ -4,11 +4,11 @@
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
   padding: 1.875rem;
   width: 100%;
-  max-width: 56.25rem;
+  max-width: none; 
 }
 
 .review-list-container {
-  max-height: 25rem;
+  max-height: 31.25rem;
   overflow-y: auto;
   padding-right: 0.625rem;
 }
@@ -25,6 +25,7 @@
   font-size: 1rem;
 }
 
+/* Scrollbar */
 .review-list-container::-webkit-scrollbar {
   width: 0.5rem;
 }
@@ -35,11 +36,11 @@
 }
 
 .review-list-container::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
+  background: #5eb5a6;
   border-radius: 0.625rem;
 }
 
 .review-list-container::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-color);
+  background: #4a9688;
 }
 

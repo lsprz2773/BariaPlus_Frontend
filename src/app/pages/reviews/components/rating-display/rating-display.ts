@@ -12,41 +12,21 @@ export class RatingDisplay {
   @Output() ratingChange = new EventEmitter<number>();
 
   stars: number[] = [1, 2, 3, 4, 5];
-  hoverRating: number = 0;
 
   onStarClick(star: number): void {
     if (!this.interactive) return;
-    
-    // Si clickea la misma estrella, alterna entre .0 y .5
-    if (Math.floor(this.rating) === star - 1 && this.rating % 1 === 0.5) {
-      this.rating = star;
-    } else if (this.rating === star) {
-      this.rating = star - 0.5;
-    } else {
-      this.rating = star;
-    }
-    
+    this.rating = star;
     this.ratingChange.emit(this.rating);
   }
 
-  onStarHover(star: number): void {
-    if (!this.interactive) return;
-    this.hoverRating = star;
-  }
-
-  onMouseLeave(): void {
-    if (!this.interactive) return;
-    this.hoverRating = 0;
-  }
-
+  // visualización 
   getStarClass(star: number): string {
-    const currentRating = this.interactive && this.hoverRating > 0 
-      ? this.hoverRating 
-      : this.rating;
+    const diff = this.rating - star;
     
-    if (currentRating >= star) {
+    if (diff >= 0) {
       return 'full';
-    } else if (currentRating >= star - 0.5) {
+    } else if (diff >= -0.5 && !this.interactive) {
+      // mostrar medias estrellas en modo readonly
       return 'half';
     }
     return 'empty';

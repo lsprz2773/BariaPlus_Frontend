@@ -1,11 +1,12 @@
 <div class="review-card">
   <div class="avatar-container">
-    <div class="avatar"></div>
+    <img 
+      [src]="getAvatarImage()" 
+      [alt]="gender === 'male' ? 'Avatar masculino' : 'Avatar femenino'"
+      class="avatar-image">
   </div>
   <div class="review-content">
-    <h4 class="patient-name">Jorge Antionio Axayacatl Gómez Escamilla</h4>
-    <p class="patient-comment">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
+    <h4 class="patient-name">{{ patientName }}</h4>
+    <p class="patient-comment">{{ comment }}</p>
   </div>
 </div>
