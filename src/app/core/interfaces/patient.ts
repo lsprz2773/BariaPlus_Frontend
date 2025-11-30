@@ -42,5 +42,5 @@ export interface PatientResponse {
 
 export interface ConsultationSummary {
   id: number;
-  date: Date
+  consultationDate: string
 }

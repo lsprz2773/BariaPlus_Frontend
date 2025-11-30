@@ -1,10 +1,10 @@
 <app-top-bar [patientId]="patientId" [medicalRecordId]="medicalRecordId"></app-top-bar>
-<section class="appointments-list">
+<section class="appointments-list" [ngClass]="{'withAppointments': appointments.length>0,}">
   @if (appointments.length === 0){
     <h5>Aun no hay consultas registradas</h5>
   } @else if (appointments && appointments.length > 0){
     @for (appointment of appointments; track appointment.id){
-      <app-appointment [appointment]="appointment" (click)="onClick()"></app-appointment>
+      <app-appointment [appointment]="appointment" (click)="onClick(appointment.id)"></app-appointment>
     }
   }
 </section>

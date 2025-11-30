@@ -22,7 +22,6 @@ export class Analysis implements OnInit {
   selectedIndicator?: IndicatorDisplay;
 
 
-
   // indicadores y métricas ya mapeados para la vista
   indicators: IndicatorDisplay[] = [];
   basicMetrics: MetricDisplay[] = [];
@@ -116,7 +115,7 @@ export class Analysis implements OnInit {
 
     // indicadores -> IndicatorDisplay
     this.indicators = res.calculatedIndicators.map(ci => {
-  const base: IndicatorDisplay = {
+    const base: IndicatorDisplay = {
     typeIndicatorId: ci.typeIndicatorId,
     name: ci.nameIndicator,
     value: ci.value,
@@ -133,7 +132,7 @@ export class Analysis implements OnInit {
 
 
 
-    
+
 
     // métricas originales -> agrupar por sección
     const metricCatalogMap: Record<number, MetricDisplay> = {

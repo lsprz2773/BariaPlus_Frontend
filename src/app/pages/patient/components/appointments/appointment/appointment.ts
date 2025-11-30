@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ConsultationSummary} from '../../../../../core/interfaces/patient';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-appointment',

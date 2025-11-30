@@ -12,23 +12,27 @@ import {Router} from '@angular/router';
 export class Appointments implements OnInit, OnChanges{
   @Input() patientId: number = 0;
   @Input() medicalRecordId: number = 0;
-  @Input() patientData!: PatientResponse;
+  @Input() patientData: PatientResponse | null = null;
 
   constructor(private router: Router) {
   }
 
   get appointments(): ConsultationSummary[]{
+    if (!this.patientData?.patient?.consultations) {
+      return [];
+    }
     return this.patientData?.patient?.consultations ?? [];
   }
 
-  onClick(){
-    this.router.navigate(['']);
+  onClick(appointmentId: number) {
+    this.router.navigate(['/analysis', appointmentId]);
   }
 
     ngOnInit() {
       console.log('📅 Appointments ngOnInit - IDs:', {
         patientId: this.patientId,
-        medicalRecordId: this.medicalRecordId
+        medicalRecordId: this.medicalRecordId,
+        patientData: this.patientData,
       });
     }
 
