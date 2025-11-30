@@ -82,8 +82,6 @@ export class AnthropometricMeasurements implements OnInit {
         medicalRecordId: this.medicalRecordId
       });
     }
-
-    // ✅ También suscribirse para actualizaciones
     this.route.queryParamMap.subscribe(params => {
       const paramPatientId = Number(params.get('patientId')) || 0;
       const paramMedicalRecordId = Number(params.get('medicalRecordId')) || 0;
@@ -92,10 +90,6 @@ export class AnthropometricMeasurements implements OnInit {
       if (paramPatientId > 0 && paramMedicalRecordId > 0) {
         this.patientId = paramPatientId;
         this.medicalRecordId = paramMedicalRecordId;
-        console.log('✅ IDs actualizados del subscribe:', {
-          patientId: this.patientId,
-          medicalRecordId: this.medicalRecordId
-        });
       }
     });
   }

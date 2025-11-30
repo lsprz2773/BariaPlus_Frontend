@@ -6,9 +6,14 @@ import { Component, Input } from '@angular/core';
   templateUrl: './review-card.html',
   styleUrl: './review-card.css'
 })
-export class ReviewCard{
+export class ReviewCard {
   @Input() patientName: string = '';
   @Input() comment: string = '';
   @Input() gender: 'male' | 'female' = 'male';
 
+  getAvatarImage(): string {
+    return this.gender === 'male' 
+      ? '/assets/otros/men-avatar.png' 
+      : '/assets/otros/women-avatar.png';
+  }
 }

@@ -1,0 +1,165 @@
+<div class="analysis-page">
+  <!-- Columna izquierda -->
+  <section class="left-column">
+    <article class="patient-card">
+      <div class="avatar"></div>
+
+      <h2 class="patient-name">Consulta #{{ consultationId }}</h2>
+      <p class="patient-location">{{ reason }}</p>
+
+      <div class="patient-meta">
+        <span class="label">Fecha de consulta</span>
+        <span class="value">{{ date | date : "dd 'de' MMMM 'de' yyyy" }}</span>
+      </div>
+
+      <div class="indicators-title">Porcentajes calculados por el sistema</div>
+
+      <div class="indicator-list">
+        <div
+  class="indicator-item"
+  *ngFor="let ind of indicators"
+  [style.backgroundColor]="ind.color"
+  (click)="selectedIndicator = ind"
+>
+  <span>{{ ind.name }}:</span>
+  <span>{{ ind.value }}</span>
+  <span class="chevron">▾</span>
+</div>
+
+      </div>
+
+      <div
+  class="indicator-modal-backdrop"
+  *ngIf="selectedIndicator?.image"
+  (click)="selectedIndicator = undefined"
+>
+  <div class="indicator-modal" (click)="$event.stopPropagation()">
+    <h3>{{ selectedIndicator?.name }}</h3>
+    <img
+      [src]="selectedIndicator?.image"
+      alt="Referencia {{ selectedIndicator?.name }}"
+    />
+    <button class="btn-primary" (click)="selectedIndicator = undefined">
+      Cerrar
+    </button>
+  </div>
+</div>
+
+
+      <div class="legend">
+        <div class="legend-item"><span class="dot yellow"></span>Bajo</div>
+        <div class="legend-item"><span class="dot green"></span>Normal</div>
+        <div class="legend-item"><span class="dot orange"></span>Alto</div>
+        <div class="legend-item"><span class="dot red"></span>Muy alto</div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Columna derecha -->
+  <section class="right-column">
+    <!-- Primera fila: Medidas básicas / Circunferencias -->
+    <div class="cards-row">
+      <article class="card card-basic">
+        <h3 class="card-title">Medidas Básicas</h3>
+        <ul class="card-list">
+          <li *ngFor="let m of basicMetrics">
+            <span>{{ m.name }}:</span>
+            <span>{{ m.value }} {{ m.unit }}</span>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card card-basic">
+        <h3 class="card-title">Circunferencias</h3>
+        <ul class="card-list">
+          <li *ngFor="let m of circumferenceMetrics">
+            <span>{{ m.name }}:</span>
+            <span>{{ m.value }} {{ m.unit }}</span>
+          </li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- Segunda fila: Pliegues / Bioimpedancia -->
+    <div class="cards-row">
+      <article class="card card-folds">
+        <h3 class="card-title">Pliegues</h3>
+        <ul class="card-list two-columns">
+          <li *ngFor="let m of foldsMetrics">
+            <span>{{ m.name }}:</span>
+            <span>{{ m.value }} {{ m.unit }}</span>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card card-bio">
+        <h3 class="card-title">Bioimpedancia</h3>
+        <ul class="card-list">
+          <li *ngFor="let m of bioimpedanceMetrics">
+            <span>{{ m.name }}:</span>
+            <span>{{ m.value }} {{ m.unit }}</span>
+          </li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- Tercera fila: gasto energético + notas -->
+    <div class="bottom-row">
+      <!-- Gasto energético -->
+      <article class="card card-energy">
+        <div class="energy-header">
+          <div>
+            <span class="label">Gasto energético:</span>
+            <span class="value">{{ baseEnergy | number : '1.0-0' }} kcal</span>
+          </div>
+          <button class="btn-finish" id="save-energy" (click)="onSaveEnergy()">Guardar</button>
+        </div>
+
+        <div class="energy-form">
+          <label>Ajuste de gasto energético (%)</label>
+
+          <div class="energy-slider-row">
+            <span class="energy-label">-50%</span>
+
+            <input type="range" min="-50" max="50" step="1" [(ngModel)]="energyDelta" />
+
+            <span class="energy-label">+50%</span>
+          </div>
+
+          <div class="energy-preview">
+            <span class="preview-label"> Ajuste actual: {{ energyDelta }}% </span>
+            <span class="preview-value">
+              Nuevo objetivo: {{ adjustedEnergy | number : '1.0-0' }} kcal
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Notas -->
+      <article class="card card-notes">
+        <div class="notes-header">
+          <span>Ver notas</span>
+          <span class="arrow">→</span>
+        </div>
+
+        <div class="notes-outer">
+          <div class="notes-inner">
+            <div class="note-pill" *ngFor="let note of notes" (click)="onNoteClick(note)">
+              <p class="note-text">{{ note.description }}</p>
+
+              <div class="note-category">
+                <img [src]="getIconPath(note.categoryId)" class="note-icon" alt="" />
+                <span>{{ getCategory(note.categoryId) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Botón finalizar -->
+    <div class="actions">
+      <button class="btn-finish" (click)="onFinish()">Finalizar</button>
+    </div>
+  </section>
+</div>

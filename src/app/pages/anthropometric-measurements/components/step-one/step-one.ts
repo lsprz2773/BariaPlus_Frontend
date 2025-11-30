@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormItem } from '../../../../core/interfaces/form-item';
+import { ImagesControl } from '../images-control';
 
 @Component({
   selector: 'app-step-one',
@@ -14,8 +15,18 @@ export class StepOne {
   @Input() fields: FormItem[] = [];
   @Input() title: string = '';
 
+  constructor(private avatarService: ImagesControl) { }
+
   isFieldInvalid(fieldName: string): boolean {
     const control = this.form.get(fieldName);
     return !!(control?.invalid && control?.touched);
+  }
+
+  onFieldFocus(fieldName: string): void {
+    this.avatarService.highlightField(fieldName);
+  }
+
+  onFieldBlur(): void {
+    this.avatarService.clearHighlight();
   }
 }

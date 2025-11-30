@@ -9,6 +9,7 @@ export interface Consultation {
 }
 
 export interface CalculatedIndicator {
+  nameIndicator: any;
   typeIndicatorId: number;
   value: string;
   rangeId: number;
@@ -17,6 +18,7 @@ export interface CalculatedIndicator {
 }
 
 export interface CalculatedMetric {
+  nameCatalog: any;
   catalogId: number;
   value: string;
 }
@@ -45,4 +47,43 @@ export interface IndicatorDisplay {
   rangeName: string;
   color: string;
   icon?: string;
+  image?: string;
+}
+
+export interface OriginalMetric {
+  metricsCatalogId: number;
+  nameCatalog?: string;
+  value: string;
+}
+
+export interface OriginalNote {
+  description: string;
+  categoryId: number;
+}
+
+export interface EnergeticExpenditure {
+  physicalActivityId: number;
+  energyExpenditure: string;
+  reductionPercentage: string;
+  energyExpenditureReduction: string;
+}
+
+export interface ConsultationDetailResponse {
+  success: boolean;
+  message: string;
+  consultation: {
+    id: number;
+    date: string;
+    reason: string;
+    medicalRecordId: number;
+    // en la respuesta de getById no vienen estos counts, por eso opcionales
+    notesCount?: number;
+    healthIndicatorsCount?: number;
+    metricsCount?: number;
+  };
+  calculatedIndicators: CalculatedIndicator[];
+  calculatedMetrics: CalculatedMetric[];
+  originalMetrics: OriginalMetric[];
+  originalNotes: OriginalNote[];
+  energeticExpenditure: EnergeticExpenditure;
 }

@@ -1,0 +1,470 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.analysis-page {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #e9fdfb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #333;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Columna izquierda */
+.left-column {
+  display: flex;
+}
+
+.patient-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem 1.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #62ada5;
+  margin: 0 auto 0.75rem;
+}
+
+.patient-name {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.patient-location {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+.patient-meta {
+  background-color: #e9fdfb;
+  border-radius: 10px;
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+
+  .label {
+    display: block;
+    color: #777;
+  }
+
+  .value {
+    font-weight: 600;
+  }
+}
+
+.indicators-title {
+  font-size: 0.8rem;
+  color: #777;
+  margin-bottom: 0.5rem;
+}
+
+.indicator-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.indicator-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 999px;
+  background-color: #f5f5f5;
+  color: #333;
+
+  &.green { background-color: #a0ebae; }
+  &.yellow { background-color: #f9e26f; }
+  &.orange { background-color: #f79850; }
+  &.red { background-color: #fa4c4c; color: #fff; }
+}
+
+.chevron {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.6rem;  
+  font-size: 1rem;
+  font-weight: 600;
+  padding-left: 30%;
+  margin-top: 60px;
+}
+
+.legend-item {
+  display: inline-flex;      /* punto + texto en la misma línea */
+  align-items: center;       /* centra verticalmente */
+  gap: 0.6rem;               /* espacio entre el círculo y el texto */
+}
+
+.dot {
+  width: 35px;
+  height:35px;
+  border-radius: 50%;
+
+  &.yellow { background-color: #f9e26f; }
+  &.green { background-color: #a0ebae; }
+  &.orange { background-color: #f79850; }
+  &.red { background-color: #fa4c4c; }
+}
+
+/* Columna derecha */
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-left: 1.3rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.15rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background-color: #62ada5;
+  }
+}
+
+.card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.18rem 0;
+  }
+}
+
+.card-folds .card-title::before { background-color: #f5a345; }
+.card-bio .card-title::before { background-color: #62ada5; }
+
+.card-list.two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1rem;
+
+  li {
+    padding-right: 0.5rem;
+  }
+
+  .sum-row {
+    grid-column: 1 / -1;
+    margin-top: 0.4rem;
+    border-top: 1px solid #eee;
+    padding-top: 0.4rem;
+    font-weight: 600;
+  }
+}
+
+/* Gasto energético y notas */
+.bottom-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr;
+  gap: 1.25rem;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-energy .energy-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+
+  .label {
+    color: #62ada5;
+    font-weight: 600;
+  }
+
+  .value {
+    font-weight: 600;
+  }
+}
+
+#save-energy{
+  margin-right: 20px;
+}
+.energy-form {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+
+  label {
+    font-size: 0.8rem;
+    color: #777;
+    grid-column: 1 / -1;
+  }
+
+  input {
+    border-radius: 999px;
+    border: 1px solid #ddd;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+  }
+}
+
+.card-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #62ada5;
+}
+
+
+.notes-inner {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: start;
+  align-items: start ;
+}
+
+/* pastilla interna */
+.note-pill {
+  background-color: #dffaf7;
+  border-radius: 16px;     /* completamente ovalado */
+  padding: 12px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+}
+
+.note-category {
+  display: inline-flex;
+  align-items: start;
+  gap: 8px;
+  color: #62ada5;
+  font-size: 0.9rem;
+}
+
+.note-icon {
+  width: 18px;
+  height: 18px;
+}
+
+
+
+.notes-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Botones */
+.btn-primary {
+  background-color: #62ada5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 1.2rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-outline {
+  width: 98%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  gap: 10px;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.15);
+  margin-bottom: 15px;
+  transition: 100ms all ease-out;
+}
+
+/* Botón finalizar */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-finish {
+  background-color: #62ada5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 2.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.energy-form {
+  justify-content: start;
+  gap: 1rem;
+  label {
+    font-size: 0.8rem;
+    color: #777;
+  }
+}
+
+.energy-slider-row {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  gap: 0.75rem;
+}
+
+.energy-label {
+  font-size: 0.75rem;
+  color: #777;
+  z-index: 2;
+}
+
+/* slider básico personalizado */
+.energy-slider-row input[type='range'] {
+  position:absolute;
+  z-index: 1;
+  width: 85%;
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: #e9fdfb;
+  outline: none;
+}
+
+/* track */
+.energy-slider-row input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #e9fdfb;
+}
+.energy-slider-row input[type='range']::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #e9fdfb;
+}
+
+/* thumb */
+.energy-slider-row input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #62ada5;
+  cursor: pointer;
+  margin-top: -5px;
+}
+.energy-slider-row input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #62ada5;
+  cursor: pointer;
+}
+
+.energy-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background-color: #e9fdfb;
+  border-radius: 12px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+.energy-preview .preview-label {
+  color: #777;
+}
+
+.energy-preview .preview-value {
+  font-weight: 600;
+  color: #62ada5;
+}
+
+
+
+.indicator-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.indicator-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 700px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 0.75rem 0 1rem;
+  }
+}

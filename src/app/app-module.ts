@@ -55,6 +55,7 @@ import {StatsMenu} from './pages/stats-view/components/stats-menu/stats-menu';
 import {Stat} from './pages/stats-view/components/stat/stat';
 import {StatsButton} from './pages/stats-view/components/stats-button/stats-button';
 import {NgApexchartsModule} from 'ng-apexcharts';
+import { Analysis } from './pages/analysis/analysis';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import {NgApexchartsModule} from 'ng-apexcharts';
     StatsView,
     StatsMenu,
     Stat,
-    StatsButton
+    StatsButton,
+    Analysis
     ],
   imports: [
     BrowserModule,
