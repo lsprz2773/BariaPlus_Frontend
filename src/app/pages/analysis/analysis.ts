@@ -322,7 +322,9 @@ export class Analysis implements OnInit {
   }
 
   onFinish(): void {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/reviews/registro'],{
+      queryParams: {consultationId: this.consultationId}
+    });
   }
 
   onSaveEnergy(): void {
