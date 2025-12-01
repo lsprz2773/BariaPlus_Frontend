@@ -29,7 +29,6 @@ import {MainInfo} from './pages/patient/components/info/main-info/main-info';
 import {SideInfo} from './pages/patient/components/info/side-info/side-info';
 import { BottomInfo } from './pages/patient/components/info/main-info/bottom-info/bottom-info';
 import {TopInfo} from './pages/patient/components/info/main-info/top-info/top-info';
-import { Login } from './pages/auth/login/login';
 import {CookieService} from 'ngx-cookie-service';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {authInterceptor} from './core/interceptors/auth-interceptor';
@@ -84,7 +83,6 @@ import { Analysis } from './pages/analysis/analysis';
     Info,
     TopInfo,
     BottomInfo,
-    Login,
     AnthropometricMeasurements,
     Default,
     StepOne,

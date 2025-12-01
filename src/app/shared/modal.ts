@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root' 
+  providedIn: 'root'
 })
-export class Modal { // Ojo, lo llamaste 'Modal' en tu import, lo mantengo.
+export class Modal {
   private isModalOpenSubject = new BehaviorSubject<boolean>(false);
   public isModalOpen$: Observable<boolean> = this.isModalOpenSubject.asObservable();
 

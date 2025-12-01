@@ -30,12 +30,10 @@ export class Form implements OnInit {
   currentStep: number = 1;
   totalSteps: number = 2;
 
-
   userForm!: FormGroup;
 
   ngOnInit() {
     this.initForm()
-    console.log('PADRE partOne:', this.userForm);
   }
 
   initForm() {
@@ -137,12 +135,10 @@ export class Form implements OnInit {
 
 
   onPartOneNext() {
-    console.log('PASO 1 userForm value:', this.userForm.value);
-    console.log('PASO 1 userForm valid:', this.userForm.valid);
+    console.log('paso 1: ', this.userForm.value);
     const controls = ['firstName', 'lastName', 'email', 'password', 'checkPassword'];
     const stepOneGroupValid = controls.every(c => this.userForm.get(c)?.valid);
     const passwordsOk = !this.userForm.errors?.['passwordMismatch'];
-    console.log('Paso 1 controls valid:', stepOneGroupValid, 'passwordsOk:', passwordsOk);
     if (!stepOneGroupValid || !passwordsOk) {
       controls.forEach(c => this.userForm.get(c)?.markAsTouched());
       this.userForm.markAsTouched()
@@ -152,7 +148,7 @@ export class Form implements OnInit {
   }
 
   onPartTwoRegister(){
-    console.log('PASO 2 userForm value:', this.userForm.value);
+    console.log('paso 2: ', this.userForm.value);
     const controls = ['gender', 'professionalLicense', 'graduationInstitution', 'employmentStart', 'currentWorkplace'];
     const stepTwoValid = controls.every(c => this.userForm.get(c)?.valid);
 

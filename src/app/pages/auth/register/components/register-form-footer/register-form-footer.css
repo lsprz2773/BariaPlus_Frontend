@@ -12,6 +12,18 @@
   align-items: center;
 }
 
+h4{
+  cursor: default;
+}
+
+h5{
+  text-decoration: underline;
+}
+
+h5:hover{
+  cursor: pointer;
+}
+
 a{
   color: var(--primary-color);
 }
