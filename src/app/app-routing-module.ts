@@ -8,7 +8,6 @@ import { UserProfile } from './pages/user-profile/user-profile';
 import { Reviews } from './pages/reviews/reviews';
 import { Register } from './pages/auth/register/register';
 import { Patient } from './pages/patient/patient';
-import { Login } from './pages/auth/login/login';
 import { AnthropometricMeasurements } from './pages/anthropometric-measurements/anthropometric-measurements';
 import { NotesRegister } from './pages/notes-register/notes-register';
 import { Details } from './pages/notes-register/details/details';
@@ -25,10 +24,6 @@ const routes: Routes = [
   {
     path: 'user-register',
     component: Register
-  },
-  {
-    path: 'login',
-    component: Login
   },
   {
     path: '',
@@ -85,9 +80,9 @@ const routes: Routes = [
         path: 'stats/:patientId',
         component: StatsView
       },
-      { 
-        path: 'analysis/:id', 
-        component: Analysis 
+      {
+        path: 'analysis/:id',
+        component: Analysis
       }
     ]
   }
