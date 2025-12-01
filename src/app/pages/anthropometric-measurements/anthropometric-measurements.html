@@ -46,3 +46,14 @@
         </button>
     </div>
 </section>
+
+<!-- Modal de confirmación -->
+<app-confirm-modal
+    [isVisible]="showModal"
+    [type]="modalType"
+    [title]="modalTitle"
+    [message]="modalMessage"
+    (onConfirm)="handleModalConfirm()"
+    (onCancel)="handleModalCancel()"
+    (onClose)="closeModal()">
+</app-confirm-modal>

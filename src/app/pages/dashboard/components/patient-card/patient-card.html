@@ -24,11 +24,13 @@
 </article>
 
 <app-confirm-modal
+    [type]="'confirm'"
     [title]="'¿Eliminar paciente?'"
     [message]="'¿Estás seguro de marcar como inactivo a ' + patientToDeleteName + '? Esta acción no se puede deshacer.'"
     [confirmText]="'Sí, eliminar'"
     [cancelText]="'Cancelar'"
-    [isDangerous]="true"
-    (confirmed)="onConfirmDelete()"
-    (cancelled)="onCancelDelete()">
+    [isVisible]="showDeleteModal"
+    (onConfirm)="onConfirmDelete()"
+    (onCancel)="onCancelDelete()"
+    (onClose)="onCancelDelete()">
 </app-confirm-modal>

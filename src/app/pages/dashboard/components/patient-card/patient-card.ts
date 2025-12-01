@@ -1,6 +1,7 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Patient } from '../../../../core/interfaces/patient';
 import { PatientService } from '../../../../core/services/patient-service';
+import { PatientEditService } from '../../../../core/services/patient-edit-service';
 import { Router } from '@angular/router';
 import { Modal } from '../../../../shared/modal';
 
@@ -16,11 +17,12 @@ export class PatientCard {
   @Output() patientDeleted = new EventEmitter<number>();
 
   menuOpen = false;
-  showConfirmModal = false;
+  showDeleteModal = false;
   patientToDeleteName = '';
 
   constructor(
-    private patientService: PatientService, 
+    private patientService: PatientService,
+    private patientEditService: PatientEditService,
     private router: Router,
     private modalService: Modal
   ) { }
@@ -38,8 +40,13 @@ export class PatientCard {
   onEdit(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('Editar');
     this.menuOpen = false;
+    
+    // Configurar el servicio de edición con los datos del paciente
+    this.patientEditService.setPatientForEdit(this.patient);
+    
+    // Navegar a la página de registro de pacientes en modo edición
+    this.router.navigate(['/patient-register']);
   }
 
   onDelete(event: Event) {
@@ -48,7 +55,7 @@ export class PatientCard {
     this.menuOpen = false;
 
     this.patientToDeleteName = `${this.patient.firstName} ${this.patient.lastName}`;
-    this.modalService.openModal();
+    this.showDeleteModal = true;
   }
 
   onConfirmDelete(): void {
@@ -56,9 +63,9 @@ export class PatientCard {
       return;
     }
 
+    this.showDeleteModal = false;
     this.patientService.deletePatient(this.patient.id).subscribe({
       next: (response) => {
-        
         // Emite el evento al padre
         this.patientDeleted.emit(this.patient.id);
       },
@@ -69,7 +76,8 @@ export class PatientCard {
     });
   }
 
-  onCancelDelete(): void{
+  onCancelDelete(): void {
+    this.showDeleteModal = false;
   }
 
   getAvatar(genderId: number): string {

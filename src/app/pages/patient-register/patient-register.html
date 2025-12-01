@@ -1,6 +1,6 @@
 <section class="register-wrap">
     <header class="title-container">
-        <h2 class="title">Registro Paciente</h2>
+        <h2 class="title">{{ isEditMode ? 'Editar Paciente' : 'Registro Paciente' }}</h2>
     </header>
 
     <article class="form">
@@ -100,7 +100,7 @@
         <button type="button" class="next" (click)="isLastStep() ? submitAllData() : nextStep()"
             [disabled]="isSubmitted">
             @if (isLastStep()) {
-                {{ isSubmitted ? 'Enviando...' : 'Finalizar' }}
+                {{ isSubmitted ? (isEditMode ? 'Actualizando...' : 'Creando...') : (isEditMode ? 'Actualizar' : 'Finalizar') }}
                 <i class="fa fa-check"></i>
             } @else {
                 Siguiente
@@ -109,3 +109,13 @@
         </button>
     </div>
 </section>
+
+<app-confirm-modal
+    [isVisible]="showModal"
+    [type]="modalType"
+    [title]="modalTitle"
+    [message]="modalMessage"
+    (onConfirm)="handleModalConfirm()"
+    (onCancel)="handleModalCancel()"
+    (onClose)="closeModal()">
+</app-confirm-modal>
