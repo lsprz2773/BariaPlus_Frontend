@@ -1,6 +1,7 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Patient } from '../../../../core/interfaces/patient';
 import { PatientService } from '../../../../core/services/patient-service';
+import { PatientEditService } from '../../../../core/services/patient-edit-service';
 import { Router } from '@angular/router';
 import { Modal } from '../../../../shared/modal';
 
@@ -20,7 +21,8 @@ export class PatientCard {
   patientToDeleteName = '';
 
   constructor(
-    private patientService: PatientService, 
+    private patientService: PatientService,
+    private patientEditService: PatientEditService,
     private router: Router,
     private modalService: Modal
   ) { }
@@ -38,8 +40,13 @@ export class PatientCard {
   onEdit(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('Editar');
     this.menuOpen = false;
+    
+    // Configurar el servicio de edición con los datos del paciente
+    this.patientEditService.setPatientForEdit(this.patient);
+    
+    // Navegar a la página de registro de pacientes en modo edición
+    this.router.navigate(['/patient-register']);
   }
 
   onDelete(event: Event) {
