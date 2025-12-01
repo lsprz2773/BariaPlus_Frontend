@@ -1,6 +1,7 @@
 export const environment = {
-  AUTH_API_URL: '/api', 
+  AUTH_API_URL: '/api',
   production: false,
+  apiUrl: '',
   tokenKey: 'bp_token',
   doctorKey: 'bp_doctor',
 

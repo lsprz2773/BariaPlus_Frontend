@@ -55,6 +55,7 @@ import {Stat} from './pages/stats-view/components/stat/stat';
 import {StatsButton} from './pages/stats-view/components/stats-button/stats-button';
 import {NgApexchartsModule} from 'ng-apexcharts';
 import { Analysis } from './pages/analysis/analysis';
+import {apiInterceptor} from './core/interceptors/api-interceptor';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { Analysis } from './pages/analysis/analysis';
     provideHttpClient(
       withInterceptors([
         authInterceptor,
-        authTokenInterceptor
+        authTokenInterceptor,
+        apiInterceptor
       ])
     )
   ],
