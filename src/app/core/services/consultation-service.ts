@@ -26,6 +26,18 @@ export class ConsultationService {
     return this.http.get<ConsultationResponse>(`/api/consultations/${consultationId}`);
   }
 
+  updateEnergyAdjustment(payload: {
+  consultationId: number;
+  energyExpenditure: number;
+  adjustmentPercentage: number;
+}) {
+  return this.http.put<ConsultationDetailResponse>(
+    '/api/consultations/energy-adjustment',
+    payload
+  );
+}
+
+
   // updateConsultation(consultationId: number, consultation: ConsultationRequest): Observable<ConsultationResponse> {
   //     return this.http.put<ConsultationResponse>(`/api/consultations/${consultationId}`, consultation);
   // }
