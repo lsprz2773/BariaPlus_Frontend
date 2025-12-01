@@ -1,59 +1,62 @@
 <div class="analysis-page">
   <!-- Columna izquierda -->
   <section class="left-column">
-    <article class="patient-card">
-      <div class="avatar"></div>
+  <article class="patient-card">
+    <figure class="patient-avatar">
+      <img
+        [src]="getAvatar(genderId)"
+        alt="Avatar paciente"
+      />
+    </figure>
 
-      <h2 class="patient-name">Consulta #{{ consultationId }}</h2>
-      <p class="patient-location">{{ reason }}</p>
+    <h2 class="patient-name">{{ firstName }} {{ lastName }}</h2>
+    <p class="patient-location">{{ reason }}</p>
 
-      <div class="patient-meta">
-        <span class="label">Fecha de consulta</span>
-        <span class="value">{{ date | date : "dd 'de' MMMM 'de' yyyy" }}</span>
-      </div>
+    <div class="patient-meta">
+      <span class="label">Fecha de consulta</span>
+      <span class="value">{{ date | date : "dd 'de' MMMM 'de' yyyy" }}</span>
+    </div>
 
-      <div class="indicators-title">Porcentajes calculados por el sistema</div>
+    <div class="indicators-title">Porcentajes calculados por el sistema</div>
 
-      <div class="indicator-list">
-        <div
-  class="indicator-item"
-  *ngFor="let ind of indicators"
-  [style.backgroundColor]="ind.color"
-  (click)="selectedIndicator = ind"
->
-  <span>{{ ind.name }}:</span>
-  <span>{{ ind.value }}</span>
-  <span class="chevron">▾</span>
-</div>
-
-      </div>
-
+    <div class="indicator-list">
       <div
-  class="indicator-modal-backdrop"
-  *ngIf="selectedIndicator?.image"
-  (click)="selectedIndicator = undefined"
->
-  <div class="indicator-modal" (click)="$event.stopPropagation()">
-    <h3>{{ selectedIndicator?.name }}</h3>
-    <img
-      [src]="selectedIndicator?.image"
-      alt="Referencia {{ selectedIndicator?.name }}"
-    />
-    <button class="btn-primary" (click)="selectedIndicator = undefined">
-      Cerrar
-    </button>
-  </div>
-</div>
-
-
-      <div class="legend">
-        <div class="legend-item"><span class="dot yellow"></span>Bajo</div>
-        <div class="legend-item"><span class="dot green"></span>Normal</div>
-        <div class="legend-item"><span class="dot orange"></span>Alto</div>
-        <div class="legend-item"><span class="dot red"></span>Muy alto</div>
+        class="indicator-item"
+        *ngFor="let ind of indicators"
+        [style.backgroundColor]="ind.color"
+        (click)="selectedIndicator = ind"
+      >
+        <span>{{ ind.name }}:</span>
+        <span>{{ ind.value }}</span>
+        <span class="chevron">▾</span>
       </div>
-    </article>
-  </section>
+    </div>
+
+    <div
+      class="indicator-modal-backdrop"
+      *ngIf="selectedIndicator?.image"
+      (click)="selectedIndicator = undefined"
+    >
+      <div class="indicator-modal" (click)="$event.stopPropagation()">
+        <h3>{{ selectedIndicator?.name }}</h3>
+        <img
+          [src]="selectedIndicator?.image"
+          alt="Referencia {{ selectedIndicator?.name }}"
+        />
+        <button class="btn-primary" (click)="selectedIndicator = undefined">
+          Cerrar
+        </button>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><span class="dot yellow"></span>Bajo</div>
+      <div class="legend-item"><span class="dot green"></span>Normal</div>
+      <div class="legend-item"><span class="dot orange"></span>Alto</div>
+      <div class="legend-item"><span class="dot red"></span>Muy alto</div>
+    </div>
+  </article>
+</section>
 
   <!-- Columna derecha -->
   <section class="right-column">

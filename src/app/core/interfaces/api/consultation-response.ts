@@ -76,6 +76,9 @@ export interface ConsultationDetailResponse {
     date: string;
     reason: string;
     medicalRecordId: number;
+    genderId: number;
+    firstName: string;
+    lastName: string;
     // en la respuesta de getById no vienen estos counts, por eso opcionales
     notesCount?: number;
     healthIndicatorsCount?: number;
