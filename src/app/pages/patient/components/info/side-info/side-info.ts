@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { PatientResponse } from '../../../../../core/interfaces/patient';
+import { PatientEditService } from '../../../../../core/services/patient-edit-service';
 
 @Component({
   selector: 'app-side-info',
@@ -13,6 +15,11 @@ export class SideInfo implements OnChanges {
   medicalHistoriesText: string = 'Ninguno';
   allergiesText: string = 'Ninguna';
   diseasesText: string = 'Ninguna';
+
+  constructor(
+    private router: Router,
+    private patientEditService: PatientEditService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['patient'] && this.patient?.patient) {
@@ -38,6 +45,13 @@ export class SideInfo implements OnChanges {
         alergias: this.allergiesText,
         enfermedades: this.diseasesText
       });
+    }
+  }
+
+  onEdit(): void {
+    if (this.patient?.patient) {
+      this.patientEditService.setPatientForEdit(this.patient.patient);
+      this.router.navigate(['/patient-register']);
     }
   }
 }

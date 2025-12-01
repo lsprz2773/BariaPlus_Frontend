@@ -48,5 +48,8 @@ export class PatientService {
     return this.http.patch(`/api/patient/${id}/status`, { statusId: 2 });
   }
 
+  editPatient(id: number, patient: Patient): Observable<PatientResponse> {
+    return this.http.put<PatientResponse>(`/api/patient/${id}`, patient);
+  }
 }
 
