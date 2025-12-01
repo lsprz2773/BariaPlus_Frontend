@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {CookiesStorage} from './cookies-storage';
 import {map, Observable} from 'rxjs';
 import {StatSeries, StatsResponse} from '../interfaces/api/stats-response';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,11 @@ import {StatSeries, StatsResponse} from '../interfaces/api/stats-response';
 export class StatIndicatorService {
   constructor(private http: HttpClient) { }
 
+  apiUrl = environment.apiUrl;
+
   getIndicatorSeries(patientId: number, indicatorId: number):Observable<StatSeries> {
     console.log('id en service: ', indicatorId);
-    return this.http.get<StatsResponse>(`/api/patient/${patientId}/stats?indicator=${indicatorId}`).pipe(
+    return this.http.get<StatsResponse>(`${this.apiUrl}/api/patient/${patientId}/stats?indicator=${indicatorId}`).pipe(
       map(res => ({
           name: res.indicatorName,
           points:res.data
