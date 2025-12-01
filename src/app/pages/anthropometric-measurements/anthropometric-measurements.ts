@@ -21,6 +21,7 @@ export class AnthropometricMeasurements implements OnInit {
   measurementsForm!: FormGroup;
   patientId: number = 0;
   medicalRecordId: number = 0;
+  consultationId: number | null = null;
 
   // Propiedades para el modal
   showModal = false;
@@ -215,6 +216,7 @@ export class AnthropometricMeasurements implements OnInit {
     // enviar a la API
     this.consultationService.createConsultation(consultationData).subscribe({
       next: (response) => {
+        this.consultationId = response.consultation.id
         // Mostrar modal de éxito
         this.showSuccessModal(
           '¡Consulta realizada!',
@@ -268,7 +270,7 @@ export class AnthropometricMeasurements implements OnInit {
     if (this.modalType === 'success') {
       // Si es modal de éxito, limpiar estado y navegar
       this.consultationStateService.clearAllConsultationData();
-      this.router.navigate(['/patient', this.patientId]);
+      this.router.navigate(['/analysis', this.consultationId]);
     }
     this.closeModal();
   }
