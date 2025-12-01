@@ -20,6 +20,9 @@ export class Analysis implements OnInit {
   date = '';
   reason = '';
   selectedIndicator?: IndicatorDisplay;
+  genderId?: number;
+  firstName?: string;
+  lastName?: string;
 
 
   // indicadores y métricas ya mapeados para la vista
@@ -110,8 +113,15 @@ export class Analysis implements OnInit {
   }
 
   private populateFromResponse(res: ConsultationDetailResponse): void {
+    if (!res || !res.consultation) {
+    console.warn('Respuesta sin consultation, no se puede poblar la vista', res);
+    return;
+  }
     this.date = res.consultation.date;
     this.reason = res.consultation.reason;
+    this.genderId = res.consultation.genderId;
+    this.firstName = res.consultation.firstName;
+    this.lastName = res.consultation.lastName
 
     // indicadores -> IndicatorDisplay
     this.indicators = res.calculatedIndicators.map(ci => {
@@ -129,6 +139,7 @@ export class Analysis implements OnInit {
     image: this.mapIndicatorToImage(ci.typeIndicatorId)
   };
 });
+
 
 
 
@@ -328,6 +339,32 @@ export class Analysis implements OnInit {
   }
 
   onSaveEnergy(): void {
-    console.log('enery');
+  const payload = {
+    consultationId: this.consultationId,
+    energyExpenditure: this.baseEnergy,
+    adjustmentPercentage: this.energyDelta,
+  };
+
+  this.consultationService.updateEnergyAdjustment(payload)
+    .subscribe({
+      next: res => {
+
+        // si el backend NO regresa consultation, no llames populateFromResponse
+        // solo sincroniza valores locales
+        this.baseEnergy = this.adjustedEnergy;
+        next: () => this.loadConsultation(this.consultationId)
+
+      },
+      error: err => console.error('Error actualizando gasto energético', err),
+    });
+}
+getAvatar(genderId?: number): string {
+  if (genderId === 1) {
+    return 'assets/otros/men-avatar.png';
   }
+  if (genderId === 2) {
+    return 'assets/otros/women-avatar.png';
+  }
+  return 'assets/otros/default-avatar.png';
+}
 }
