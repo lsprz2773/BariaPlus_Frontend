@@ -34,7 +34,6 @@ export class PatientService {
     }
 
 
-
     return this.http.get<PatientResponse>('/api/patient', { params });
   }
 

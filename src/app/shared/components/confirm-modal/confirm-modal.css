@@ -132,6 +132,36 @@
     box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
 }
 
+.btn-success {
+    color: white;
+    background-color: var(--primary-color);
+}
+
+.btn-success:hover {
+    background-color: var(--hover-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-warning {
+    color: white;
+    background-color: var(--secondary-color);
+}
+
+.btn-warning:hover {
+    background-color: var(--secondary-color);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.btn-primary {
+    color: white;
+    background-color: var(--tertiary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--tertiary-color);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
 @media (max-width: 480px) {
     .modal-content {
         padding: 24px;

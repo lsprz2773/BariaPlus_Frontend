@@ -16,7 +16,7 @@ export class PatientCard {
   @Output() patientDeleted = new EventEmitter<number>();
 
   menuOpen = false;
-  showConfirmModal = false;
+  showDeleteModal = false;
   patientToDeleteName = '';
 
   constructor(
@@ -48,7 +48,7 @@ export class PatientCard {
     this.menuOpen = false;
 
     this.patientToDeleteName = `${this.patient.firstName} ${this.patient.lastName}`;
-    this.modalService.openModal();
+    this.showDeleteModal = true;
   }
 
   onConfirmDelete(): void {
@@ -56,9 +56,9 @@ export class PatientCard {
       return;
     }
 
+    this.showDeleteModal = false;
     this.patientService.deletePatient(this.patient.id).subscribe({
       next: (response) => {
-        
         // Emite el evento al padre
         this.patientDeleted.emit(this.patient.id);
       },
@@ -69,7 +69,8 @@ export class PatientCard {
     });
   }
 
-  onCancelDelete(): void{
+  onCancelDelete(): void {
+    this.showDeleteModal = false;
   }
 
   getAvatar(genderId: number): string {

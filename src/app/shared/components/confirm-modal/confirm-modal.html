@@ -12,10 +12,12 @@
         <p class="modal-message">{{ message }}</p>
 
         <div class="modal-actions">
-            <button type="button" class="btn btn-cancel" (click)="onCancel()">
+            @if(showCancel) {
+            <button type="button" class="btn btn-cancel" (click)="handleCancel()">
                 {{ cancelText }}
             </button>
-            <button type="button" class="btn {{ confirmButtonClass }}" (click)="onConfirm()">
+            }
+            <button type="button" class="btn {{ confirmButtonClass }}" (click)="handleConfirm()">
                 {{ confirmText }}
             </button>
         </div>

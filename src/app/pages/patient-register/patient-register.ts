@@ -158,11 +158,6 @@ export class PatientRegister implements OnInit {
 
   // Enviar datos (el padre lee del FormGroup)
   submitAllData(): void {
-    if (this.patientForm.invalid) {
-      alert('⚠️ Por favor completa todos los campos requeridos');
-      this.patientForm.markAllAsTouched();
-      return;
-    }
 
     this.isSubmitted = true;
 
@@ -217,7 +212,6 @@ export class PatientRegister implements OnInit {
 
     this.patientService.createPatient(patientData).subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response);
         if (response.success) {
           alert(`${response.message}\nPaciente: ${response.patient.firstName} ${response.patient.lastName}`);
           this.patientForm.reset();

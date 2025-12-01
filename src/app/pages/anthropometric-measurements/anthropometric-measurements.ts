@@ -22,6 +22,12 @@ export class AnthropometricMeasurements implements OnInit {
   patientId: number = 0;
   medicalRecordId: number = 0;
 
+  // Propiedades para el modal
+  showModal = false;
+  modalType: 'success' | 'warning' | 'error' | 'info' | 'confirm' = 'success';
+  modalTitle = '';
+  modalMessage = '';
+
   // talla, peso actual, gasto energético, circunferencias
   step1Fields: FormItem[] = [
     { id: 1, type: 'number', placeholder: 'Peso actual en kg', name: 'peso', required: true, step: '0.1', min: 0 },
@@ -149,19 +155,9 @@ export class AnthropometricMeasurements implements OnInit {
   }
 
   submitAllData(): void {
-    if (this.patientId === 0 || this.medicalRecordId === 0) {
-      alert(' Error: IDs de paciente o historial médico no válidos');
-      console.error('IDs inválidos:', {
-        patientId: this.patientId,
-        medicalRecordId: this.medicalRecordId
-      });
-      return;
-    }
 
     if (this.measurementsForm.invalid) {
-      alert('⚠️ Por favor completa todos los campos requeridos');
-      this.measurementsForm.markAllAsTouched();
-      return;
+
     }
 
     this.isSubmitted = true;
@@ -192,7 +188,10 @@ export class AnthropometricMeasurements implements OnInit {
     const physicalActivityId = activityMap[formValues.physicalActivityId];
 
     if (!physicalActivityId) {
-      alert('Nivel de actividad física inválido');
+      this.showWarningModal(
+        'Nivel de actividad física inválido',
+        'Por favor, selecciona un nivel de actividad física válido antes de continuar.'
+      );
       console.error('physicalActivityId no mapeado:', formValues.physicalActivityId);
       this.isSubmitted = false;
       return;
@@ -216,12 +215,11 @@ export class AnthropometricMeasurements implements OnInit {
     // enviar a la API
     this.consultationService.createConsultation(consultationData).subscribe({
       next: (response) => {
-        console.log('✅ RESPUESTA EXITOSA:', response);
-        
-        // limpiar estado
-        this.consultationStateService.clearAllConsultationData();
-
-        this.router.navigate(['/patient', this.patientId]);
+        // Mostrar modal de éxito
+        this.showSuccessModal(
+          '¡Consulta realizada!',
+          'Las mediciones antropométricas han sido guardadas exitosamente.'
+        );
       },
       error: (error) => {
         console.error('❌ ERROR COMPLETO:', error);
@@ -234,11 +232,53 @@ export class AnthropometricMeasurements implements OnInit {
           errorMessage += ': ' + error.error.message;
         } else if (error.message) {
           errorMessage += ': ' + error.message;
+        } else if (error.status === 0) {
+          errorMessage = 'No se pudo conectar con el servidor. Verifica tu conexión a internet.';
         }
 
-        alert(errorMessage);
+        this.showErrorModal('Error en la consulta', errorMessage);
         this.isSubmitted = false;
       }
     });
   }
+
+  // Métodos simplificados para manejar modales
+  showSuccessModal(title: string, message: string): void {
+    this.modalType = 'success';
+    this.modalTitle = title;
+    this.modalMessage = message;
+    this.showModal = true;
+  }
+
+  showErrorModal(title: string, message: string): void {
+    this.modalType = 'error';
+    this.modalTitle = title;
+    this.modalMessage = message;
+    this.showModal = true;
+  }
+
+  showWarningModal(title: string, message: string): void {
+    this.modalType = 'warning';
+    this.modalTitle = title;
+    this.modalMessage = message;
+    this.showModal = true;
+  }
+
+  handleModalConfirm(): void {
+    if (this.modalType === 'success') {
+      // Si es modal de éxito, limpiar estado y navegar
+      this.consultationStateService.clearAllConsultationData();
+      this.router.navigate(['/patient', this.patientId]);
+    }
+    this.closeModal();
+  }
+
+  handleModalCancel(): void {
+    this.closeModal();
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+  }
+
 }
